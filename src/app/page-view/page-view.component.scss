@@ -1,1 +1,29 @@
-@import '../login-view/login-view.component.scss'
+@import '../login-view/login-view.component.scss';
+
+header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  box-sizing: border-box;
+}
+.section-log-out{
+    border-left: 1px silver solid;
+    border-right: 1px silver solid;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }
+  .log-out {
+    font-size: 5vw;
+    color: #99cc00;
+  }
+  .button-log-out {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+  }
