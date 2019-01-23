@@ -1,0 +1,16 @@
+<header>
+  <img class="gtt-icon" src="../../assets/gtt1.png">
+  <input class="to-reg-log" type="button" routerLink="/register" routerLinkActive="active" value="Register">
+</header>
+
+<section>
+  <div>
+    <p class="name-page">Login</p>
+    <label>Username:</label>
+    <p><input class="input-agregar" type="text" placeholder="Username" name="username" [(ngModel)]="usernameLogin"></p>
+    <label>Password:</label>
+    <p><input class="input-agregar" type="password" placeholder="Password" name="pass" [(ngModel)]="passLogin"></p>
+    <div class="div-button-submit"><input class="button-submit" type="button" value="Login" (click)="login()"></div>
+  </div>
+</section>
+<simple-notifications></simple-notifications>
