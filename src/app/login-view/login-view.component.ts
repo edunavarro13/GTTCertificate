@@ -24,15 +24,34 @@ export class LoginViewComponent {
     if (this.usernameLogin.trim() !== '' && this.passLogin.trim() !== '') {
       this.apiService.login(this.usernameLogin.trim(), this.passLogin.trim()).then(response => {
         this.routerLog.navigate(['/trello']);
-      }).catch(errmes => this.notification.error('ERROR!', errmes, {
+      }).catch(errmes => this.notification.error('¡ERROR!', errmes, {
         timeOut: 3000,
         showProgressBar: true,
         pauseOnHover: true,
         clickToClose: true
       }));
     } else {
-      this.notification.error('ERROR!', `Username and password can not be empty.`, {
+      this.notification.error('¡ERROR!', `Usuario y contraseña no pueden estar vacíos.`, {
         timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }
+  }
+
+  infoButton(option: number) {
+    if(option === 1) {
+      this.notification.info('Información', `En Usuario debes introducir el nombre de usuario con el que te has registrado.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }
+    else if(option === 2) {
+      this.notification.info('Información', `En Contraseña debes introducir la contraseña que elegiste al registrar tu usuario.`, {
+        timeOut: 5000,
         showProgressBar: true,
         pauseOnHover: true,
         clickToClose: true

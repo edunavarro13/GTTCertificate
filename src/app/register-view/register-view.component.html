@@ -5,11 +5,28 @@
 
 <section>
   <div>
-    <p class="name-page">Register</p>
-    <label>Username:</label>
-    <p><input class="input-agregar" type="text" placeholder="Username" name="username" [(ngModel)]="usernameRegister"></p>
-    <label>Password:</label>
-    <p><input class="input-agregar" type="password" placeholder="Password" name="pass" [(ngModel)]="passRegister"></p>
+    <p class="name-page">Registro</p>
+    <label class="padding-label">Usuario:</label>
+    <div class="flexbox-inputs">
+      <div>
+        <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">account_circle</i></button>
+      </div>
+      <input class="input-agregar" type="text" placeholder="Username" name="username" [(ngModel)]="usernameRegister">
+    </div>
+    <label class="padding-label">Contraseña:</label>
+    <div class="flexbox-inputs">
+      <div>
+        <button class="button-of-inputs" (click)="infoButton(2)"><i class="material-icons">credit_card</i> </button>
+      </div>
+      <input class="input-agregar" type="password" placeholder="Password" name="pass" [(ngModel)]="passRegister">
+    </div>
+    <label class="padding-label">Confirmación contraseña:</label>
+    <div class="flexbox-inputs">
+      <div>
+        <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">credit_card</i> </button>
+      </div>
+      <input class="input-agregar" type="password" placeholder="Password" name="confirmation" [(ngModel)]="confRegister">
+    </div>
     <div class="div-button-submit"><input class="button-submit" type="button" value="Register" (click)="register()"></div>
   </div>
 </section>

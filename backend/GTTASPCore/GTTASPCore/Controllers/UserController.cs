@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GTTASPCore.Models;
+using GTTASPCore.Helpers;
 
 namespace GTTASPCore.Controllers
 {
@@ -12,9 +13,9 @@ namespace GTTASPCore.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserContext _context;
+        private readonly GTTContext _context;
 
-        public UserController(UserContext context)
+        public UserController(GTTContext context)
         {
             this._context = context;
             if(this._context.Users.Count() == 0)
@@ -22,7 +23,7 @@ namespace GTTASPCore.Controllers
                 Console.WriteLine("No existe ningun usuario");
                 User newUser = new User();
                 newUser.username = "edunavarro13";
-                newUser.password = "1234";
+                newUser.password = Encrypt.Hash("1234");
                 this._context.Users.Add(newUser);
                 this._context.SaveChanges();
             }
@@ -37,7 +38,7 @@ namespace GTTASPCore.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}", Name = "Get")]
-        public ActionResult<User> Get(long id)
+        public ActionResult<User> GetUser(long id)
         {
             User userGet = this._context.Users.Find(id);
             if(userGet == null)

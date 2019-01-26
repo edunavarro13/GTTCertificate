@@ -12626,11 +12626,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\eduna\\source\\repos\\GTTASPCore\\GTTASPCore\\GTTASPCore.csproj",
+      "projectUniqueName": "C:\\Users\\eduna\\Desktop\\todo\\GTTCertificate\\backend\\GTTASPCore\\GTTASPCore\\GTTASPCore.csproj",
       "projectName": "GTTASPCore",
-      "projectPath": "C:\\Users\\eduna\\source\\repos\\GTTASPCore\\GTTASPCore\\GTTASPCore.csproj",
+      "projectPath": "C:\\Users\\eduna\\Desktop\\todo\\GTTCertificate\\backend\\GTTASPCore\\GTTASPCore\\GTTASPCore.csproj",
       "packagesPath": "C:\\Users\\eduna\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\eduna\\source\\repos\\GTTASPCore\\GTTASPCore\\obj\\",
+      "outputPath": "C:\\Users\\eduna\\Desktop\\todo\\GTTCertificate\\backend\\GTTASPCore\\GTTASPCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
