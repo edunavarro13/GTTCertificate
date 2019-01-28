@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 
 namespace GTTASPCore.Models
 {
-    public class User
-    {
-        public long id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
+  public enum Role { admin, user };
+  public class User
+  {
+    public long id { get; set; }
+    public string username { get; set; }
+    public string password { get; set; }
+    public Role role { get; set;}
+    public Jira user_jira { get; set; }
     }
 }

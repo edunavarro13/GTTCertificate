@@ -24,6 +24,8 @@ namespace GTTASPCore.Controllers
                 User newUser = new User();
                 newUser.username = "edunavarro13";
                 newUser.password = Encrypt.Hash("1234");
+                newUser.role = Role.admin;
+                newUser.user_jira = null;
                 this._context.Users.Add(newUser);
                 this._context.SaveChanges();
             }
@@ -52,21 +54,19 @@ namespace GTTASPCore.Controllers
         [HttpPost]
         public ActionResult<ErrorApi> Post([FromBody] User value)
         {
-      ErrorApi valueReturn;
+            ErrorApi valueReturn;
             try
             {
               User userEx = this._context.Users.Where(user => user.username == value.username).First();
               if(userEx != null)
               {
-                valueReturn = new ErrorApi(400, "El usuario ya existe.", "");
-          return valueReturn;
-        }
+                valueReturn = new ErrorApi(405, "El usuario ya existe.", "");
+                return valueReturn;
+              }
             }
       // Si lo pilla es que Users esta vacia, ergo no existe
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception ex) { }
+            value.password = Encrypt.Hash(value.password);
             this._context.Users.Add(value);
             this._context.SaveChanges();
             valueReturn = new ErrorApi(200, "Usuario creado con éxito.", "");

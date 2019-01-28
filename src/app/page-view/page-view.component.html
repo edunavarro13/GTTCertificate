@@ -1,7 +1,16 @@
 <header>
   <img class="gtt-icon" src="../../assets/gtt1.png">
   <div class="section-log-out">
-    <button class="button-log-out" (click)="logOut()"><i class="material-icons log-out">home</i></button>
+    <nav id="menu">
+      <ul>
+       <li><a href="#"><i class="material-icons log-out">account_box</i></a>
+       <ul>
+       <li class="not-last"><a href="#">Datos usuario</a></li>
+       <li><a (click)="logOut()">Cerrar sesión</a></li>
+       </ul>
+       </li>
+      </ul>
+      </nav>
   </div>
 </header>
 <section>

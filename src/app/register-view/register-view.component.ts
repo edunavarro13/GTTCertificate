@@ -63,22 +63,21 @@ export class RegisterViewComponent {
       if (this.passRegister.trim() === this.confRegister.trim()) {
         this.apiService.register(this.usernameRegister.trim(), this.passRegister.trim())
           .then((response: any) => {
-            if(response.status === 200) {
-            this.notification.success('SUCCESS!', `Your user ${this.usernameRegister} is registered.`, {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: true,
-              clickToClose: true
-            });
-          }
-          else {
-            this.notification.error('¡ERROR!', response.message, {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: true,
-              clickToClose: true
-            })
-          }
+            if (response.status === 200) {
+              this.notification.success('¡SUCCESS!', `Your user ${this.usernameRegister} is registered.`, {
+                timeOut: 3000,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: true
+              });
+            } else {
+              this.notification.error('¡ERROR!', response.message, {
+                timeOut: 3000,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: true
+              })
+            }
           }).catch(console.error);
       } else {
         this.notification.error('¡ERROR!', `Contraseña y confirmación de la contraseña no son iguales.`, {
