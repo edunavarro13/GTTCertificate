@@ -50,11 +50,27 @@ namespace GTTASPCore.Controllers
 
         // POST: api/User
         [HttpPost]
-        public ActionResult<User> Post([FromBody] User value)
+        public ActionResult<ErrorApi> Post([FromBody] User value)
         {
+      ErrorApi valueReturn;
+            try
+            {
+              User userEx = this._context.Users.Where(user => user.username == value.username).First();
+              if(userEx != null)
+              {
+                valueReturn = new ErrorApi(400, "El usuario ya existe.", "");
+          return valueReturn;
+        }
+            }
+      // Si lo pilla es que Users esta vacia, ergo no existe
+            catch (Exception ex)
+            {
+
+            }
             this._context.Users.Add(value);
             this._context.SaveChanges();
-            return value;
+            valueReturn = new ErrorApi(200, "Usuario creado con éxito.", "");
+            return valueReturn;
         }
 
         // PUT: api/User/5

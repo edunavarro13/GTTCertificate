@@ -42,14 +42,14 @@ namespace GTTASPCore.Controllers
           try
           {
             User userLog = this._context.Users.Where(user => user.username == value.username).First();
-        if (userLog.password == Encrypt.Hash(value.password))
-        {
-          mess = new ErrorApi(200, "", "autorizado");
-        }
-        else
-        {
-          mess = new ErrorApi(401, "Password incorrecta", "");
-        }
+            if (userLog.password == Encrypt.Hash(value.password))
+            {
+              mess = new ErrorApi(200, "", "autorizado");
+            }
+            else
+            {
+              mess = new ErrorApi(401, "Password incorrecta", "");
+            }
           }
           catch (Exception ex)
           {
