@@ -5,8 +5,9 @@
       <ul>
        <li><a href="#"><i class="material-icons log-out">account_box</i></a>
        <ul>
-       <li class="not-last"><a href="#">Datos usuario</a></li>
-       <li><a (click)="logOut()">Cerrar sesión</a></li>
+          <li class="not-last"><i class="material-icons icon-menu-nav">home</i><a routerLink="/home" routerLinkActive="active">Inicio</a></li>
+       <li class="not-last"><i class="material-icons icon-menu-nav">description</i><a href="#">Datos usuario</a></li>
+       <li><i class="material-icons icon-menu-nav">power_settings_new</i><a (click)="logOut()">Cerrar sesión</a></li>
        </ul>
        </li>
       </ul>

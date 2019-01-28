@@ -7,8 +7,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 3vw;
-  padding-right: 3vw;
 }
 
 .log-out {
@@ -61,7 +59,7 @@
   float: left;
   margin: 0;
   padding: 0;
-  width: 23vw;
+  width: 31vw;
   height: 12.5vh;
 }
 
@@ -89,7 +87,7 @@
   align-items: center;
   justify-content: center;
   float: none;
-  width: 22.7vw;
+  width: 30.8vw;
   box-sizing: border-box;
 }
 
@@ -110,4 +108,8 @@
 .not-last {
   border-bottom: 2px #99cc00 solid;
   box-sizing: border-box;
+}
+
+.icon-menu-nav {
+  font-size: 5vh;
 }
