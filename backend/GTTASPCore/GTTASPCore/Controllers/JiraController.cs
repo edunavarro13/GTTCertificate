@@ -34,24 +34,28 @@ namespace GTTASPCore.Controllers
     }
 
         // GET: api/Jira/5
-        [HttpGet("{id}", Name = "GetJira")]
-        public ActionResult<Jira> GetJira(long id)
+        [HttpGet("{username}", Name = "GetJira")]
+        public ActionResult<Jira> GetJira(string username)
         {
-          Jira jiraGet = this._context.Jiras.Find(id);
-          if (jiraGet == null)
-          {
-            return NotFound("Error 404");
-          }
-          return jiraGet;
-        }
+      try
+      {
+        Jira jiraDel = this._context.Jiras.Where(jira => jira.username == username).First();
+        return jiraDel;
+      }
+      catch (Exception ex)
+      {
+        return NotFound("Error 404");
+      }
+    }
 
         // POST: api/Jira
         [HttpPost]
-        public ActionResult<Jira> PostJira([FromBody] Jira value)
+        public ActionResult<ErrorApi> PostJira([FromBody] Jira value)
         {
+          ErrorApi errApi = new ErrorApi(200, "Usuario de Jira enlazado al usuario.");
           this._context.Jiras.Add(value);
           this._context.SaveChanges();
-          return value;
+          return errApi;
         }
 
         // PUT: api/Jira/5

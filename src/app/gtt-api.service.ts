@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { User, Jira } from './models.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class GttApiService {
   headers: object = JSON.parse(localStorage.getItem('headers')) || '';
   urlAuth: string = "api/auth";
   urlRegis: string = "api/user";
+  urlNewJira: string = "api/jira";
 
   constructor(private api: HttpClient, private router: Router) {}
 
@@ -54,6 +56,28 @@ export class GttApiService {
       }).catch(badResponse => {
         console.log(badResponse);
       }));
+  }
+
+  getUserById() {
+    return this.api.get(this.urlRegis + `/${this.idUser}`).toPromise();
+  }
+
+  addJira(username: string, password: string, url: string, component: string, proyect: string) {
+    return this.api.post(this.urlNewJira, {
+      username,
+      password,
+      url,
+      proyect,
+      component
+    }).toPromise();
+  }
+
+  getJiraByUser(username: string) {
+    return this.api.get(this.urlNewJira + `/${username}`).toPromise();
+  }
+
+  updateUser(newUser: User) {
+    return this.api.put(this.urlRegis + `/${this.idUser}`, newUser).toPromise();
   }
 
   // login(username: string, password: string) {

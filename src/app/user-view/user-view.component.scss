@@ -1,1 +1,54 @@
 @import '../page-view/page-view.component.scss';
+
+.button-submit-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  margin-bottom: 5vh;
+}
+
+.padding-to-bottom {
+  padding-bottom: 5vh;
+}
+
+.button-edit {
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.controls {
+  opacity: 0;
+  transition: opacity 400ms;
+}
+
+.name-page:hover .controls {
+  opacity: 1;
+}
+
+i {
+  cursor: pointer;
+}
+
+.label-result {
+    color: #4e4e4e;
+    padding-left: 2vw;
+}
+
+// .section-user {
+//   min-height: 87vh;
+//   width: auto;
+//   background: linear-gradient(to bottom, #d3eb8b, #adc565);
+//   box-sizing: border-box;
+//   font-family: 'PT Sans', sans-serif;
+//   font-weight: bold;
+// }
+
+// .grid-user {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   justify-content: center;
+//   grid-column-gap: 3vw;
+//   padding-left: 1vw;
+//   padding-right: 1vw;
+// }

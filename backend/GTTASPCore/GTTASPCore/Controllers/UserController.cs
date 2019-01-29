@@ -51,6 +51,7 @@ namespace GTTASPCore.Controllers
         }
 
         // POST: api/User
+        // Es el Register
         [HttpPost]
         public ActionResult<ErrorApi> Post([FromBody] User value)
         {
@@ -67,6 +68,7 @@ namespace GTTASPCore.Controllers
       // Si lo pilla es que Users esta vacia, ergo no existe
             catch (Exception ex) { }
             value.password = Encrypt.Hash(value.password);
+            value.role = Role.user;
             this._context.Users.Add(value);
             this._context.SaveChanges();
             valueReturn = new ErrorApi(200, "Usuario creado con éxito.");
@@ -75,12 +77,21 @@ namespace GTTASPCore.Controllers
 
         // PUT: api/User/5
         [HttpPut("{id}")]
-        public void Put(long id, [FromBody] User value)
+        public ActionResult<ErrorApi> Put(long id, [FromBody] User value)
         {
             User userUpdate = this._context.Users.Find(id);
-            userUpdate.username = value.username;
             userUpdate.password = value.password;
-            this._context.SaveChanges();
+            userUpdate.role = value.role;
+      Jira jiraUpdate = new Jira();
+      jiraUpdate.username = value.user_jira.username;
+      jiraUpdate.password = value.user_jira.password;
+      jiraUpdate.url = value.user_jira.url;
+      jiraUpdate.component = value.user_jira.component;
+      jiraUpdate.proyect = value.user_jira.proyect;
+      userUpdate.user_jira = jiraUpdate;
+
+      this._context.SaveChanges();
+            return new ErrorApi(200, "Usuario modificado correctamente.");
         }
 
         // DELETE: api/ApiWithActions/5
