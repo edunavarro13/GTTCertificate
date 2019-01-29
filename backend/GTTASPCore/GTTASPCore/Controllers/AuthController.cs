@@ -44,16 +44,16 @@ namespace GTTASPCore.Controllers
             User userLog = this._context.Users.Where(user => user.username == value.username).First();
             if (userLog.password == Encrypt.Hash(value.password))
             {
-              mess = new ErrorApi(200, "", "autorizado");
+              mess = new ErrorApi(200, Encrypt.Hash(userLog.username), userLog.id);
             }
             else
             {
-              mess = new ErrorApi(401, "Password incorrecta", "");
+              mess = new ErrorApi(401, "Password incorrecta");
             }
           }
           catch (Exception ex)
           {
-            mess = new ErrorApi(404, "No existe ningun usuario con ese nombre", "");
+            mess = new ErrorApi(404, "No existe ningun usuario con ese nombre");
           }
           return mess;
         }

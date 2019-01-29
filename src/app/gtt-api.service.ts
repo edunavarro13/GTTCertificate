@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,18 @@ import { HttpClient } from '@angular/common/http';
 export class GttApiService {
 
   jwt: string;
+  idUser: number = JSON.parse(localStorage.getItem('idUser')) || -1;
   headers: object = JSON.parse(localStorage.getItem('headers')) || '';
   urlAuth: string = "api/auth";
-  urlRegis: string = "api/user"
+  urlRegis: string = "api/user";
 
-  constructor(private api: HttpClient) {}
+  constructor(private api: HttpClient, private router: Router) {}
+
+  permited() {
+    if(this.idUser === -1) {
+      this.router.navigate(['/login']);
+    }
+  }
 
   register(username: string, password: string) {
     return this.api.post(this.urlRegis, {
@@ -34,7 +42,9 @@ export class GttApiService {
               Authorization: `Bearer ${this.jwt}`
             }
           }
+          this.idUser = response.idUser;
           localStorage.setItem('headers', JSON.stringify(this.headers));
+          localStorage.setItem('idUser', JSON.stringify(this.idUser));
           resolve(response.jwt);
         }
         else {

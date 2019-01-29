@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GttApiService } from '../gtt-api.service';
 
 @Component({
   selector: 'app-user-view',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private gttApi: GttApiService) { }
 
   ngOnInit() {
+    this.gttApi.permited();
   }
 
 }

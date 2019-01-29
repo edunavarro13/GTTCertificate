@@ -60,7 +60,7 @@ namespace GTTASPCore.Controllers
               User userEx = this._context.Users.Where(user => user.username == value.username).First();
               if(userEx != null)
               {
-                valueReturn = new ErrorApi(405, "El usuario ya existe.", "");
+                valueReturn = new ErrorApi(405, "El usuario ya existe.");
                 return valueReturn;
               }
             }
@@ -69,7 +69,7 @@ namespace GTTASPCore.Controllers
             value.password = Encrypt.Hash(value.password);
             this._context.Users.Add(value);
             this._context.SaveChanges();
-            valueReturn = new ErrorApi(200, "Usuario creado con éxito.", "");
+            valueReturn = new ErrorApi(200, "Usuario creado con éxito.");
             return valueReturn;
         }
 
