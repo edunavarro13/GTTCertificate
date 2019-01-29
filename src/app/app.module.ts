@@ -12,13 +12,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { UserViewComponent } from './user-view/user-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginViewComponent,
     RegisterViewComponent,
-    PageViewComponent
+    PageViewComponent,
+    UserViewComponent
   ],
   imports: [
     BrowserModule,
