@@ -12,6 +12,5 @@ namespace GTTASPCore.Models
     public string username { get; set; }
     public string password { get; set; }
     public Role role { get; set;}
-    public Jira user_jira { get; set; }
     }
 }

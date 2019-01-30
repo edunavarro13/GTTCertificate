@@ -62,22 +62,17 @@ export class GttApiService {
     return this.api.get(this.urlRegis + `/${this.idUser}`).toPromise();
   }
 
-  addJira(username: string, password: string, url: string, component: string, proyect: string) {
-    return this.api.post(this.urlNewJira, {
-      username,
-      password,
-      url,
-      proyect,
-      component
-    }).toPromise();
+  addJira(newJira: Jira) {
+    newJira.idUser = this.idUser;
+    return this.api.post(this.urlNewJira, newJira).toPromise();
   }
 
-  getJiraByUser(username: string) {
-    return this.api.get(this.urlNewJira + `/${username}`).toPromise();
+  getJiraByUserId() {
+    return this.api.get(this.urlNewJira + `/${this.idUser}`).toPromise();
   }
 
-  updateUser(newUser: User) {
-    return this.api.put(this.urlRegis + `/${this.idUser}`, newUser).toPromise();
+  updateJira(newJira: Jira) {
+    return this.api.put(this.urlNewJira + `/${this.idUser}`, newJira).toPromise();
   }
 
   // login(username: string, password: string) {

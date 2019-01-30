@@ -23,61 +23,94 @@ import {
 })
 export class UserViewComponent implements OnInit {
 
+  jiraActive: Jira;
   userActive: User;
   usernameJira: string = "";
   passwordJira: string = "";
   componentJira: string = "";
   proyectJira: string = "";
   urlJira: string = "";
-  jiraToCreate: Jira;
 
   editJira: boolean = false;
 
-  constructor(private gttApi: GttApiService, private routerUser: Router, private notification: NotificationsService) {
-    this.jiraToCreate = {
-      id: 0,
-      username: '',
-      password: '',
-      component: '',
-      proyect: '',
-      url: ''
-    };
+  constructor(private gttApi: GttApiService, private routerUser: Router, 
+    private notification: NotificationsService) {
   }
 
   ngOnInit() {
     this.gttApi.permited();
-    this.gttApi.getUserById().then((response: User) => {
-      this.userActive = response;
+    this.gttApi.getUserById().then((responseUser: User) => {
+      this.userActive = responseUser;
     }).catch(console.error);
-    
-    if (this.userActive.user_jira !== null) {
-      this.usernameJira = this.userActive.user_jira.username;
-      this.passwordJira = this.userActive.user_jira.password;
-      this.componentJira = this.userActive.user_jira.component;
-      this.proyectJira = this.userActive.user_jira.proyect;
-      this.urlJira = this.userActive.user_jira.url;
-    } else {
-      this.jiraToCreate = this.userActive.user_jira;
-    }
+
+    this.gttApi.getJiraByUserId().then((response: Jira) => {
+      this.jiraActive = response;
+      if (this.jiraActive) {
+        this.usernameJira = this.jiraActive.username;
+        this.passwordJira = this.jiraActive.password;
+        this.componentJira = this.jiraActive.component;
+        this.proyectJira = this.jiraActive.proyect;
+        this.urlJira = this.jiraActive.url;
+      }
+    }).catch(console.error);
   }
 
   addNewJira() {
-    console.log(this.userActive);
-    this.jiraToCreate.username = this.usernameJira;
-    this.jiraToCreate.password = this.passwordJira;
-    this.jiraToCreate.url = this.urlJira;
-    this.jiraToCreate.proyect = this.proyectJira;
-    this.jiraToCreate.component = this.componentJira;
-    this.userActive.user_jira = this.jiraToCreate;
-    // No hace falta hacer nada mas que el update, ahi se crea en el backend
-    // Y es un void, asi que no entra ni en then ni en catch
-    this.gttApi.updateUser(this.userActive).then(res => {console.log(res)}).catch(console.error);
-    this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido enlazado con tu usuario.`, {
-      timeOut: 3000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    if(!this.jiraActive) {            
+      this.jiraActive = {
+        id: undefined,
+        username: this.usernameJira,
+        password: this.passwordJira,
+        url: this.urlJira,
+        proyect: this.proyectJira,
+        component: this.componentJira,
+        idUser: 0
+      };
+      this.gttApi.addJira(this.jiraActive).then((res: any) => {
+        if(res.status === 200) {
+          this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido enlazado con tu usuario.`, {
+            timeOut: 3000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true
+          });
+        }
+        else {
+          this.notification.error('¡ERROR!', res.message, {
+            timeOut: 3000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true
+          });
+        }
+      }).catch(console.error);
+    }
+    else {   
+      this.jiraActive.username = this.usernameJira;
+      this.jiraActive.password = this.passwordJira;
+      this.jiraActive.url = this.urlJira;
+      this.jiraActive.proyect = this.proyectJira;
+      this.jiraActive.component = this.componentJira;
+      this.gttApi.updateJira(this.jiraActive).then((res: any) => {
+        if(res.status === 200) {
+          this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido modificado con éxito.`, {
+            timeOut: 3000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true
+          });
+        }
+        else {
+          this.notification.error('¡ERROR!', res.message, {
+            timeOut: 3000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true
+          });
+        }
+      }).catch(console.error);
+    }
+    this.editJira = false;
   }
 
   logOut() {

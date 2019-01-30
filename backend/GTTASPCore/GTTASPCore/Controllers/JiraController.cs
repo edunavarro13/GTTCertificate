@@ -16,15 +16,6 @@ namespace GTTASPCore.Controllers
         public JiraController(GTTContext context)
         {
           this._context = context;
-          if (this._context.Jiras.Count() == 0)
-          {
-            Console.WriteLine("No existe ningun usuario Jira");
-            Jira newUser = new Jira();
-            newUser.username = "edunavarro13Jira";
-            newUser.password = "1234";
-            this._context.Jiras.Add(newUser);
-            this._context.SaveChanges();
-          }
         }
     // GET: api/Jira
     [HttpGet]
@@ -34,39 +25,69 @@ namespace GTTASPCore.Controllers
     }
 
         // GET: api/Jira/5
-        [HttpGet("{username}", Name = "GetJira")]
-        public ActionResult<Jira> GetJira(string username)
+        [HttpGet("{id}", Name = "GetJira")]
+        public ActionResult<Jira> GetJira(long id)
         {
-      try
-      {
-        Jira jiraDel = this._context.Jiras.Where(jira => jira.username == username).First();
-        return jiraDel;
-      }
-      catch (Exception ex)
-      {
-        return NotFound("Error 404");
-      }
-    }
+          try
+          {
+            Jira jiraDel = this._context.Jiras.Where(jira => jira.idUser == id).First();
+            return jiraDel;
+          }
+          catch (Exception ex)
+          {
+            return NotFound("Error 404");
+          }
+        }
 
         // POST: api/Jira
         [HttpPost]
         public ActionResult<ErrorApi> PostJira([FromBody] Jira value)
         {
-          ErrorApi errApi = new ErrorApi(200, "Usuario de Jira enlazado al usuario.");
-          this._context.Jiras.Add(value);
-          this._context.SaveChanges();
+          ErrorApi errApi;
+          try
+          {
+            Jira jiraDel = this._context.Jiras.Where(jira => jira.username == value.username).First();
+            errApi = new ErrorApi(405, "Ese usuario Jira ya esta enlazado a otro usuario.");
+          }
+          catch (Exception ex)
+          {
+            this._context.Jiras.Add(value);
+            this._context.SaveChanges();
+            errApi = new ErrorApi(200, "Usuario de Jira enlazado al usuario.");
+          }
           return errApi;
         }
 
         // PUT: api/Jira/5
         [HttpPut("{id}")]
-        public void PutJira(long id, [FromBody] Jira value)
+        public ActionResult<ErrorApi> PutJira(long id, [FromBody] Jira value)
         {
-          Jira jiraUpdate = this._context.Jiras.Find(id);
+          
+      ErrorApi errApi;
+      try
+      {
+        Jira jiraUpdate = this._context.Jiras.Where(jira => jira.idUser == id).First();
+        if (jiraUpdate == null)
+        {
+          errApi = new ErrorApi(404, "No se ha encontrado ningún usuario Jira con ese usuario.");
+        }
+        else
+        {
           jiraUpdate.username = value.username;
           jiraUpdate.password = value.password;
+          jiraUpdate.url = value.url;
+          jiraUpdate.proyect = value.proyect;
+          jiraUpdate.component = value.component;
           this._context.SaveChanges();
+          errApi = new ErrorApi(200, "Usuario Jira modificado.");
         }
+      }
+      catch (Exception ex)
+      {
+        errApi = new ErrorApi(404, "No se ha encontrado ningún usuario Jira con ese usuario.");
+      }
+      return errApi;
+    }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]

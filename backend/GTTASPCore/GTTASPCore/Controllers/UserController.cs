@@ -25,7 +25,6 @@ namespace GTTASPCore.Controllers
                 newUser.username = "edunavarro13";
                 newUser.password = Encrypt.Hash("1234");
                 newUser.role = Role.admin;
-                newUser.user_jira = null;
                 this._context.Users.Add(newUser);
                 this._context.SaveChanges();
             }
@@ -81,16 +80,6 @@ namespace GTTASPCore.Controllers
         {
             User userUpdate = this._context.Users.Find(id);
             userUpdate.password = value.password;
-            userUpdate.role = value.role;
-      Jira jiraUpdate = new Jira();
-      jiraUpdate.username = value.user_jira.username;
-      jiraUpdate.password = value.user_jira.password;
-      jiraUpdate.url = value.user_jira.url;
-      jiraUpdate.component = value.user_jira.component;
-      jiraUpdate.proyect = value.user_jira.proyect;
-      userUpdate.user_jira = jiraUpdate;
-
-      this._context.SaveChanges();
             return new ErrorApi(200, "Usuario modificado correctamente.");
         }
 

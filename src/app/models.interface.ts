@@ -3,7 +3,6 @@ export interface User {
     username: string;
     password: string;
     role: number;
-    user_jira: Jira ;
   }
 export interface Jira {
     id: number;
@@ -12,5 +11,6 @@ export interface Jira {
     component: string;
     proyect: string;
     url: string;
+    idUser: number;
 }
   

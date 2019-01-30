@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GTTASPCore.Migrations
 {
     [DbContext(typeof(GTTContext))]
-    [Migration("20190128144135_RelationUserJira")]
-    partial class RelationUserJira
+    [Migration("20190130123314_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,8 @@ namespace GTTASPCore.Migrations
 
                     b.Property<string>("component");
 
+                    b.Property<long>("idUser");
+
                     b.Property<string>("password");
 
                     b.Property<string>("proyect");
@@ -84,22 +86,11 @@ namespace GTTASPCore.Migrations
 
                     b.Property<int>("role");
 
-                    b.Property<long?>("user_jiraid");
-
                     b.Property<string>("username");
 
                     b.HasKey("id");
 
-                    b.HasIndex("user_jiraid");
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("GTTASPCore.Models.User", b =>
-                {
-                    b.HasOne("GTTASPCore.Models.Jira", "user_jira")
-                        .WithMany()
-                        .HasForeignKey("user_jiraid");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,5 +13,6 @@ namespace GTTASPCore.Models
     public string url { get; set; }
     public string proyect { get; set; }
     public string component { get; set; }
+    public long idUser { get; set; }
   }
 }

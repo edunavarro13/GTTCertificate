@@ -34,7 +34,7 @@
       </div>
       <br>
       <label class="padding-label">Usuario de Jira:</label>
-      <label *ngIf="!editJira" class="label-result">{{ jiraToCreate.password }}<br><br></label>
+      <label *ngIf="!editJira" class="label-result">{{ jiraActive ? jiraActive.username : "" }}<br><br></label>
       <div *ngIf="editJira" class="flexbox-inputs">
         <div>
           <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">account_circle</i></button>
@@ -42,7 +42,7 @@
         <input class="input-agregar" type="text" placeholder="Nombre de usuario" name="username" [(ngModel)]="usernameJira">
       </div>
       <label class="padding-label">Contraseña de Jira:</label>
-      <label *ngIf="!editJira" class="label-result">{{ jiraToCreate.password }}<br><br></label>
+      <label *ngIf="!editJira" class="label-result">{{ jiraActive ? jiraActive.password : "" }}<br><br></label>
       <div *ngIf="editJira" class="flexbox-inputs">
         <div>
           <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">credit_card</i></button>
@@ -50,7 +50,7 @@
         <input class="input-agregar" type="password" placeholder="Contraseña" name="password" [(ngModel)]="passwordJira">
       </div>
       <label class="padding-label">Componente de Jira:</label>
-      <label *ngIf="!editJira" class="label-result">{{ jiraToCreate.component }}<br><br></label>
+      <label *ngIf="!editJira" class="label-result">{{ jiraActive ? jiraActive.component : "" }}<br><br></label>
       <div *ngIf="editJira" class="flexbox-inputs">
         <div>
           <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">settings</i></button>
@@ -58,7 +58,7 @@
         <input class="input-agregar" type="text" placeholder="Componente" name="component" [(ngModel)]="componentJira">
       </div>
       <label class="padding-label">Proyecto de Jira:</label>
-      <label *ngIf="!editJira" class="label-result">{{ jiraToCreate.proyect }}<br><br></label>
+      <label *ngIf="!editJira" class="label-result">{{ jiraActive ? jiraActive.proyect : "" }}<br><br></label>
       <div *ngIf="editJira" class="flexbox-inputs">
         <div>
           <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">note</i></button>
@@ -66,7 +66,7 @@
         <input class="input-agregar" type="text" placeholder="Contraseña" name="proyect" [(ngModel)]="proyectJira">
       </div>
       <label class="padding-label">URL de Jira:</label>
-      <label *ngIf="!editJira" class="label-result">{{ jiraToCreate.url }}<br><br></label>
+      <label *ngIf="!editJira" class="label-result">{{ jiraActive ? jiraActive.url : "" }}<br><br></label>
       <div *ngIf="editJira" class="flexbox-inputs">
         <div>
           <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">language</i></button>

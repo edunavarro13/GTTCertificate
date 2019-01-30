@@ -39,7 +39,11 @@ namespace GTTASPCore.Migrations
                     id = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     username = table.Column<string>(nullable: true),
-                    password = table.Column<string>(nullable: true)
+                    password = table.Column<string>(nullable: true),
+                    url = table.Column<string>(nullable: true),
+                    proyect = table.Column<string>(nullable: true),
+                    component = table.Column<string>(nullable: true),
+                    idUser = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +57,8 @@ namespace GTTASPCore.Migrations
                     id = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     username = table.Column<string>(nullable: true),
-                    password = table.Column<string>(nullable: true)
+                    password = table.Column<string>(nullable: true),
+                    role = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
