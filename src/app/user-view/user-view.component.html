@@ -21,18 +21,27 @@
   <div *ngIf="userActive">
     <div>
       <p class="name-page">Datos usuario:</p>
-      <p>Nombre de usuario: {{ userActive.username }} Rol: {{ userActive.role === 1 ? 'User' : 'Admin' }}</p>
-      <div class="div-button-submit"><button class="button-submit button-submit-user"><i class="material-icons">credit_card</i>
-          Cambiar contraseña</button></div>
+      <div class="grid-user">
+        <label class="padding-label padding-label-user">Nombre de usuario :</label>
+        <label class="label-result">{{ userActive ? userActive.username : "" }}<br><br></label>
+        <label class="padding-label padding-label-user">Rol :</label>
+        <label class="label-result">{{ userActive.role === 1 ? 'User' : 'Admin' }}<br><br></label>
+      </div>
+      <div class="div-button-submit">
+        <button class="button-submit button-submit-user"><i class="material-icons">credit_card</i>
+          Cambiar contraseña</button>
+      </div>
     </div>
     <div>
       <div class="name-page">
         <div class="controls">
           <button class="button-submit button-submit-userJira" (click)="editJira = !editJira"><i class="material-icons">create</i>
             <div *ngIf="!editJira">Editar</div>
-            <div *ngIf="editJira">Salir edición</div></button>
+            <div *ngIf="editJira">Salir edición</div>
+          </button>
         </div>
-        Datos Jira: <!--<i class="material-icons">feedback</i> -->
+        Datos Jira:
+        <!--<i class="material-icons">feedback</i> -->
       </div>
       <br>
       <label class="padding-label">Usuario de Jira:</label>
@@ -74,7 +83,10 @@
           <button class="button-of-inputs" (click)="infoButton(5)"><i class="material-icons">language</i></button>
         </div>
         <input class="input-agregar" type="text" placeholder="Contraseña" name="url" [(ngModel)]="urlJira">
-        <button class="button-of-inputs button-edit" (click)="addNewJira()"><i class="material-icons">create</i></button>
+      </div>
+      <div *ngIf="editJira" class="div-button-submit">
+        <button class="button-submit button-submit-userJira" (click)="addNewJira()"><i class="material-icons">create</i>Editar
+          Jira</button>
       </div>
     </div>
   </div>

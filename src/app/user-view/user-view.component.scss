@@ -45,6 +45,15 @@ i {
     padding-left: 2vw;
 }
 
+.grid-user {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.padding-label-user {
+  text-align: end;
+}
+
 // .section-user {
 //   min-height: 87vh;
 //   width: auto;
