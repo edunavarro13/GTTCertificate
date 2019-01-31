@@ -33,9 +33,8 @@ export class UserViewComponent implements OnInit {
 
   editJira: boolean = false;
 
-  constructor(private gttApi: GttApiService, private routerUser: Router, 
-    private notification: NotificationsService) {
-  }
+  constructor(private gttApi: GttApiService, private routerUser: Router,
+    private notification: NotificationsService) {}
 
   ngOnInit() {
     this.gttApi.permited();
@@ -55,9 +54,29 @@ export class UserViewComponent implements OnInit {
     }).catch(console.error);
   }
 
+  convertPass() {
+    if (this.jiraActive) {
+      let asterisc = "";
+      for (let i = 0; i < this.jiraActive.password.length; i++) {
+        asterisc += '*';
+      }
+      return asterisc;
+    }
+    return "";
+  }
+
   addNewJira() {
-    if(!this.jiraActive) {            
-      this.jiraActive = {
+    // Ningun campo puede estar vacio, si no salta un error
+    if (!this.usernameJira || !this.passwordJira || !this.urlJira || !this.proyectJira || !this.componentJira) {
+      this.notification.error('¡ERROR!', "Ninguno de los campos pueden estar vacíos", {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    } else {
+      let jiraActiveAux: Jira = undefined;
+      jiraActiveAux = {
         id: undefined,
         username: this.usernameJira,
         password: this.passwordJira,
@@ -66,57 +85,93 @@ export class UserViewComponent implements OnInit {
         component: this.componentJira,
         idUser: 0
       };
-      this.gttApi.addJira(this.jiraActive).then((res: any) => {
-        if(res.status === 200) {
-          this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido enlazado con tu usuario.`, {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
-        }
-        else {
-          this.notification.error('¡ERROR!', res.message, {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
-        }
-      }).catch(console.error);
+      if (!this.jiraActive) {
+        this.gttApi.addJira(jiraActiveAux).then((res: any) => {
+          if (res.status === 200) {
+            this.jiraActive = jiraActiveAux;
+            this.editJira = false;
+            this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido enlazado con tu usuario.`, {
+              timeOut: 3000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true
+            });
+          } else {
+            this.notification.error('¡ERROR!', res.message, {
+              timeOut: 3000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true
+            });
+          }
+        }).catch(console.error);
+      } else {
+        this.gttApi.updateJira(jiraActiveAux).then((res: any) => {
+          if (res.status === 200) {
+            this.jiraActive = jiraActiveAux;
+            this.editJira = false;
+            this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido modificado con éxito.`, {
+              timeOut: 3000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true
+            });
+          } else {
+            this.notification.error('¡ERROR!', res.message, {
+              timeOut: 3000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true
+            });
+          }
+        }).catch(console.error);
+      }
     }
-    else {   
-      this.jiraActive.username = this.usernameJira;
-      this.jiraActive.password = this.passwordJira;
-      this.jiraActive.url = this.urlJira;
-      this.jiraActive.proyect = this.proyectJira;
-      this.jiraActive.component = this.componentJira;
-      this.gttApi.updateJira(this.jiraActive).then((res: any) => {
-        if(res.status === 200) {
-          this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido modificado con éxito.`, {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
-        }
-        else {
-          this.notification.error('¡ERROR!', res.message, {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
-        }
-      }).catch(console.error);
-    }
-    this.editJira = false;
   }
 
   logOut() {
     if (confirm(`Are you sure you want to Log out?`)) {
       localStorage.clear();
       this.routerUser.navigate(['/login']);
+    }
+  }
+
+  infoButton(option: number) {
+    if (option === 1) {
+      this.notification.info('Información', `En Usuario de Jira debes introducir el nombre de usuario que usas en Jira.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    } else if (option === 2) {
+      this.notification.info('Información', `En Contraseña de Jira debes introducir la contraseña que elegiste en Jira.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    } else if (option === 3) {
+      this.notification.info('Información', `En Componente de Jira debes introducir el componente tu usuario de Jira.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    } else if (option === 4) {
+      this.notification.info('Información', `En Proyecto de Jira debes introducir el proyecto donde se creará una tarea cuando un certificado caduque.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    } else if (option === 5) {
+      this.notification.info('Información', `En Url de Jira debes introducir la url de tu usuario de Jira.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
     }
   }
 

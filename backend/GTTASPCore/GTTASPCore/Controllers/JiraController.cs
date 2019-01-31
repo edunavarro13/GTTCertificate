@@ -66,25 +66,40 @@ namespace GTTASPCore.Controllers
       ErrorApi errApi;
       try
       {
-        Jira jiraUpdate = this._context.Jiras.Where(jira => jira.idUser == id).First();
-        if (jiraUpdate == null)
+        Jira jiraUpdate = this._context.Jiras.Where(jira => jira.username == value.username).First();
+        if (jiraUpdate != null)
         {
-          errApi = new ErrorApi(404, "No se ha encontrado ningún usuario Jira con ese usuario.");
+          // Si no se modifica el username, deberia encontrarlo, pero con el idUser pasado
+          if (jiraUpdate.idUser != id)
+          {
+            errApi = new ErrorApi(404, "Ese usuario Jira ya esta enlazado a otro usuario.");
+          }
+          else
+          {
+            jiraUpdate.username = value.username;
+            jiraUpdate.password = value.password;
+            jiraUpdate.url = value.url;
+            jiraUpdate.proyect = value.proyect;
+            jiraUpdate.component = value.component;
+            this._context.SaveChanges();
+            errApi = new ErrorApi(200, "Usuario Jira modificado.");
+          }
         }
         else
         {
-          jiraUpdate.username = value.username;
-          jiraUpdate.password = value.password;
-          jiraUpdate.url = value.url;
-          jiraUpdate.proyect = value.proyect;
-          jiraUpdate.component = value.component;
-          this._context.SaveChanges();
-          errApi = new ErrorApi(200, "Usuario Jira modificado.");
+          errApi = new ErrorApi(400, "Error del servidodr.");
         }
       }
       catch (Exception ex)
       {
-        errApi = new ErrorApi(404, "No se ha encontrado ningún usuario Jira con ese usuario.");
+        Jira jiraUpdate = this._context.Jiras.Where(jira => jira.idUser == id).First(); ;
+        jiraUpdate.username = value.username;
+        jiraUpdate.password = value.password;
+        jiraUpdate.url = value.url;
+        jiraUpdate.proyect = value.proyect;
+        jiraUpdate.component = value.component;
+        this._context.SaveChanges();
+        errApi = new ErrorApi(200, "Usuario Jira modificado.");
       }
       return errApi;
     }

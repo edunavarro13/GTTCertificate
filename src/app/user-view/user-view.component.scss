@@ -8,6 +8,14 @@
   margin-bottom: 5vh;
 }
 
+.button-submit-userJira {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  margin-right: 5px;
+}
+
 .padding-to-bottom {
   padding-bottom: 5vh;
 }
@@ -19,11 +27,13 @@
 
 .controls {
   opacity: 0;
-  transition: opacity 400ms;
+  transition: opacity 800ms;
+  display: none;
 }
 
 .name-page:hover .controls {
   opacity: 1;
+  display: inline;
 }
 
 i {
