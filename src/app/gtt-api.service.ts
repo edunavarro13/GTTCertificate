@@ -64,6 +64,7 @@ export class GttApiService {
 
   addJira(newJira: Jira) {
     newJira.idUser = this.idUser;
+    localStorage.setItem('verified', JSON.stringify(0));
     return this.api.post(this.urlNewJira, newJira).toPromise();
   }
 
@@ -73,6 +74,7 @@ export class GttApiService {
 
   updateJira(newJira: Jira) {
     newJira.idUser = this.idUser;
+    localStorage.setItem('verified', JSON.stringify(0));
     return this.api.put(this.urlNewJira + `/${this.idUser}`, newJira).toPromise();
   }
 }

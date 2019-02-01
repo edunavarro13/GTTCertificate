@@ -7,6 +7,7 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { PageViewComponent } from './page-view/page-view.component';
 import { GttApiService } from './gtt-api.service';
+import { GttJiraService } from './gtt-jira.service';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,7 +32,7 @@ import { UserViewComponent } from './user-view/user-view.component';
     BrowserAnimationsModule,
     NoopAnimationsModule
   ],
-  providers: [GttApiService],
+  providers: [GttApiService, GttJiraService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

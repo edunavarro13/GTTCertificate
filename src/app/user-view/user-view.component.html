@@ -40,65 +40,70 @@
             <div *ngIf="editJira">Salir edición</div>
           </button>
         </div>
-        Datos Jira:
+        Datos Jira: <button *ngIf="verified>0" class="button-verified" (click)="infoButton(6)"><i class="material-icons">verified_user</i></button>
         <!--<i class="material-icons">feedback</i> -->
       </div>
       <div *ngIf="!editJira">
-          <div class="grid-user">
-              <label class="padding-label padding-label-user">Usuario de Jira :</label>
-              <label class="label-result">{{ jiraActive ? jiraActive.username : "" }}<br><br></label>
-              <label class="padding-label padding-label-user">Contraseña de Jira :</label>
-              <label class="label-result">{{ convertPass() }}<br><br></label>
-              <label class="padding-label padding-label-user">Componente de Jira :</label>
-              <label class="label-result">{{ jiraActive ? jiraActive.component : "" }}<br><br></label>
-              <label class="padding-label padding-label-user">Proyecto de Jira :</label>
-              <label class="label-result">{{ jiraActive ? jiraActive.proyect : "" }}<br><br></label>
-              <label class="padding-label padding-label-user">URL de Jira :</label>
-              <label class="label-result">{{ jiraActive ? jiraActive.url : "" }}<br><br></label>
-            </div>
+        <div class="grid-user">
+          <label class="padding-label padding-label-user">Usuario de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.username : "" }}<br><br></label>
+          <label class="padding-label padding-label-user">Contraseña de Jira :</label>
+          <label class="label-result">{{ convertPass() }}<br><br></label>
+          <label class="padding-label padding-label-user">Componente de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.component : "" }}<br><br></label>
+          <label class="padding-label padding-label-user">Proyecto de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.proyect : "" }}<br><br></label>
+          <label class="padding-label padding-label-user">URL de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.url : "" }}<br><br></label>
+        </div>
+        <div *ngIf="jiraActive" class="div-button-submit">
+          <button class="button-submit button-submit-userJira" (click)="confirmUser()"><i class="material-icons">cloud_done</i>
+            Comprobar conexión
+          </button>
+        </div>
       </div>
       <div *ngIf="editJira">
-      <br>
-      <label class="padding-label">Usuario de Jira:</label>
-      <div *ngIf="editJira" class="flexbox-inputs">
-        <div>
-          <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">account_circle</i></button>
+        <br>
+        <label class="padding-label">Usuario de Jira:</label>
+        <div *ngIf="editJira" class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">account_circle</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Nombre de usuario" name="username" [(ngModel)]="usernameJira">
         </div>
-        <input class="input-agregar" type="text" placeholder="Nombre de usuario" name="username" [(ngModel)]="usernameJira">
-      </div>
-      <label class="padding-label">Contraseña de Jira:</label>
-      <div *ngIf="editJira" class="flexbox-inputs">
-        <div>
-          <button class="button-of-inputs" (click)="infoButton(2)"><i class="material-icons">credit_card</i></button>
+        <label class="padding-label">Contraseña de Jira:</label>
+        <div *ngIf="editJira" class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(2)"><i class="material-icons">credit_card</i></button>
+          </div>
+          <input class="input-agregar" type="password" placeholder="Contraseña" name="password" [(ngModel)]="passwordJira">
         </div>
-        <input class="input-agregar" type="password" placeholder="Contraseña" name="password" [(ngModel)]="passwordJira">
-      </div>
-      <label class="padding-label">Componente de Jira:</label>
-      <div *ngIf="editJira" class="flexbox-inputs">
-        <div>
-          <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">settings</i></button>
+        <label class="padding-label">Componente de Jira:</label>
+        <div *ngIf="editJira" class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">settings</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Componente" name="component" [(ngModel)]="componentJira">
         </div>
-        <input class="input-agregar" type="text" placeholder="Componente" name="component" [(ngModel)]="componentJira">
-      </div>
-      <label class="padding-label">Proyecto de Jira:</label>
-      <div *ngIf="editJira" class="flexbox-inputs">
-        <div>
-          <button class="button-of-inputs" (click)="infoButton(4)"><i class="material-icons">note</i></button>
+        <label class="padding-label">Proyecto de Jira:</label>
+        <div *ngIf="editJira" class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(4)"><i class="material-icons">note</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Contraseña" name="proyect" [(ngModel)]="proyectJira">
         </div>
-        <input class="input-agregar" type="text" placeholder="Contraseña" name="proyect" [(ngModel)]="proyectJira">
-      </div>
-      <label class="padding-label">URL de Jira:</label>
-      <div *ngIf="editJira" class="flexbox-inputs">
-        <div>
-          <button class="button-of-inputs" (click)="infoButton(5)"><i class="material-icons">language</i></button>
+        <label class="padding-label">URL de Jira:</label>
+        <div *ngIf="editJira" class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(5)"><i class="material-icons">language</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Contraseña" name="url" [(ngModel)]="urlJira">
         </div>
-        <input class="input-agregar" type="text" placeholder="Contraseña" name="url" [(ngModel)]="urlJira">
+        <div *ngIf="editJira" class="div-button-submit">
+          <button class="button-submit button-submit-userJira" (click)="addNewJira()"><i class="material-icons">create</i>Editar
+            Jira</button>
+        </div>
       </div>
-      <div *ngIf="editJira" class="div-button-submit">
-        <button class="button-submit button-submit-userJira" (click)="addNewJira()"><i class="material-icons">create</i>Editar
-          Jira</button>
-      </div>
-    </div>
     </div>
   </div>
 </section>

@@ -46,12 +46,23 @@ i {
 }
 
 .grid-user {
+  margin-top: 3vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .padding-label-user {
   text-align: end;
+}
+
+.button-verified {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: rgb(0, 155, 0);
 }
 
 // .section-user {

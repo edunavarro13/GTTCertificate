@@ -28,6 +28,19 @@ namespace GTTASPCore.Controllers
                 this._context.Users.Add(newUser);
                 this._context.SaveChanges();
             }
+            if(this._context.Jiras.Count() == 0)
+      {
+        Console.WriteLine("No existe ningun usuario Jira");
+        Jira newJira = new Jira();
+        newJira.username = "edunavarro13";
+        newJira.password = "edunavarro13";
+        newJira.component = "component";
+        newJira.url = "url";
+        newJira.proyect = "proyect";
+        newJira.idUser = 1;
+        this._context.Jiras.Add(newJira);
+        this._context.SaveChanges();
+      }
         }
 
         // GET: api/User

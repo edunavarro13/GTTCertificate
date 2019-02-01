@@ -10,7 +10,7 @@ namespace GTTASPCore.Models
     public long id { get; set; }
     public string alias { get; set; }
     public string entidad_emisora { get; set; }
-    public long serie { get; set; }
+    public string serie { get; set; }
     public string subject { get; set; }
     public DateTime caducidad { get; set; }
     public string password { get; set; }

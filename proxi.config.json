@@ -3,5 +3,10 @@
         "target": "https://localhost:44358/",
         "secure": false,
         "changeOrigin": true 
+    },
+    "/rest/*": {
+        "target": "http://192.168.99.100:9090/",
+        "secure": false,
+        "changeOrigin": true 
     }
 }

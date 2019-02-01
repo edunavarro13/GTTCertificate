@@ -16,7 +16,7 @@ export class PageViewComponent implements OnInit {
   }
 
   logOut() {
-    if (confirm(`Are you sure you want to Log out?`)) {
+    if (confirm(`¿Estás seguro que quieres cerrar la sesión?`)) {
       localStorage.clear();
       this.routerLog.navigate(['/login']);
     }

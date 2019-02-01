@@ -15,6 +15,7 @@ import {
 import {
   NotificationsService
 } from 'angular2-notifications';
+import { GttJiraService } from '../gtt-jira.service';
 
 @Component({
   selector: 'app-user-view',
@@ -30,10 +31,11 @@ export class UserViewComponent implements OnInit {
   componentJira: string = "";
   proyectJira: string = "";
   urlJira: string = "";
+  verified: number = JSON.parse(localStorage.getItem('verified')) || 0;
 
   editJira: boolean = false;
 
-  constructor(private gttApi: GttApiService, private routerUser: Router,
+  constructor(private gttApi: GttApiService, private jiraApi: GttJiraService, private routerUser: Router,
     private notification: NotificationsService) {}
 
   ngOnInit() {
@@ -96,6 +98,7 @@ export class UserViewComponent implements OnInit {
               pauseOnHover: true,
               clickToClose: true
             });
+            this.verified = 0;
           } else {
             this.notification.error('¡ERROR!', res.message, {
               timeOut: 3000,
@@ -116,6 +119,7 @@ export class UserViewComponent implements OnInit {
               pauseOnHover: true,
               clickToClose: true
             });
+            this.verified = 0;
           } else {
             this.notification.error('¡ERROR!', res.message, {
               timeOut: 3000,
@@ -130,7 +134,7 @@ export class UserViewComponent implements OnInit {
   }
 
   logOut() {
-    if (confirm(`Are you sure you want to Log out?`)) {
+    if (confirm(`¿Estás seguro que quieres cerrar la sesión?`)) {
       localStorage.clear();
       this.routerUser.navigate(['/login']);
     }
@@ -173,6 +177,32 @@ export class UserViewComponent implements OnInit {
         clickToClose: true
       });
     }
+    else if (option === 6) {
+      this.notification.info('Información', `Este icono verifica que el usuario de Jira introducido existe.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }
+  }
+
+  confirmUser() {
+    this.jiraApi.verifiedUser(this.jiraActive.username, this.jiraActive.password).then(response => {
+      this.verified = 1;
+      localStorage.setItem('verified', JSON.stringify(1));
+      this.notification.success('¡Confirmado!', `El usuario de Jira ${this.jiraActive.username} se puede conectar con éxito.`, {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }).catch(errmes => this.notification.error('¡ERROR!', `El usuario de Jira ${this.jiraActive.username} no se ha podido conectar.`, {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    }));
   }
 
 }
