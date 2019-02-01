@@ -15,7 +15,9 @@ import {
 import {
   NotificationsService
 } from 'angular2-notifications';
-import { GttJiraService } from '../gtt-jira.service';
+import {
+  GttJiraService
+} from '../gtt-jira.service';
 
 @Component({
   selector: 'app-user-view',
@@ -34,6 +36,10 @@ export class UserViewComponent implements OnInit {
   verified: number = JSON.parse(localStorage.getItem('verified')) || 0;
 
   editJira: boolean = false;
+  // De password
+  editPass: boolean = false;
+  usernamePass1: string = "";
+  usernamePass2: string = "";
 
   constructor(private gttApi: GttApiService, private jiraApi: GttJiraService, private routerUser: Router,
     private notification: NotificationsService) {}
@@ -176,8 +182,7 @@ export class UserViewComponent implements OnInit {
         pauseOnHover: true,
         clickToClose: true
       });
-    }
-    else if (option === 6) {
+    } else if (option === 6) {
       this.notification.info('Información', `Este icono verifica que el usuario de Jira introducido existe.`, {
         timeOut: 5000,
         showProgressBar: true,
@@ -205,4 +210,36 @@ export class UserViewComponent implements OnInit {
     }));
   }
 
+  editUser() {
+    // Ningun campo puede estar vacio
+    if (this.usernamePass1.trim() && this.usernamePass2.trim()) {
+      if (this.usernamePass1.trim() === this.usernamePass2.trim()) {
+        this.userActive.password = this.usernamePass1;
+        this.gttApi.updateUser(this.userActive).then(response => {
+          this.notification.success('¡Éxito!', `El usuario ${this.userActive.username} se ha modificado correctamente.`, {
+            timeOut: 3000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true
+          });
+        }).catch(console.error);
+        this.editPass = false;
+      }
+      else {
+        this.notification.error('¡ERROR!', "La contraseña y la confirmación de la contraseña no coinciden.", {
+          timeOut: 3000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true
+        });
+      }
+    } else {
+      this.notification.error('¡ERROR!', "Ninguno de los campos pueden estar vacíos.", {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }
+  }
 }

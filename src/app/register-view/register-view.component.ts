@@ -23,48 +23,13 @@ export class RegisterViewComponent {
   confRegister: string = '';
   constructor(private apiService: GttApiService, private routeAtr: Router, private notification: NotificationsService) {}
 
-  // register() {
-  //   if (this.usernameRegister.trim() !== '' && this.passRegister.trim() !== '' && this.confRegister.trim()) {
-  //     if (this.passRegister.trim() === this.confRegister.trim()) {
-  //       this.apiService.register(this.usernameRegister.trim(), this.passRegister.trim())
-  //         .then(response => {
-  //           this.notification.success('SUCCESS!', `Your user ${this.usernameRegister} is registered.`, {
-  //             timeOut: 3000,
-  //             showProgressBar: true,
-  //             pauseOnHover: true,
-  //             clickToClose: true
-  //           });
-  //         }).catch(errmes => this.notification.error('¡ERROR!', errmes, {
-  //           timeOut: 3000,
-  //           showProgressBar: true,
-  //           pauseOnHover: true,
-  //           clickToClose: true
-  //         }));
-  //     } else {
-  //       this.notification.error('¡ERROR!', `Contraseña y confirmación de la contraseña no son iguales.`, {
-  //         timeOut: 3000,
-  //         showProgressBar: true,
-  //         pauseOnHover: true,
-  //         clickToClose: true
-  //       });
-  //     }
-  //   } else {
-  //     this.notification.error('¡ERROR!', `Usuario, contraseña y confirmación de la contraseña no pueden estar vacíos.`, {
-  //       timeOut: 3000,
-  //       showProgressBar: true,
-  //       pauseOnHover: true,
-  //       clickToClose: true
-  //     });
-  //   }
-  // }
-
   register() {
     if (this.usernameRegister.trim() !== '' && this.passRegister.trim() !== '' && this.confRegister.trim()) {
       if (this.passRegister.trim() === this.confRegister.trim()) {
         this.apiService.register(this.usernameRegister.trim(), this.passRegister.trim())
           .then((response: any) => {
             if (response.status === 200) {
-              this.notification.success('¡SUCCESS!', `Your user ${this.usernameRegister} is registered.`, {
+              this.notification.success('¡Éxito!', `Tu usuario ${this.usernameRegister} ha sido registrado satisfactoriamente.`, {
                 timeOut: 3000,
                 showProgressBar: true,
                 pauseOnHover: true,
