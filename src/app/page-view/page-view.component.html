@@ -5,9 +5,12 @@
       <ul>
         <li><a href="#"><i class="material-icons log-out">account_box</i><i class="material-icons log-out">arrow_drop_down</i></a>
           <ul>
-            <li class="not-last"><a routerLink="/home" routerLinkActive="active"><i class="material-icons icon-menu-nav">home</i></a><a routerLink="/home" routerLinkActive="active">Inicio</a></li>
-            <li class="not-last"><a routerLink="/user" routerLinkActive="active"><i class="material-icons icon-menu-nav">description</i></a><a routerLink="/user" routerLinkActive="active">Datos usuario</a></li>
-            <li><a href="" (click)="logOut()"><i class="material-icons icon-menu-nav">power_settings_new</i></a><a href="" (click)="logOut()">Cerrar sesión</a></li>
+            <li class="not-last"><a routerLink="/home" routerLinkActive="active"><i class="material-icons icon-menu-nav">home</i></a><a
+                routerLink="/home" routerLinkActive="active">Inicio</a></li>
+            <li class="not-last"><a routerLink="/user" routerLinkActive="active"><i class="material-icons icon-menu-nav">description</i></a><a
+                routerLink="/user" routerLinkActive="active">Datos usuario</a></li>
+            <li><a href="" (click)="logOut()"><i class="material-icons icon-menu-nav">power_settings_new</i></a><a href=""
+                (click)="logOut()">Cerrar sesión</a></li>
           </ul>
         </li>
       </ul>
@@ -16,9 +19,24 @@
 </header>
 <section class="section-logIn">
   <div>
-    <input type="text" value="Aqui ira el buscador">
-    <p>
-      page-view works!
-    </p>
+    <input type="text" value="Aqui ira el buscador"><br><br>
+    <div class="grid-principal-first">
+      <div class="row-style">Alias</div>
+      <div class="row-style">Caducidad</div>
+      <div class="row-style">ID_ORGA</div>
+      <div class="row-style">Cliente</div>
+      <div class="row-style">Opciones</div>
+    </div>
+    <div class="grid-principal">
+      <div *ngFor="let certificate of allCertificates">
+        <div class="grid-principal-body">
+          <div class="row-style">{{certificate.alias}}</div>
+          <div class="row-style">{{certificate.caducidad}}</div>
+          <div class="row-style">{{certificate.id_orga}}</div>
+          <div class="row-style">{{certificate.cliente}}</div>
+          <div class="row-style">Botones</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

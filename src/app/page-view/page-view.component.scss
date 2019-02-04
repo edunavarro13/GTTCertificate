@@ -113,3 +113,42 @@
 .icon-menu-nav {
   font-size: 5vh;
 }
+
+.grid-principal {
+  display: grid;
+  // grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+  width: 90vw;
+  height: 60vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  color: #4e4e4e;
+}
+
+.grid-principal-body {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid-principal-first {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+  width: 90vw;
+  height: 10vh;
+  background-color: #d7d3d4;
+  font-size: 1.8vw;
+}
+
+.row-style {
+  height: 10vh;
+  width: 18vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px #99cc00 solid;
+  box-sizing: border-box;
+}

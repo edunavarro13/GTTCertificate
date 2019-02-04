@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GttApiService } from '../gtt-api.service';
+import { Certificate } from '../models.interface';
 
 @Component({
   selector: 'app-page-view',
@@ -9,10 +10,16 @@ import { GttApiService } from '../gtt-api.service';
 })
 export class PageViewComponent implements OnInit {
 
+  allCertificates: Array<Certificate> = [];
+
   constructor(private routerLog: Router, private gttApi: GttApiService) { }
 
   ngOnInit() {
     this.gttApi.permited();
+    this.gttApi.getAllCertificates().then( (result: any) => {
+      this.allCertificates = result;
+      console.log(result);
+    }).catch(console.error);
   }
 
   logOut() {

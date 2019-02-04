@@ -51,6 +51,13 @@ i {
   grid-template-columns: 1fr 1fr;
 }
 
+.grid-user-update {
+  margin-top: 3vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 3vw;
+}
+
 .padding-label-user {
   text-align: end;
 }

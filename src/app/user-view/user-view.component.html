@@ -27,29 +27,33 @@
         <label class="padding-label padding-label-user">Rol :</label>
         <label class="label-result">{{ userActive.role === 1 ? 'User' : 'Admin' }}<br><br></label>
       </div>
-      <div class="div-button-submit">
+      <div *ngIf="!editPass" class="div-button-submit">
         <button class="button-submit button-submit-user" (click)="editPass = !editPass"><i class="material-icons">credit_card</i>
-          <div *ngIf="!editPass">Cambiar contraseña</div>
-          <div *ngIf="editPass">Salir edición</div></button>
+          Cambiar contraseña</button>
       </div>
       <!-- Seccion modificar contraseña  -->
       <div *ngIf="editPass" class="div-button-submit">
-          <label class="padding-label">Contraseña nueva:</label>
-          <div class="flexbox-inputs">
-            <div>
-              <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">credit_card</i></button>
-            </div>
-            <input class="input-agregar" type="password" placeholder="Contraseña nueva" name="passNew1" [(ngModel)]="usernamePass1">
+        <label class="padding-label">Contraseña nueva:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">credit_card</i></button>
           </div>
-          <label class="padding-label">Confirmación contraseña nueva:</label>
-          <div class="flexbox-inputs">
-            <div>
-              <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">credit_card</i></button>
-            </div>
-            <input class="input-agregar" type="password" placeholder="Confirmación contraseña nueva" name="passNew2" [(ngModel)]="usernamePass2">
+          <input class="input-agregar" type="password" placeholder="Contraseña nueva" name="passNew1" [(ngModel)]="usernamePass1">
+        </div>
+        <label class="padding-label">Confirmación contraseña nueva:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">credit_card</i></button>
           </div>
-        <button class="button-submit button-submit-user" (click)="editUser()"><i class="material-icons">create</i>
-          Cambiar contraseña</button>
+          <input class="input-agregar" type="password" placeholder="Confirmación contraseña nueva" name="passNew2"
+            [(ngModel)]="usernamePass2">
+        </div>
+        <div class="grid-user-update">
+          <button class="button-submit button-submit-user" (click)="editUser()"><i class="material-icons">create</i>
+            Cambiar contraseña</button>
+          <button class="button-submit button-submit-user" (click)="editPass = !editPass"><i class="material-icons">credit_card</i>Salir
+            edición</button>
+        </div>
       </div>
       <!-- Fin seccion modificar contraseña -->
     </div>

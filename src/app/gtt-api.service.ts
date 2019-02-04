@@ -14,6 +14,7 @@ export class GttApiService {
   urlAuth: string = "api/auth";
   urlRegis: string = "api/user";
   urlNewJira: string = "api/jira";
+  urlCert: string = "api/certificate";
 
   constructor(private api: HttpClient, private router: Router) {}
 
@@ -80,5 +81,9 @@ export class GttApiService {
     newJira.idUser = this.idUser;
     localStorage.setItem('verified', JSON.stringify(0));
     return this.api.put(this.urlNewJira + `/${this.idUser}`, newJira).toPromise();
+  }
+
+  getAllCertificates() {
+    return this.api.get(this.urlCert).toPromise();
   }
 }

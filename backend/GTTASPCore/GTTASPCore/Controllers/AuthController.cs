@@ -6,6 +6,7 @@ using GTTASPCore.Helpers;
 using GTTASPCore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Jose;
 
 namespace GTTASPCore.Controllers
 {
@@ -44,7 +45,7 @@ namespace GTTASPCore.Controllers
             User userLog = this._context.Users.Where(user => user.username == value.username).First();
             if (userLog.password == Encrypt.Hash(value.password))
             {
-              mess = new ErrorApi(200, Encrypt.Hash(userLog.username), userLog.id);
+              mess = new ErrorApi(200, JWT.Encode(value.username, "top secret", JweAlgorithm.PBES2_HS256_A128KW, JweEncryption.A256CBC_HS512), userLog.id);
             }
             else
             {

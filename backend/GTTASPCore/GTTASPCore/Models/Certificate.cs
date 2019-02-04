@@ -20,5 +20,6 @@ namespace GTTASPCore.Models
     public string persona_contacto { get; set; }
     public string reporsitorio { get; set; }
     public string observaciones { get; set; }
+    public bool eliminado { get; set; }
   }
 }
