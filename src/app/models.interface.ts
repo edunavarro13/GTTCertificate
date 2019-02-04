@@ -19,7 +19,7 @@ export interface Certificate {
   entidad_emisora: string;
   serie: string;
   subject: string;
-  caducidad: string;
+  caducidad: Date;
   password: string;
   id_orga: number;
   cliente: string;

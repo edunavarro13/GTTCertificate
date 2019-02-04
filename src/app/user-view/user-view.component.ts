@@ -189,6 +189,20 @@ export class UserViewComponent implements OnInit {
         pauseOnHover: true,
         clickToClose: true
       });
+    } else if (option === 7) {
+      this.notification.info('Información', `En contraseña debes introducir la nueva contraseña que quieras tener.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    } else if (option === 8) {
+      this.notification.info('Información', `En confirmación de la contraseña debes introducir el mismo valor que en contraseña.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
     }
   }
 

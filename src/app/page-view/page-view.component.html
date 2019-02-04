@@ -21,11 +21,11 @@
   <div>
     <input type="text" value="Aqui ira el buscador"><br><br>
     <div class="grid-principal-first">
-      <div class="row-style">Alias</div>
-      <div class="row-style">Caducidad</div>
-      <div class="row-style">ID_ORGA</div>
-      <div class="row-style">Cliente</div>
-      <div class="row-style">Opciones</div>
+      <button class="row-style row-style-first" (click)="modeOrdenate(0, true)">Alias</button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(1, true)">Caducidad</button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(2, true)">ID_ORGA</button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(3, true)">Cliente</button>
+      <button class="row-style row-style-first" disabled>Opciones</button>
     </div>
     <div class="grid-principal">
       <div *ngFor="let certificate of allCertificates">
@@ -34,9 +34,13 @@
           <div class="row-style">{{certificate.caducidad}}</div>
           <div class="row-style">{{certificate.id_orga}}</div>
           <div class="row-style">{{certificate.cliente}}</div>
-          <div class="row-style">Botones</div>
+          <div class="row-style">
+            <input type="button" value="📋" (click)="detailButton()">
+            <input type="button" value="❌" (click)="deleteButton()">
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<simple-notifications></simple-notifications>
