@@ -21,10 +21,22 @@
   <div>
     <input type="text" value="Aqui ira el buscador"><br><br>
     <div class="grid-principal-first">
-      <button class="row-style row-style-first" (click)="modeOrdenate(0, true)">Alias</button>
-      <button class="row-style row-style-first" (click)="modeOrdenate(1, true)">Caducidad</button>
-      <button class="row-style row-style-first" (click)="modeOrdenate(2, true)">ID_ORGA</button>
-      <button class="row-style row-style-first" (click)="modeOrdenate(3, true)">Cliente</button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(0)">Alias
+        <i *ngIf="columnActive===0 && boolCert" class="material-icons">arrow_drop_down</i>
+        <i *ngIf="columnActive===0 && !boolCert" class="material-icons">arrow_drop_up</i>
+      </button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(1)">Caducidad
+          <i *ngIf="columnActive===1 && boolCert" class="material-icons">arrow_drop_down</i>
+          <i *ngIf="columnActive===1 && !boolCert" class="material-icons">arrow_drop_up</i>
+      </button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(2)">ID_ORGA
+          <i *ngIf="columnActive===2 && boolCert" class="material-icons">arrow_drop_down</i>
+          <i *ngIf="columnActive===2 && !boolCert" class="material-icons">arrow_drop_up</i>
+      </button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(3)">Cliente
+          <i *ngIf="columnActive===3 && boolCert" class="material-icons">arrow_drop_down</i>
+          <i *ngIf="columnActive===3 && !boolCert" class="material-icons">arrow_drop_up</i>
+      </button>
       <button class="row-style row-style-first" disabled>Opciones</button>
     </div>
     <div class="grid-principal">

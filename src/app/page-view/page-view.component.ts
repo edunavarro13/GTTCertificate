@@ -25,6 +25,8 @@ export class PageViewComponent implements OnInit {
 
   allCertificates: Array < Certificate > = [];
   userActive: User;
+  boolCert: boolean = false;
+  columnActive: number = 0;
 
   constructor(private routerLog: Router, private gttApi: GttApiService,
     private notification: NotificationsService) {}
@@ -33,7 +35,7 @@ export class PageViewComponent implements OnInit {
     this.gttApi.permited();
     this.gttApi.getAllCertificates().then((result: any) => {
       this.allCertificates = result;
-      this.modeOrdenate(0, true);
+      this.modeOrdenate(0);
     }).catch(console.error);
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userActive = responseUser;
@@ -73,7 +75,10 @@ export class PageViewComponent implements OnInit {
     }
   }
 
-  modeOrdenate(type: number, asc: boolean) {
+  modeOrdenate(type: number) {
+    this.columnActive = type;
+    this.boolCert = !this.boolCert;
+    let asc: boolean = this.boolCert;
     this.allCertificates.sort(function (a, b) {
       if (type === 0) {
         if ((asc && a.alias > b.alias) || (!asc && a.alias < b.alias)) {
