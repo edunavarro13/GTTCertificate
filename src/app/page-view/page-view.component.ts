@@ -3,9 +3,6 @@ import {
   OnInit
 } from '@angular/core';
 import {
-  Router
-} from '@angular/router';
-import {
   GttApiService
 } from '../gtt-api.service';
 import {
@@ -28,7 +25,7 @@ export class PageViewComponent implements OnInit {
   boolCert: boolean = false;
   columnActive: number = 0;
 
-  constructor(private routerLog: Router, private gttApi: GttApiService,
+  constructor(private gttApi: GttApiService,
     private notification: NotificationsService) {}
 
   ngOnInit() {
@@ -40,13 +37,6 @@ export class PageViewComponent implements OnInit {
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userActive = responseUser;
     }).catch(console.error);
-  }
-
-  logOut() {
-    if (confirm(`¿Estás seguro que quieres cerrar la sesión?`)) {
-      localStorage.clear();
-      this.routerLog.navigate(['/login']);
-    }
   }
 
   detailButton() {

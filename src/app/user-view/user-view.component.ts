@@ -10,9 +10,6 @@ import {
   Jira
 } from '../models.interface';
 import {
-  Router
-} from '@angular/router';
-import {
   NotificationsService
 } from 'angular2-notifications';
 import {
@@ -41,7 +38,7 @@ export class UserViewComponent implements OnInit {
   usernamePass1: string = "";
   usernamePass2: string = "";
 
-  constructor(private gttApi: GttApiService, private jiraApi: GttJiraService, private routerUser: Router,
+  constructor(private gttApi: GttApiService, private jiraApi: GttJiraService,
     private notification: NotificationsService) {}
 
   ngOnInit() {
@@ -136,13 +133,6 @@ export class UserViewComponent implements OnInit {
           }
         }).catch(console.error);
       }
-    }
-  }
-
-  logOut() {
-    if (confirm(`¿Estás seguro que quieres cerrar la sesión?`)) {
-      localStorage.clear();
-      this.routerUser.navigate(['/login']);
     }
   }
 

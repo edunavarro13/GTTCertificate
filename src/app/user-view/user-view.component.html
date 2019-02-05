@@ -1,22 +1,4 @@
-<header>
-  <img class="gtt-icon" src="../../assets/gtt1.png">
-  <div class="section-log-out">
-    <nav id="menu">
-      <ul>
-        <li><a href="#"><i class="material-icons log-out">account_box</i><i class="material-icons log-out">arrow_drop_down</i></a>
-          <ul>
-            <li class="not-last"><a routerLink="/home" routerLinkActive="active"><i class="material-icons icon-menu-nav">home</i></a><a
-                routerLink="/home" routerLinkActive="active">Inicio</a></li>
-            <li class="not-last"><a routerLink="/user" routerLinkActive="active"><i class="material-icons icon-menu-nav">description</i></a><a
-                routerLink="/user" routerLinkActive="active">Datos usuario</a></li>
-            <li><a href="" (click)="logOut()"><i class="material-icons icon-menu-nav">power_settings_new</i></a><a href=""
-                (click)="logOut()">Cerrar sesión</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<app-principal-header></app-principal-header>
 <section class="section-logIn padding-to-bottom">
   <div *ngIf="userActive">
     <div>
