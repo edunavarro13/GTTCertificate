@@ -17,7 +17,8 @@ namespace GTTASPCore.Controllers
     {
     private readonly GTTContext _context;
     private string ruta = "C:\\Users\\eduna\\Desktop\\todo\\GTTCertificate\\backend\\Certificados\\prueba.pfx";
-    private string contraseña = "1234";
+    private string ruta2 = "C:\\Users\\eduna\\Downloads\\20170419-ja-kit-de-certificados-de-prueba-v9.1.2\\20170419-JA-Kit-de-Certificados-de-Prueba-v9.1.2\\ACA\\SCD-colegiado-Ministerio.p12";
+    private string contraseña = "111111";
     public CertificateController(GTTContext context)
     {
       this._context = context;
@@ -69,7 +70,7 @@ namespace GTTASPCore.Controllers
         [HttpPost]
         public string Post(string value)
         {
-      X509Certificate2 certificate = new X509Certificate2(this.ruta, this.contraseña);
+      X509Certificate2 certificate = new X509Certificate2(this.ruta2, this.contraseña);
       string expirationDate = certificate.GetExpirationDateString();
       string issuer = certificate.Issuer;
       string effectiveDateString = certificate.GetEffectiveDateString();

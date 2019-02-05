@@ -168,6 +168,12 @@
   font-size: 2.5vw;
 }
 
+.button-flex-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 600px) {
   .grid-principal-body {
     font-size: 8px;

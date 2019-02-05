@@ -1,8 +1,9 @@
 <app-principal-header></app-principal-header>
 <section class="section-logIn">
   <div>
-    <button (click)="viewDelete = !viewDelete">A eliminados</button>
-    <input type="text" value="Aqui ira el buscador"><br><br>
+    <input type="text" value="Aqui ira el buscador">
+    <button class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">close</i>
+      A eliminados</button>
     <div class="grid-principal-first">
       <button class="row-style row-style-first" (click)="modeOrdenate(0)">Alias
         <i *ngIf="columnActive===0 && boolCert" class="material-icons">arrow_drop_down</i>
