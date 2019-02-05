@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User, Jira } from './models.interface';
+import { User, Jira, Certificate } from './models.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -89,5 +89,9 @@ export class GttApiService {
 
   getCertificateById(idCert: number) {
     return this.api.get(this.urlCert + `/${idCert}`).toPromise();
+  }
+
+  updateCertificate(newCert: Certificate) {
+    return this.api.put(this.urlCert + `/${newCert.id}`, newCert).toPromise();
   }
 }

@@ -88,9 +88,13 @@ namespace GTTASPCore.Controllers
 
         // PUT: api/Certificate/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<ErrorApi> Put(long id, [FromBody] Certificate newCert)
         {
-        }
+      Certificate certUpdate = this._context.Certificates.Find(id);
+      certUpdate.eliminado = newCert.eliminado;
+      this._context.SaveChanges();
+      return new ErrorApi(200, "Certificado modificado correctamente.");
+    }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]

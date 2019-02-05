@@ -158,6 +158,16 @@
   font-weight: bold;
 }
 
+.grid-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-buttons-style {
+  height: 8vh;
+  font-size: 2.5vw;
+}
+
 @media screen and (max-width: 600px) {
   .grid-principal-body {
     font-size: 8px;

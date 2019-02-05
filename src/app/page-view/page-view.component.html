@@ -1,6 +1,7 @@
 <app-principal-header></app-principal-header>
 <section class="section-logIn">
   <div>
+    <button (click)="viewDelete = !viewDelete">A eliminados</button>
     <input type="text" value="Aqui ira el buscador"><br><br>
     <div class="grid-principal-first">
       <button class="row-style row-style-first" (click)="modeOrdenate(0)">Alias
@@ -21,20 +22,38 @@
       </button>
       <button class="row-style row-style-first" disabled>Opciones</button>
     </div>
-    <div class="grid-principal">
+    <div class="grid-principal" *ngIf="!viewDelete">
       <div *ngFor="let certificate of allCertificates">
         <div class="grid-principal-body">
           <div class="row-style">{{certificate.alias}}</div>
           <div class="row-style">{{certificate.caducidad}}</div>
           <div class="row-style">{{certificate.id_orga}}</div>
           <div class="row-style">{{certificate.cliente}}</div>
-          <div class="row-style">
-            <input type="button" value="📋" (click)="detailButton(certificate.id)">
-            <input type="button" value="❌" (click)="deleteButton()">
+          <div class="row-style grid-buttons">
+            <div></div> <!-- Esta vacio para dejar un espacio -->
+            <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
+            <input type="button" class="button-log-out grid-buttons-style" value="❌" (click)="deleteButton(certificate.id)">
+            <div></div>
           </div>
         </div>
       </div>
     </div>
+    <div class="grid-principal" *ngIf="viewDelete">
+        <div *ngFor="let certificate of allCertificatesDelete">
+          <div class="grid-principal-body">
+            <div class="row-style">{{certificate.alias}}</div>
+            <div class="row-style">{{certificate.caducidad}}</div>
+            <div class="row-style">{{certificate.id_orga}}</div>
+            <div class="row-style">{{certificate.cliente}}</div>
+            <div class="row-style grid-buttons">
+              <div></div> <!-- Esta vacio para dejar un espacio -->
+              <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
+              <input type="button" class="button-log-out grid-buttons-style" value="✔️" (click)="deleteButton(certificate.id)">
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </section>
 <simple-notifications></simple-notifications>
