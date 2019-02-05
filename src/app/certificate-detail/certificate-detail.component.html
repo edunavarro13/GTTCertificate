@@ -1,4 +1,34 @@
 <app-principal-header></app-principal-header>
 <section class="section-logIn">
-  certificate-detail Id= {{ id }} works!
+  <div>
+    <p class="name-page">Datos Certificado:</p>
+    <div class="grid-user">
+      <label class="padding-label padding-label-user">Alias :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.alias : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Entidad emisora :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.entidad_emisora : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Serie :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.serie : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Subject :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.subject : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Caducidad :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.caducidad : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Password :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.password : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">ID_ORGA :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.id_orga : 0 }}<br><br></label>
+      <label class="padding-label padding-label-user">Cliente :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.cliente : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Integraciones institución :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.itegraciones_institucion : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Persona contacto :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.persona_contacto : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Repositorio :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.reporsitorio : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Observaciones :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.observaciones : "" }}<br><br></label>
+      <label class="padding-label padding-label-user">Eliminado :</label>
+      <label class="label-result">{{ certificateActive ? certificateActive.eliminado : "" }}<br><br></label>
+    </div>
+  </div>
 </section>

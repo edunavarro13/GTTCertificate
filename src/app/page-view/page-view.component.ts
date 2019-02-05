@@ -12,6 +12,7 @@ import {
 import {
   NotificationsService
 } from 'angular2-notifications';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-view',
@@ -26,7 +27,7 @@ export class PageViewComponent implements OnInit {
   columnActive: number = 0;
 
   constructor(private gttApi: GttApiService,
-    private notification: NotificationsService) {}
+    private notification: NotificationsService, private router: Router) {}
 
   ngOnInit() {
     this.gttApi.permited();
@@ -39,17 +40,8 @@ export class PageViewComponent implements OnInit {
     }).catch(console.error);
   }
 
-  detailButton() {
-    if (this.userActive.role === 0) {
-
-    } else {
-      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para modificar los certificados.", {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }
+  detailButton(idCert: number) {
+    this.router.navigate(['/certificate/' + idCert]);
   }
 
   deleteButton() {

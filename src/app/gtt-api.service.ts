@@ -86,4 +86,8 @@ export class GttApiService {
   getAllCertificates() {
     return this.api.get(this.urlCert).toPromise();
   }
+
+  getCertificateById(idCert: number) {
+    return this.api.get(this.urlCert + `/${idCert}`).toPromise();
+  }
 }

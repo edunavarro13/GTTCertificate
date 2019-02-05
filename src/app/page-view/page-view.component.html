@@ -29,7 +29,7 @@
           <div class="row-style">{{certificate.id_orga}}</div>
           <div class="row-style">{{certificate.cliente}}</div>
           <div class="row-style">
-            <input type="button" value="📋" (click)="detailButton()">
+            <input type="button" value="📋" (click)="detailButton(certificate.id)">
             <input type="button" value="❌" (click)="deleteButton()">
           </div>
         </div>
