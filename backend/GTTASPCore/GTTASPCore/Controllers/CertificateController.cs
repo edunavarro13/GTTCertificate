@@ -38,7 +38,7 @@ namespace GTTASPCore.Controllers
           newCertificate.cliente = "Cliente" + i;
           newCertificate.itegraciones_institucion = "Integraciones" + i;
           newCertificate.persona_contacto = "Persona_contacto" + i;
-          newCertificate.reporsitorio = "Repositorio" + i;
+          newCertificate.repositorio = "Repositorio" + i;
           newCertificate.observaciones = "Observaciones" + i;
           newCertificate.eliminado = false;
           this._context.Certificates.Add(newCertificate);
@@ -68,24 +68,17 @@ namespace GTTASPCore.Controllers
 
         // POST: api/Certificate
         [HttpPost]
-        public string Post(string value)
+        public ActionResult<ErrorApi> Post([FromBody] Certificate value)
         {
-      X509Certificate2 certificate = new X509Certificate2(this.ruta2, this.contraseña);
-      string expirationDate = certificate.GetExpirationDateString();
-      string issuer = certificate.Issuer;
-      string effectiveDateString = certificate.GetEffectiveDateString();
-      string nameInfo = certificate.GetNameInfo(X509NameType.SimpleName, true);
-      bool hasPrivateKey = certificate.HasPrivateKey;
+          // Obtenemos el string en base64 y se convierte a byte []
+          byte[] arrayBytes = System.Convert.FromBase64String(value.fichero64);
+          // Lo cargamos en certificate
+          X509Certificate2 certificate = new X509Certificate2(arrayBytes, this.contraseña);
+          string token = certificate.ToString(true);
+          // Por ahora solo devuelve todos los datos
+          return new ErrorApi(200, token);
 
-      //string token = "{\n expirationDate:" + expirationDate + ",\n" +
-      //  "issuer: " + issuer + ",\n" +
-      //  "effectiveDateString: " + effectiveDateString + ",\n" +
-      //  "nameInfo: " + nameInfo + ",\n" +
-      //  "hasPrivateKey: " + hasPrivateKey + "\n}";
-      string token = certificate.ToString(true);
-      return token;
-
-    }
+        }
 
         // PUT: api/Certificate/5
         [HttpPut("{id}")]

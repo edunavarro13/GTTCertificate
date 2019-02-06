@@ -4,22 +4,24 @@
     <input type="text" value="Aqui ira el buscador">
     <button class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">close</i>
       A eliminados</button>
+    <button class="button-submit button-flex-style" routerLink="/certificate" routerLinkActive="active"><i class="material-icons">note_add</i>
+      Agregar certificado</button>
     <div class="grid-principal-first">
       <button class="row-style row-style-first" (click)="modeOrdenate(0)">Alias
         <i *ngIf="columnActive===0 && boolCert" class="material-icons">arrow_drop_down</i>
         <i *ngIf="columnActive===0 && !boolCert" class="material-icons">arrow_drop_up</i>
       </button>
       <button class="row-style row-style-first" (click)="modeOrdenate(1)">Caducidad
-          <i *ngIf="columnActive===1 && boolCert" class="material-icons">arrow_drop_down</i>
-          <i *ngIf="columnActive===1 && !boolCert" class="material-icons">arrow_drop_up</i>
+        <i *ngIf="columnActive===1 && boolCert" class="material-icons">arrow_drop_down</i>
+        <i *ngIf="columnActive===1 && !boolCert" class="material-icons">arrow_drop_up</i>
       </button>
-      <button class="row-style row-style-first" (click)="modeOrdenate(2)">ID_ORGA
-          <i *ngIf="columnActive===2 && boolCert" class="material-icons">arrow_drop_down</i>
-          <i *ngIf="columnActive===2 && !boolCert" class="material-icons">arrow_drop_up</i>
+      <button class="row-style row-style-first" (click)="modeOrdenate(2)">Subject
+        <i *ngIf="columnActive===2 && boolCert" class="material-icons">arrow_drop_down</i>
+        <i *ngIf="columnActive===2 && !boolCert" class="material-icons">arrow_drop_up</i>
       </button>
       <button class="row-style row-style-first" (click)="modeOrdenate(3)">Cliente
-          <i *ngIf="columnActive===3 && boolCert" class="material-icons">arrow_drop_down</i>
-          <i *ngIf="columnActive===3 && !boolCert" class="material-icons">arrow_drop_up</i>
+        <i *ngIf="columnActive===3 && boolCert" class="material-icons">arrow_drop_down</i>
+        <i *ngIf="columnActive===3 && !boolCert" class="material-icons">arrow_drop_up</i>
       </button>
       <button class="row-style row-style-first" disabled>Opciones</button>
     </div>
@@ -28,8 +30,8 @@
         <div class="grid-principal-body">
           <div class="row-style">{{certificate.alias}}</div>
           <div class="row-style">{{certificate.caducidad}}</div>
-          <div class="row-style">{{certificate.id_orga}}</div>
-          <div class="row-style">{{certificate.cliente}}</div>
+          <div class="row-style">{{certificate.subject}}</div>
+          <div class="row-style">{{certificate.id_orga + " - " + certificate.cliente}}</div>
           <div class="row-style grid-buttons">
             <div></div> <!-- Esta vacio para dejar un espacio -->
             <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
@@ -40,21 +42,21 @@
       </div>
     </div>
     <div class="grid-principal" *ngIf="viewDelete">
-        <div *ngFor="let certificate of allCertificatesDelete">
-          <div class="grid-principal-body">
-            <div class="row-style">{{certificate.alias}}</div>
-            <div class="row-style">{{certificate.caducidad}}</div>
-            <div class="row-style">{{certificate.id_orga}}</div>
-            <div class="row-style">{{certificate.cliente}}</div>
-            <div class="row-style grid-buttons">
-              <div></div> <!-- Esta vacio para dejar un espacio -->
-              <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
-              <input type="button" class="button-log-out grid-buttons-style" value="✔️" (click)="deleteButton(certificate.id)">
-              <div></div>
-            </div>
+      <div *ngFor="let certificate of allCertificatesDelete">
+        <div class="grid-principal-body">
+          <div class="row-style">{{certificate.alias}}</div>
+          <div class="row-style">{{certificate.caducidad}}</div>
+          <div class="row-style">{{certificate.subject}}</div>
+          <div class="row-style">{{certificate.id_orga + " - " + certificate.cliente}}</div>
+          <div class="row-style grid-buttons">
+            <div></div> <!-- Esta vacio para dejar un espacio -->
+            <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
+            <input type="button" class="button-log-out grid-buttons-style" value="✔️" (click)="deleteButton(certificate.id)">
+            <div></div>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </section>
 <simple-notifications></simple-notifications>

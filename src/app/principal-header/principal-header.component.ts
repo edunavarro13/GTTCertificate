@@ -15,6 +15,7 @@ export class PrincipalHeaderComponent implements OnInit {
   constructor(private routerLog: Router, private gttApi: GttApiService) { }
 
   ngOnInit() {
+    this.gttApi.permited();
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userHeader = responseUser;
     }).catch(console.error);

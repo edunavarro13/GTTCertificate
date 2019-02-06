@@ -34,7 +34,6 @@ export class PageViewComponent implements OnInit {
     private notification: NotificationsService, private router: Router) {}
 
   ngOnInit() {
-    this.gttApi.permited();
     this.loadGrid();
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userActive = responseUser;
@@ -111,19 +110,19 @@ export class PageViewComponent implements OnInit {
         // a must be equal to b
         return 0;
       } else if (type === 2) {
-        if ((asc && a.id_orga > b.id_orga) || (!asc && a.id_orga < b.id_orga)) {
+        if ((asc && a.subject > b.subject) || (!asc && a.subject < b.subject)) {
           return 1;
         }
-        if ((!asc && a.id_orga > b.id_orga) || (asc && a.id_orga < b.id_orga)) {
+        if ((!asc && a.subject > b.subject) || (asc && a.subject < b.subject)) {
           return -1;
         }
         // a must be equal to b
         return 0;
       } else {
-        if ((asc && a.cliente > b.cliente) || (!asc && a.cliente < b.cliente)) {
+        if ((asc && a.id_orga > b.id_orga) || (!asc && a.id_orga < b.id_orga)) {
           return 1;
         }
-        if ((!asc && a.cliente > b.cliente) || (asc && a.cliente < b.cliente)) {
+        if ((!asc && a.id_orga > b.id_orga) || (asc && a.id_orga < b.id_orga)) {
           return -1;
         }
         // a must be equal to b

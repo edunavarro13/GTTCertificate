@@ -18,8 +18,9 @@ namespace GTTASPCore.Models
     public string cliente { get; set; }
     public string itegraciones_institucion {get; set;}
     public string persona_contacto { get; set; }
-    public string reporsitorio { get; set; }
+    public string repositorio { get; set; }
     public string observaciones { get; set; }
     public bool eliminado { get; set; }
+    public string fichero64 { get; set; }
   }
 }

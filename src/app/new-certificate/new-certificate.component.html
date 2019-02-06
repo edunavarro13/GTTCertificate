@@ -1,0 +1,10 @@
+<app-principal-header></app-principal-header>
+<section class="section-logIn">
+  <div>
+    <p class="name-page">Agregar certificado</p>
+    <input type="file"
+       id="avatar" name="avatar"
+       accept='application/x-pkcs12' [(ngModel)]="avatar" (change)="obtainCert($event)">
+       <p>{{ archivo }}</p>
+  </div>
+</section>

@@ -1,5 +1,5 @@
 import {
-  Component, OnInit
+  Component
 } from '@angular/core';
 import {
   GttApiService
@@ -16,7 +16,7 @@ import {
   templateUrl: './register-view.component.html',
   styleUrls: ['./register-view.component.scss']
 })
-export class RegisterViewComponent implements OnInit {
+export class RegisterViewComponent {
 
   usernameRegister: string = '';
   passRegister: string = '';
@@ -24,9 +24,6 @@ export class RegisterViewComponent implements OnInit {
   roleRegister: number = 1;
   constructor(private apiService: GttApiService, private routeAtr: Router, private notification: NotificationsService) {}
 
-  ngOnInit() {
-    this.apiService.permited();
-  }
   register() {
     if (this.usernameRegister.trim() !== '' && this.passRegister.trim() !== '' && this.confRegister.trim()) {
       if (this.passRegister.trim() === this.confRegister.trim()) {

@@ -44,7 +44,6 @@ export class UserViewComponent implements OnInit {
     private notification: NotificationsService) {}
 
   ngOnInit() {
-    this.gttApi.permited();
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userActive = responseUser;
     }).catch(console.error);
