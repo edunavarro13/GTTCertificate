@@ -24,10 +24,11 @@ export class GttApiService {
     }
   }
 
-  register(username: string, password: string) {
+  register(username: string, password: string, role: number) {
     return this.api.post(this.urlRegis, {
       username,
-      password
+      password,
+      role
     }).toPromise();
   }
 

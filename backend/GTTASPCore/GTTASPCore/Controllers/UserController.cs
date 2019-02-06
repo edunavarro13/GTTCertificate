@@ -80,7 +80,7 @@ namespace GTTASPCore.Controllers
       // Si lo pilla es que Users esta vacia, ergo no existe
             catch (Exception ex) { }
             value.password = Encrypt.Hash(value.password);
-            value.role = Role.user;
+            value.role = value.role == 0? Role.admin : Role.user;
             this._context.Users.Add(value);
             this._context.SaveChanges();
             valueReturn = new ErrorApi(200, "Usuario creado con éxito.");

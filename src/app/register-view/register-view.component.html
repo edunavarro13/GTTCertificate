@@ -1,7 +1,4 @@
-<header>
-  <img class="gtt-icon" src="../../assets/gtt1.png">
-  <input class="to-reg-log" type="button" routerLink="/login" routerLinkActive="active" value="Login">
-</header>
+<app-principal-header></app-principal-header>
 
 <section class="section-logIn">
   <div>
@@ -26,6 +23,16 @@
         <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">credit_card</i> </button>
       </div>
       <input class="input-agregar" type="password" placeholder="Password" name="confirmation" [(ngModel)]="confRegister">
+    </div>
+    <label class="padding-label">Rol de usuario:</label>
+    <div class="flexbox-inputs">
+      <div>
+        <button class="button-of-inputs" (click)="infoButton(4)"><i class="material-icons">airline_seat_recline_normal</i> </button>
+      </div>
+      <select class="input-agregar select-add" name="role" [(ngModel)]="roleRegister"> 
+        <option class="option-select" value="0">Admin</option>
+        <option class="option-select" value="1">User</option>
+      </select> 
     </div>
     <div class="div-button-submit"><input class="button-submit" type="button" value="Register" (click)="register()"></div>
   </div>
