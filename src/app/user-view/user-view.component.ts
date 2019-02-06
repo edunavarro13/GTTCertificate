@@ -30,6 +30,8 @@ export class UserViewComponent implements OnInit {
   componentJira: string = "";
   proyectJira: string = "";
   urlJira: string = "";
+  descJira: string = "";
+  roleJira: number = 0;
   verified: number = JSON.parse(localStorage.getItem('verified')) || 0;
 
   editJira: boolean = false;
@@ -55,6 +57,7 @@ export class UserViewComponent implements OnInit {
         this.componentJira = this.jiraActive.component;
         this.proyectJira = this.jiraActive.proyect;
         this.urlJira = this.jiraActive.url;
+        this.descJira = this.jiraActive.descripcion;
       }
     }).catch(console.error);
   }
@@ -88,6 +91,8 @@ export class UserViewComponent implements OnInit {
         url: this.urlJira,
         proyect: this.proyectJira,
         component: this.componentJira,
+        descripcion: this.descJira,
+        issue: this.roleJira,
         idUser: 0
       };
       if (!this.jiraActive) {
@@ -152,7 +157,7 @@ export class UserViewComponent implements OnInit {
         clickToClose: true
       });
     } else if (option === 3) {
-      this.notification.info('Información', `En Componente de Jira debes introducir el componente tu usuario de Jira.`, {
+      this.notification.info('Información', `En Componente de Jira debes introducir el equipo que va a recibir la tarea de Jira.`, {
         timeOut: 5000,
         showProgressBar: true,
         pauseOnHover: true,
@@ -188,6 +193,22 @@ export class UserViewComponent implements OnInit {
       });
     } else if (option === 8) {
       this.notification.info('Información', `En confirmación de la contraseña debes introducir el mismo valor que en contraseña.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }
+    else if (option === 9) {
+      this.notification.info('Información', `Tipo de tarea es el tipo que tendrá la tarea de Jira cuando se suba (siempre será Explotación).`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }
+    else if (option === 10) {
+      this.notification.info('Información', `En descripción de Jira debes introducir la información en detalle que tendrá la tarea de Jira cuando se suba.`, {
         timeOut: 5000,
         showProgressBar: true,
         pauseOnHover: true,

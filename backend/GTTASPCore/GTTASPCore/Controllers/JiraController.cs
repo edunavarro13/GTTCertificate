@@ -81,6 +81,8 @@ namespace GTTASPCore.Controllers
             jiraUpdate.url = value.url;
             jiraUpdate.proyect = value.proyect;
             jiraUpdate.component = value.component;
+            jiraUpdate.descripcion = value.descripcion;
+            jiraUpdate.issue_type = Issue.explotacion;
             this._context.SaveChanges();
             errApi = new ErrorApi(200, "Usuario Jira modificado.");
           }

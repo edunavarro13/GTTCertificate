@@ -81,11 +81,20 @@ i {
 //   font-weight: bold;
 // }
 
-// .grid-user {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
-//   justify-content: center;
-//   grid-column-gap: 3vw;
-//   padding-left: 1vw;
-//   padding-right: 1vw;
-// }
+.grid-jira-edit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  grid-column-gap: 3vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+.input-description {
+  height: 17vh;
+}
+
+.button-description {
+  height: 18vh;
+}
+

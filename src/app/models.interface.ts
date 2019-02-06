@@ -11,6 +11,8 @@ export interface Jira {
   component: string;
   proyect: string;
   url: string;
+  descripcion: string;
+  issue: number;
   idUser: number;
 }
 export interface Certificate {
