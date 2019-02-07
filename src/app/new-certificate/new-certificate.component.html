@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div class="div-button-submit">
+    <div *ngIf="watchFile" class="div-button-submit">
         <input class="input-file input-agregar" type="file" id="avatar" name="avatar" accept='.p12' [(ngModel)]="avatar" (change)="obtainCert($event)">
     </div>
   </div>

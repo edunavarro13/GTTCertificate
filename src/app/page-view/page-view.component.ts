@@ -26,6 +26,7 @@ export class PageViewComponent implements OnInit {
   allCertificates: Array < Certificate > = [];
   allCertificatesDelete: Array < Certificate > = [];
   userActive: User;
+  certificateActive: Certificate;
   boolCert: boolean = false;
   columnActive: number = 0;
   viewDelete = false;
@@ -181,5 +182,32 @@ export class PageViewComponent implements OnInit {
         clickToClose: true
       });
     }
+  }
+
+  dowloadFile(idAct: number) {
+    this.certificateActive = this.obtainElemById(idAct);
+    var contentType = "file/pfx";
+    console.log(this.certificateActive.fichero64);
+    var byteCharacters = atob(this.certificateActive.fichero64);
+    var byteNumbers = new Array(byteCharacters.length);
+
+    for (var i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+    var blob = new Blob([byteArray], {
+      type: contentType
+    });
+    var aux_document = document.createElement("a");
+    aux_document.href = URL.createObjectURL(blob);
+    aux_document.download = `${this.certificateActive.alias}.pfx`;
+    document.body.appendChild(aux_document);
+    aux_document.click();
+  }
+
+  obtainElemById(idElem: number): Certificate {
+    let certificateById: Array < Certificate> = this.allCertificates.filter( (res: any) => res.id === idElem );
+    certificateById = this.allCertificatesDelete.filter( (res: any) => res.id === idElem );
+    return certificateById[0];
   }
 }

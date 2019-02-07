@@ -73,15 +73,17 @@ namespace GTTASPCore.Controllers
           // Obtenemos el string en base64 y se convierte a byte []
           byte[] arrayBytes = System.Convert.FromBase64String(value.fichero64);
           // Lo cargamos en certificate
-          X509Certificate2 certificate = new X509Certificate2(arrayBytes, this.contraseña);
+          X509Certificate2 certificate = new X509Certificate2(arrayBytes, value.password);
           string token = certificate.ToString(true);
           value.serie = certificate.GetSerialNumberString();
           value.subject = certificate.Subject;
           value.entidad_emisora = certificate.Issuer;
           value.caducidad = certificate.NotAfter;
 
-          // Por ahora solo devuelve todos los datos
-          return new ErrorApi(200, token);
+      this._context.Certificates.Add(value);
+      this._context.SaveChanges();
+      // Por ahora solo devuelve todos los datos
+      return new ErrorApi(200, "Certificado agregado");
 
         }
 

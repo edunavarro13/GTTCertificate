@@ -27,7 +27,8 @@ export interface Certificate {
   cliente: string;
   itegraciones_institucion: string;
   persona_contacto: string;
-  reporsitorio: string;
+  repositorio: string;
   observaciones: string;
   eliminado: boolean;
+  fichero64: string;
 }

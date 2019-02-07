@@ -96,7 +96,8 @@ export class GttApiService {
     return this.api.put(this.urlCert + `/${newCert.id}`, newCert).toPromise();
   } 
 
-  addCertificate(fichero64: any) {
-    return this.api.post(this.urlCert, {fichero64}).toPromise();
+  addCertificate(fichero64: any, certificate: Certificate) {
+    certificate.fichero64 = fichero64;
+    return this.api.post(this.urlCert, certificate).toPromise();
   }
 }

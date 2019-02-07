@@ -2,6 +2,9 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import {
+  Certificate
+} from '../models.interface';
 import { GttApiService } from '../gtt-api.service';
 
 @Component({
@@ -12,26 +15,6 @@ import { GttApiService } from '../gtt-api.service';
 export class NewCertificateComponent implements OnInit {
 
   headers: object = JSON.parse(localStorage.getItem('headers')) || '';
-  archivo: string = "vacio";
-
-  afuConfig = {
-    multiple: false,
-    formatsAllowed: ".pfx,.p12",
-    maxSize: "1",
-    uploadAPI: {
-      url: "api/certificate",
-      headers: {
-        "Content-Type": "application/x-pkcs12",
-        "Authorization": `${this.headers}`
-      }
-    },
-    theme: "dragNDrop",
-    hideProgressBar: true,
-    hideResetBtn: true,
-    hideSelectBtn: true
-  };
-
-  constructor(private gttApi: GttApiService) {}
 
   aliasCert: string = "";
   orgaCert: string = "";
@@ -42,6 +25,10 @@ export class NewCertificateComponent implements OnInit {
   emailCert: string = "";
   passCert: string = "";
 
+  watchFile: boolean = false;
+
+  constructor(private gttApi: GttApiService) {}
+
   ngOnInit() {}
 
   imageUpload(ev: any) {
@@ -50,23 +37,43 @@ export class NewCertificateComponent implements OnInit {
   }
 
   obtainCert(event) {
+    let certificateGo: Certificate = {
+      id: undefined,
+      alias: this.aliasCert,
+      id_orga: +this.orgaCert,
+      cliente: this.clienteCert,
+      repositorio: this.repoCert,
+      itegraciones_institucion: this.listCert,
+      observaciones: this.obserCert,
+      persona_contacto: this.emailCert,
+      password: this.passCert,
+      subject: "",
+      caducidad: new Date(),
+      entidad_emisora: "",
+      serie: "",
+      eliminado: false,
+      fichero64: ""
+    }
     var reader = new FileReader();
     var arrayBuffer;
     let gtt_aux = this.gttApi;
-    let resultadoObtenido = "vacio";
     reader.onload = function(){
       arrayBuffer = reader.result;
       let arrayBuffer2 = arrayBuffer.split(','); // Para quitar data:application/x-pkcs12;base64,
       // console.log(arrayBuffer);
       // console.log(arrayBuffer2);
-      
-      gtt_aux.addCertificate(arrayBuffer2[1]).then((response: any) => {
-        resultadoObtenido = response.message;
-        console.log(resultadoObtenido);
+      gtt_aux.addCertificate(arrayBuffer2[1], certificateGo).then((response: any) => {
+        console.log(response);
       }).catch(console.error);
     };
     reader.readAsDataURL(event.target.files[0]);
-    this.archivo = resultadoObtenido;
+  }
+
+  areEmpty() {
+    if(this.aliasCert && this.clienteCert && this.emailCert && this.listCert && this.obserCert 
+      && this.orgaCert && this.repoCert && this.passCert) {
+      this.watchFile = true;
+    }
   }
 
 }
