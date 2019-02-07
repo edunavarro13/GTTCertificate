@@ -22,5 +22,6 @@ namespace GTTASPCore.Models
     public string observaciones { get; set; }
     public bool eliminado { get; set; }
     public string fichero64 { get; set; }
+    public string nombreArchivo { get; set; }
   }
 }

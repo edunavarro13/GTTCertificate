@@ -184,11 +184,10 @@ export class PageViewComponent implements OnInit {
     }
   }
 
-  dowloadFile(idAct: number) {
-    this.certificateActive = this.obtainElemById(idAct);
-    var contentType = "file/pfx";
-    console.log(this.certificateActive.fichero64);
-    var byteCharacters = atob(this.certificateActive.fichero64);
+  dowloadFile(certificate: Certificate) {
+    let certificateType = certificate.nombreArchivo.split('.')[1];
+    var contentType = "file/"+certificateType;
+    var byteCharacters = atob(certificate.fichero64);
     var byteNumbers = new Array(byteCharacters.length);
 
     for (var i = 0; i < byteCharacters.length; i++) {
@@ -200,14 +199,8 @@ export class PageViewComponent implements OnInit {
     });
     var aux_document = document.createElement("a");
     aux_document.href = URL.createObjectURL(blob);
-    aux_document.download = `${this.certificateActive.alias}.pfx`;
+    aux_document.download = `${certificate.nombreArchivo}`;
     document.body.appendChild(aux_document);
     aux_document.click();
-  }
-
-  obtainElemById(idElem: number): Certificate {
-    let certificateById: Array < Certificate> = this.allCertificates.filter( (res: any) => res.id === idElem );
-    certificateById = this.allCertificatesDelete.filter( (res: any) => res.id === idElem );
-    return certificateById[0];
   }
 }

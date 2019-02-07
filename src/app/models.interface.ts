@@ -31,4 +31,5 @@ export interface Certificate {
   observaciones: string;
   eliminado: boolean;
   fichero64: string;
+  nombreArchivo: string;
 }

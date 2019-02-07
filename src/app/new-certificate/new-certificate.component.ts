@@ -52,7 +52,8 @@ export class NewCertificateComponent implements OnInit {
       entidad_emisora: "",
       serie: "",
       eliminado: false,
-      fichero64: ""
+      fichero64: "",
+      nombreArchivo: event.target.value.split("\\")[2]
     }
     var reader = new FileReader();
     var arrayBuffer;
@@ -60,8 +61,6 @@ export class NewCertificateComponent implements OnInit {
     reader.onload = function(){
       arrayBuffer = reader.result;
       let arrayBuffer2 = arrayBuffer.split(','); // Para quitar data:application/x-pkcs12;base64,
-      // console.log(arrayBuffer);
-      // console.log(arrayBuffer2);
       gtt_aux.addCertificate(arrayBuffer2[1], certificateGo).then((response: any) => {
         console.log(response);
       }).catch(console.error);
@@ -73,6 +72,8 @@ export class NewCertificateComponent implements OnInit {
     if(this.aliasCert && this.clienteCert && this.emailCert && this.listCert && this.obserCert 
       && this.orgaCert && this.repoCert && this.passCert) {
       this.watchFile = true;
+    } else {
+      this.watchFile = false;
     }
   }
 

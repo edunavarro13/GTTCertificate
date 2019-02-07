@@ -1,13 +1,15 @@
 <app-principal-header></app-principal-header>
 <section class="section-logIn">
   <div>
-    <input type="text" value="Aqui ira el buscador">
-    <button *ngIf="!viewDelete" class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">close</i>
-      A eliminados</button>
-    <button *ngIf="viewDelete" class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">done</i>
-      A verificados</button>
-    <button class="button-submit button-flex-style" (click)="toAddCertificate()"><i class="material-icons">note_add</i>
-      Agregar certificado</button>
+    <div class="section-header">
+      <input type="text" value="Aqui ira el buscador">
+      <button *ngIf="!viewDelete" class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">close</i>
+        A eliminados</button>
+      <button *ngIf="viewDelete" class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">done</i>
+        A verificados</button>
+      <button class="button-submit button-flex-style" (click)="toAddCertificate()"><i class="material-icons">note_add</i>
+        Agregar certificado</button>
+    </div>
     <div class="grid-principal-first">
       <button class="row-style row-style-first" (click)="modeOrdenate(0)">Alias
         <i *ngIf="columnActive===0 && boolCert" class="material-icons">arrow_drop_down</i>
@@ -49,12 +51,12 @@
         <div class="grid-principal-body">
           <div class="row-style">{{certificate.alias}}</div>
           <div class="row-style">{{certificate.caducidad}}</div>
-          <div class="row-style">{{certificate.subject}}</div>
+          <div class="row-style">{{certificate.subject.split("CN=")[1].split("-")[0]}}</div>
           <div class="row-style">{{certificate.id_orga + " - " + certificate.cliente}}</div>
           <div class="row-style grid-buttons">
             <div></div> <!-- Esta vacio para dejar un espacio -->
             <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
-            <input type="button" class="button-log-out grid-buttons-style" value="📁" (click)="dowloadFile(certificate.id)">
+            <input type="button" class="button-log-out grid-buttons-style" value="📁" (click)="dowloadFile(certificate)">
             <input type="button" class="button-log-out grid-buttons-style" value="✔️" (click)="deleteButton(certificate.id)">
             <div></div>
           </div>
