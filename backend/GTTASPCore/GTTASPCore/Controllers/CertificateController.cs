@@ -75,6 +75,11 @@ namespace GTTASPCore.Controllers
           // Lo cargamos en certificate
           X509Certificate2 certificate = new X509Certificate2(arrayBytes, this.contraseña);
           string token = certificate.ToString(true);
+          value.serie = certificate.GetSerialNumberString();
+          value.subject = certificate.Subject;
+          value.entidad_emisora = certificate.Issuer;
+          value.caducidad = certificate.NotAfter;
+
           // Por ahora solo devuelve todos los datos
           return new ErrorApi(200, token);
 

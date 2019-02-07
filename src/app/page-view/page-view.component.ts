@@ -169,4 +169,17 @@ export class PageViewComponent implements OnInit {
       }
     });
   }
+
+  toAddCertificate() {
+    if (this.userActive.role === 0) {
+      this.router.navigate(['/certificate']);
+    } else {
+      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para agregar nuevos certificados.", {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }
+  }
 }

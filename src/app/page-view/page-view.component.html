@@ -2,9 +2,11 @@
 <section class="section-logIn">
   <div>
     <input type="text" value="Aqui ira el buscador">
-    <button class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">close</i>
+    <button *ngIf="!viewDelete" class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">close</i>
       A eliminados</button>
-    <button class="button-submit button-flex-style" routerLink="/certificate" routerLinkActive="active"><i class="material-icons">note_add</i>
+    <button *ngIf="viewDelete" class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">done</i>
+      A verificados</button>
+    <button class="button-submit button-flex-style" (click)="toAddCertificate()"><i class="material-icons">note_add</i>
       Agregar certificado</button>
     <div class="grid-principal-first">
       <button class="row-style row-style-first" (click)="modeOrdenate(0)">Alias

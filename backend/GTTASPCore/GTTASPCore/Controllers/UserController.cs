@@ -25,7 +25,12 @@ namespace GTTASPCore.Controllers
                 newUser.username = "edunavarro13";
                 newUser.password = Encrypt.Hash("1234");
                 newUser.role = Role.admin;
+                User newUser2 = new User();
+                newUser2.username = "usuario";
+                newUser2.password = Encrypt.Hash("1234");
+                newUser2.role = Role.user;
                 this._context.Users.Add(newUser);
+                this._context.Users.Add(newUser2);
                 this._context.SaveChanges();
             }
             if(this._context.Jiras.Count() == 0)

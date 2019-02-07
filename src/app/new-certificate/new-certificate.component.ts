@@ -33,23 +33,20 @@ export class NewCertificateComponent implements OnInit {
 
   constructor(private gttApi: GttApiService) {}
 
+  aliasCert: string = "";
+  orgaCert: string = "";
+  clienteCert: string = "";
+  repoCert: string = "";
+  listCert: string = "";
+  obserCert: string = "";
+  emailCert: string = "";
+  passCert: string = "";
+
   ngOnInit() {}
 
   imageUpload(ev: any) {
     console.log(ev);
 
-  }
-
-  readThis(inputValue: any): void {
-    // var file:File = inputValue.files[0];
-    // var myReader:FileReader = new FileReader();
-  
-    // myReader.onloadend = (e) => {
-    //   this.avatar = myReader.result;
-    // }
-    // myReader.readAsArrayBuffer(file);
-    // console.log(myReader);
-    
   }
 
   obtainCert(event) {
@@ -59,11 +56,11 @@ export class NewCertificateComponent implements OnInit {
     let resultadoObtenido = "vacio";
     reader.onload = function(){
       arrayBuffer = reader.result;
-      let arrayBuffer2 = arrayBuffer.substring(33); // Para quitar data:application/x-pkcs12;base64,
+      let arrayBuffer2 = arrayBuffer.split(','); // Para quitar data:application/x-pkcs12;base64,
       // console.log(arrayBuffer);
       // console.log(arrayBuffer2);
       
-      gtt_aux.addCertificate(arrayBuffer2).then((response: any) => {
+      gtt_aux.addCertificate(arrayBuffer2[1]).then((response: any) => {
         resultadoObtenido = response.message;
         console.log(resultadoObtenido);
       }).catch(console.error);
