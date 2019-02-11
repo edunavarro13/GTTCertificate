@@ -167,6 +167,14 @@ export class NewCertificateComponent implements OnInit {
         clickToClose: true
       });
     }
+    else if(option === 9) {
+      this.notification.info('Información', `Para poder agregar un certificado primero debes rellenar todos los campos y, luego, pulsar en el botón Examinar que aparecerá y elegir el certificado deseado.`, {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+    }
   }
 
 }

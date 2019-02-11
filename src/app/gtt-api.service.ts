@@ -29,7 +29,7 @@ export class GttApiService {
       username,
       password,
       role
-    }).toPromise();
+    }, this.headers).toPromise();
   }
 
   login(username: string, password: string) {
@@ -61,43 +61,43 @@ export class GttApiService {
   }
 
   getUserById() {
-    return this.api.get(this.urlRegis + `/${this.idUser}`).toPromise();
+    return this.api.get(this.urlRegis + `/${this.idUser}`, this.headers).toPromise();
   }
 
   updateUser(newUser: User) {
-    return this.api.put(this.urlRegis + `/${this.idUser}`, newUser).toPromise();
+    return this.api.put(this.urlRegis + `/${this.idUser}`, newUser, this.headers).toPromise();
   }
 
   addJira(newJira: Jira) {
     newJira.idUser = this.idUser;
     localStorage.setItem('verified', JSON.stringify(0));
-    return this.api.post(this.urlNewJira, newJira).toPromise();
+    return this.api.post(this.urlNewJira, newJira, this.headers).toPromise();
   }
 
   getJiraByUserId() {
-    return this.api.get(this.urlNewJira + `/${this.idUser}`).toPromise();
+    return this.api.get(this.urlNewJira + `/${this.idUser}`, this.headers).toPromise();
   }
 
   updateJira(newJira: Jira) {
     newJira.idUser = this.idUser;
     localStorage.setItem('verified', JSON.stringify(0));
-    return this.api.put(this.urlNewJira + `/${this.idUser}`, newJira).toPromise();
+    return this.api.put(this.urlNewJira + `/${this.idUser}`, newJira, this.headers).toPromise();
   }
 
   getAllCertificates() {
-    return this.api.get(this.urlCert).toPromise();
+    return this.api.get(this.urlCert, this.headers).toPromise();
   }
 
   getCertificateById(idCert: number) {
-    return this.api.get(this.urlCert + `/${idCert}`).toPromise();
+    return this.api.get(this.urlCert + `/${idCert}`, this.headers).toPromise();
   }
 
   updateCertificate(newCert: Certificate) {
-    return this.api.put(this.urlCert + `/${newCert.id}`, newCert).toPromise();
+    return this.api.put(this.urlCert + `/${newCert.id}`, newCert, this.headers).toPromise();
   } 
 
   addCertificate(fichero64: any, certificate: Certificate) {
     certificate.fichero64 = fichero64;
-    return this.api.post(this.urlCert, certificate).toPromise();
+    return this.api.post(this.urlCert, certificate, this.headers).toPromise();
   }
 }

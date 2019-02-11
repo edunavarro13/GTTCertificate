@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GTTASPCore.Models;
 using GTTASPCore.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GTTASPCore.Controllers
 {
@@ -48,15 +49,17 @@ namespace GTTASPCore.Controllers
             }
         }
 
-        // GET: api/User
-        [HttpGet]
+    // GET: api/User
+    [Authorize]
+    [HttpGet]
         public ActionResult<List<User>> GetAll()
         {
             return this._context.Users.ToList();
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
+    // GET: api/User/5
+    [Authorize]
+    [HttpGet("{id}", Name = "Get")]
         public ActionResult<User> GetUser(long id)
         {
             User userGet = this._context.Users.Find(id);
@@ -67,9 +70,10 @@ namespace GTTASPCore.Controllers
             return userGet;
         }
 
-        // POST: api/User
-        // Es el Register
-        [HttpPost]
+    // POST: api/User
+    // Es el Register
+    [Authorize]
+    [HttpPost]
         public ActionResult<ErrorApi> Post([FromBody] User value)
         {
             ErrorApi valueReturn;
@@ -92,8 +96,9 @@ namespace GTTASPCore.Controllers
             return valueReturn;
         }
 
-        // PUT: api/User/5
-        [HttpPut("{id}")]
+    // PUT: api/User/5
+    [Authorize]
+    [HttpPut("{id}")]
         public ActionResult<ErrorApi> Put(long id, [FromBody] User value)
         {
             User userUpdate = this._context.Users.Find(id);
@@ -102,8 +107,9 @@ namespace GTTASPCore.Controllers
             return new ErrorApi(200, "Usuario modificado correctamente.");
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+    // DELETE: api/ApiWithActions/5
+    [Authorize]
+    [HttpDelete("{id}")]
         public ActionResult<string> Delete(long id)
         {
             // Se podria tambien hacer con Find

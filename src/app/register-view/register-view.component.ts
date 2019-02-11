@@ -44,7 +44,13 @@ export class RegisterViewComponent {
                 clickToClose: true
               })
             }
-          }).catch(console.error);
+          }).catch(res => {
+            if(res.status === 401) {
+              this.routeAtr.navigate(['/login']);
+            } else {
+              console.error(res);
+            }
+          });
       } else {
         this.notification.error('¡ERROR!', `Contraseña y confirmación de la contraseña no son iguales.`, {
           timeOut: 3000,

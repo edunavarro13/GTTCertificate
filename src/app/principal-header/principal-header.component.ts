@@ -18,7 +18,13 @@ export class PrincipalHeaderComponent implements OnInit {
     this.gttApi.permited();
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userHeader = responseUser;
-    }).catch(console.error);
+    }).catch( res => {
+      if(res.status === 401) {
+        this.routerLog.navigate(['/login']);
+      } else {
+        console.error(res);
+      }
+    });
   }
 
   logOut() {

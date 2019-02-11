@@ -13,6 +13,11 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using GTTASPCore.Models;
 using GTTASPCore.Services;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 
 namespace GTTASPCore
 {
@@ -28,6 +33,18 @@ namespace GTTASPCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(Options => {
+              Options.TokenValidationParameters = new TokenValidationParameters
+              {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = "geekshubs.com",
+                ValidAudience = "geekshubs.com",
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("123456 secretsecretsecret"))
+              };
+            });
             services.AddDbContext<GTTContext>(optionsActions => optionsActions.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddHostedService<ServicioCron>();
@@ -44,7 +61,7 @@ namespace GTTASPCore
             {
                 app.UseHsts();
             }
-
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

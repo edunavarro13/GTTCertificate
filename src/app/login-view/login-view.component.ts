@@ -23,7 +23,7 @@ export class LoginViewComponent {
   login() {
     if (this.usernameLogin.trim() !== '' && this.passLogin.trim() !== '') {
       this.apiService.login(this.usernameLogin.trim(), this.passLogin.trim()).then(response => {
-        this.routerLog.navigate(['/trello']);
+        this.routerLog.navigate(['/home']);
       }).catch(errmes => this.notification.error('¡ERROR!', errmes, {
         timeOut: 3000,
         showProgressBar: true,

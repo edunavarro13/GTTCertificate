@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GTTASPCore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GTTASPCore.Controllers
 {
@@ -18,14 +19,16 @@ namespace GTTASPCore.Controllers
           this._context = context;
         }
     // GET: api/Jira
+    [Authorize]
     [HttpGet]
     public ActionResult<List<Jira>> GetAllJira()
     {
          return this._context.Jiras.ToList();
     }
 
-        // GET: api/Jira/5
-        [HttpGet("{id}", Name = "GetJira")]
+    // GET: api/Jira/5
+    [Authorize]
+    [HttpGet("{id}", Name = "GetJira")]
         public ActionResult<Jira> GetJira(long id)
         {
           try
@@ -39,8 +42,9 @@ namespace GTTASPCore.Controllers
           }
         }
 
-        // POST: api/Jira
-        [HttpPost]
+    // POST: api/Jira
+    [Authorize]
+    [HttpPost]
         public ActionResult<ErrorApi> PostJira([FromBody] Jira value)
         {
           ErrorApi errApi;
@@ -58,8 +62,9 @@ namespace GTTASPCore.Controllers
           return errApi;
         }
 
-        // PUT: api/Jira/5
-        [HttpPut("{id}")]
+    // PUT: api/Jira/5
+    [Authorize]
+    [HttpPut("{id}")]
         public ActionResult<ErrorApi> PutJira(long id, [FromBody] Jira value)
         {
           
@@ -106,8 +111,9 @@ namespace GTTASPCore.Controllers
       return errApi;
     }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+    // DELETE: api/ApiWithActions/5
+    [Authorize]
+    [HttpDelete("{id}")]
         public ActionResult<string> DeleteJira(long id)
         {
           try

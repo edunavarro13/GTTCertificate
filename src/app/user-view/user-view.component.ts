@@ -15,6 +15,7 @@ import {
 import {
   GttJiraService
 } from '../gtt-jira.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-view',
@@ -41,12 +42,18 @@ export class UserViewComponent implements OnInit {
   usernamePass2: string = "";
 
   constructor(private gttApi: GttApiService, private jiraApi: GttJiraService,
-    private notification: NotificationsService) {}
+    private notification: NotificationsService, private routeAtr: Router) {}
 
   ngOnInit() {
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userActive = responseUser;
-    }).catch(console.error);
+    }).catch(res => {
+      if(res.status === 401) {
+        this.routeAtr.navigate(['/login']);
+      } else {
+        console.error(res);
+      }
+    });
 
     this.gttApi.getJiraByUserId().then((response: Jira) => {
       this.jiraActive = response;
@@ -58,7 +65,13 @@ export class UserViewComponent implements OnInit {
         this.urlJira = this.jiraActive.url;
         this.descJira = this.jiraActive.descripcion;
       }
-    }).catch(console.error);
+    }).catch((res2: any) => {
+      if(res2.status === 401) {
+        this.routeAtr.navigate(['/login']);
+      } else {
+        console.error(res2);
+      }
+    });
   }
 
   convertPass() {
@@ -114,7 +127,13 @@ export class UserViewComponent implements OnInit {
               clickToClose: true
             });
           }
-        }).catch(console.error);
+        }).catch(res => {
+          if(res.status === 401) {
+            this.routeAtr.navigate(['/login']);
+          } else {
+            console.error(res);
+          }
+        });
       } else {
         this.gttApi.updateJira(jiraActiveAux).then((res: any) => {
           if (res.status === 200) {
@@ -135,7 +154,13 @@ export class UserViewComponent implements OnInit {
               clickToClose: true
             });
           }
-        }).catch(console.error);
+        }).catch(res2 => {
+          if(res2.status === 401) {
+            this.routeAtr.navigate(['/login']);
+          } else {
+            console.error(res2);
+          }
+        });
       }
     }
   }
@@ -246,7 +271,13 @@ export class UserViewComponent implements OnInit {
             pauseOnHover: true,
             clickToClose: true
           });
-        }).catch(console.error);
+        }).catch(res => {
+          if(res.status === 401) {
+            this.routeAtr.navigate(['/login']);
+          } else {
+            console.error(res);
+          }
+        });
         this.editPass = false;
       }
       else {

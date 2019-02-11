@@ -38,7 +38,13 @@ export class PageViewComponent implements OnInit {
     this.loadGrid();
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userActive = responseUser;
-    }).catch(console.error);
+    }).catch(res => {
+      if(res.status === 401) {
+        this.router.navigate(['/login']);
+      } else {
+        console.error(res);
+      }
+    });
   }
 
   loadGrid() {
@@ -47,7 +53,14 @@ export class PageViewComponent implements OnInit {
       this.allCertificates = result.filter(val => !val.eliminado);
       this.allCertificatesDelete = result.filter(valDel => valDel.eliminado);
       this.modeOrdenate(0);
-    }).catch(console.error);
+    }).catch(res => {
+      // Si entra aqui es que no esta autorizado
+      if(res.status === 401) {
+        this.router.navigate(['/login']);
+      } else {
+        console.error(res);
+      }
+    });
   }
 
   detailButton(idCert: number) {
@@ -75,8 +88,20 @@ export class PageViewComponent implements OnInit {
             });
           }
           this.loadGrid();
-        }).catch(console.error);
-      }).catch(console.error);
+        }).catch(res => {
+          if(res.status === 401) {
+            this.router.navigate(['/login']);
+          } else {
+            console.error(res);
+          }
+        });
+      }).catch(res2 => {
+        if(res2.status === 401) {
+          this.router.navigate(['/login']);
+        } else {
+          console.error(res2);
+        }
+      });
     } else {
       this.notification.error('¡ERROR!', "No tienes la autorización necesaria para marcar como eliminados los certificados.", {
         timeOut: 3000,
@@ -99,7 +124,6 @@ export class PageViewComponent implements OnInit {
         if ((!asc && a.alias > b.alias) || (asc && a.alias < b.alias)) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       } else if (type === 1) {
         if ((asc && a.caducidad > b.caducidad) || (!asc && a.caducidad < b.caducidad)) {
@@ -108,7 +132,6 @@ export class PageViewComponent implements OnInit {
         if ((!asc && a.caducidad > b.caducidad) || (asc && a.caducidad < b.caducidad)) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       } else if (type === 2) {
         if ((asc && a.subject > b.subject) || (!asc && a.subject < b.subject)) {
@@ -117,7 +140,6 @@ export class PageViewComponent implements OnInit {
         if ((!asc && a.subject > b.subject) || (asc && a.subject < b.subject)) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       } else {
         if ((asc && a.id_orga > b.id_orga) || (!asc && a.id_orga < b.id_orga)) {
@@ -126,7 +148,6 @@ export class PageViewComponent implements OnInit {
         if ((!asc && a.id_orga > b.id_orga) || (asc && a.id_orga < b.id_orga)) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       }
     });
@@ -138,7 +159,6 @@ export class PageViewComponent implements OnInit {
         if ((!asc && a.alias > b.alias) || (asc && a.alias < b.alias)) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       } else if (type === 1) {
         if ((asc && a.caducidad > b.caducidad) || (!asc && a.caducidad < b.caducidad)) {
@@ -147,7 +167,6 @@ export class PageViewComponent implements OnInit {
         if ((!asc && a.caducidad > b.caducidad) || (asc && a.caducidad < b.caducidad)) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       } else if (type === 2) {
         if ((asc && a.id_orga > b.id_orga) || (!asc && a.id_orga < b.id_orga)) {
@@ -156,7 +175,6 @@ export class PageViewComponent implements OnInit {
         if ((!asc && a.id_orga > b.id_orga) || (asc && a.id_orga < b.id_orga)) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       } else {
         if ((asc && a.cliente > b.cliente) || (!asc && a.cliente < b.cliente)) {
@@ -165,7 +183,6 @@ export class PageViewComponent implements OnInit {
         if ((!asc && a.cliente > b.cliente) || (asc && a.cliente < b.cliente)) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       }
     });

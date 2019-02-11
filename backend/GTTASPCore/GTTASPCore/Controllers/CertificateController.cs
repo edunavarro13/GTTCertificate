@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GTTASPCore.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GTTASPCore.Controllers
 {
@@ -16,23 +13,23 @@ namespace GTTASPCore.Controllers
     public class CertificateController : ControllerBase
     {
     private readonly GTTContext _context;
-    private string ruta = "C:\\Users\\eduna\\Desktop\\todo\\GTTCertificate\\backend\\Certificados\\prueba.pfx";
-    private string ruta2 = "C:\\Users\\eduna\\Downloads\\20170419-ja-kit-de-certificados-de-prueba-v9.1.2\\20170419-JA-Kit-de-Certificados-de-Prueba-v9.1.2\\ACA\\SCD-colegiado-Ministerio.p12";
-    private string contraseña = "111111";
+
     public CertificateController(GTTContext context)
     {
       this._context = context;
     }
 
     // GET: api/Certificate
+    [Authorize]
     [HttpGet]
         public IEnumerable<Certificate> Get()
         {
       return this._context.Certificates.ToList();
     }
 
-        // GET: api/Certificate/5
-        [HttpGet("{id}", Name = "GetCertificate")]
+    // GET: api/Certificate/5
+    [Authorize]
+    [HttpGet("{id}", Name = "GetCertificate")]
         public ActionResult<Certificate> Get(long id)
         {
       Certificate certGet = this._context.Certificates.Find(id);
@@ -43,8 +40,9 @@ namespace GTTASPCore.Controllers
       return certGet;
     }
 
-        // POST: api/Certificate
-        [HttpPost]
+    // POST: api/Certificate
+    [Authorize]
+    [HttpPost]
         public ActionResult<ErrorApi> Post([FromBody] Certificate value)
         {
       try
@@ -70,8 +68,9 @@ namespace GTTASPCore.Controllers
 
         }
 
-        // PUT: api/Certificate/5
-        [HttpPut("{id}")]
+    // PUT: api/Certificate/5
+    [Authorize]
+    [HttpPut("{id}")]
         public ActionResult<ErrorApi> Put(long id, [FromBody] Certificate newCert)
         {
       Certificate certUpdate = this._context.Certificates.Find(id);

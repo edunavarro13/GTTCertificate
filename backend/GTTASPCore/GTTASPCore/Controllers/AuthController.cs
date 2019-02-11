@@ -7,6 +7,10 @@ using GTTASPCore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Jose;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace GTTASPCore.Controllers
 {
@@ -45,7 +49,8 @@ namespace GTTASPCore.Controllers
             User userLog = this._context.Users.Where(user => user.username == value.username).First();
             if (userLog.password == Encrypt.Hash(value.password))
             {
-              mess = new ErrorApi(200, JWT.Encode(userLog.id, "gtt password", JweAlgorithm.PBES2_HS256_A128KW, JweEncryption.A256CBC_HS512), userLog.id);
+          JwtSecurityToken token = BuildToken(userLog);
+              return Ok(new ErrorApi(200, new JwtSecurityTokenHandler().WriteToken(token), userLog.id));
             }
             else
             {
@@ -70,5 +75,23 @@ namespace GTTASPCore.Controllers
         public void Delete(int id)
         {
         }
-    }
+
+        public JwtSecurityToken BuildToken(User data)
+        {
+          var claims = new[]{
+                  new Claim(ClaimTypes.Name, data.username),
+                  new Claim("id", data.id.ToString())
+              };
+          var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("123456 secretsecretsecret"));
+          var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+          var token = new JwtSecurityToken(
+              issuer: "geekshubs.com",
+              audience: "geekshubs.com",
+              claims: claims,
+              expires: DateTime.Now.AddDays(3),
+              signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
+          return token;
+        }
+  }
 }
