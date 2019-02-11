@@ -22,29 +22,6 @@ namespace GTTASPCore.Controllers
     public CertificateController(GTTContext context)
     {
       this._context = context;
-      if(this._context.Certificates.Count() == 0)
-      {
-        for (int i = 1; i <= 8; i++)
-        {
-          Certificate newCertificate = new Certificate();
-          newCertificate.alias = "Alias" + i;
-          newCertificate.entidad_emisora = "Entidad_Emisora" + i;
-          newCertificate.serie = "Serie" + i;
-          newCertificate.subject = "Subject" + i;
-          DateTime da = new DateTime();
-          newCertificate.caducidad = da;
-          newCertificate.password = "Password" + i;
-          newCertificate.id_orga = 1;
-          newCertificate.cliente = "Cliente" + i;
-          newCertificate.itegraciones_institucion = "Integraciones" + i;
-          newCertificate.persona_contacto = "Persona_contacto" + i;
-          newCertificate.repositorio = "Repositorio" + i;
-          newCertificate.observaciones = "Observaciones" + i;
-          newCertificate.eliminado = false;
-          this._context.Certificates.Add(newCertificate);
-        }
-        this._context.SaveChanges();
-      }
     }
 
     // GET: api/Certificate
@@ -70,20 +47,26 @@ namespace GTTASPCore.Controllers
         [HttpPost]
         public ActionResult<ErrorApi> Post([FromBody] Certificate value)
         {
-          // Obtenemos el string en base64 y se convierte a byte []
-          byte[] arrayBytes = System.Convert.FromBase64String(value.fichero64);
-          // Lo cargamos en certificate
-          X509Certificate2 certificate = new X509Certificate2(arrayBytes, value.password);
-          string token = certificate.ToString(true);
-          value.serie = certificate.GetSerialNumberString();
-          value.subject = certificate.Subject;
-          value.entidad_emisora = certificate.Issuer;
-          value.caducidad = certificate.NotAfter;
+      try
+      {
+        // Obtenemos el string en base64 y se convierte a byte []
+        byte[] arrayBytes = Convert.FromBase64String(value.fichero64);
+        // Lo cargamos en certificate
+        X509Certificate2 certificate = new X509Certificate2(arrayBytes, value.password);
+        string token = certificate.ToString(true);
+        value.serie = certificate.GetSerialNumberString();
+        value.subject = certificate.Subject;
+        value.entidad_emisora = certificate.Issuer;
+        value.caducidad = certificate.NotAfter;
 
-      this._context.Certificates.Add(value);
-      this._context.SaveChanges();
-      // Por ahora solo devuelve todos los datos
-      return new ErrorApi(200, "Certificado agregado");
+        this._context.Certificates.Add(value);
+        this._context.SaveChanges();
+        // Por ahora solo devuelve todos los datos
+        return new ErrorApi(200, "Certificado agregado");
+      } catch (Exception ex)
+      {
+        return NotFound(new ErrorApi(404, "Contraseña incorrecta"));
+      }
 
         }
 

@@ -1,7 +1,10 @@
 <app-principal-header></app-principal-header>
 <section class="section-logIn">
   <div>
-      <p class="name-page">Agregar certificado</p>
+    <div class="name-page">
+      Agregar certificado <button class="button-verified" (click)="infoButton(9)"><i class="material-icons">feedback</i></button>
+    </div>
+    <br>
     <div class="grid-jira-edit">
       <div>
         <label class="padding-label">Alias:</label>
@@ -14,17 +17,16 @@
         <label class="padding-label">ID_ORGA:</label>
         <div class="flexbox-inputs">
           <div>
-            <button class="button-of-inputs" (click)="infoButton(5)"><i class="material-icons">location_city</i></button>
+            <button class="button-of-inputs" (click)="infoButton(2)"><i class="material-icons">location_city</i></button>
           </div>
-          <input class="input-agregar" type="text" placeholder="ID_ORGA" name="orga" [(ngModel)]="orgaCert" (keyup)="areEmpty()">
+          <input class="input-agregar" type="number" placeholder="ID_ORGA" name="orga" [(ngModel)]="orgaCert" (keyup)="areEmpty()">
         </div>
         <label class="padding-label">Lista de integraciones:</label>
         <div class="flexbox-inputs">
           <div>
-            <button class="button-of-inputs button-description" (click)="infoButton(10)"><i class="material-icons">format_list_numbered</i></button>
+            <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">format_list_numbered</i></button>
           </div>
-          <textarea class="input-agregar input-description" name="lisra" cols="40" rows="5" placeholder="Lista de tareas"
-            [(ngModel)]="listCert" (keyup)="areEmpty()"></textarea>
+          <input class="input-agregar" type="text" placeholder="Lista de tareas" name="lista" [(ngModel)]="listCert" (keyup)="areEmpty()">
         </div>
         <label class="padding-label">Persona para renovaciones:</label>
         <div class="flexbox-inputs">
@@ -45,22 +47,21 @@
         <label class="padding-label">Cliente:</label>
         <div class="flexbox-inputs">
           <div>
-            <button class="button-of-inputs" (click)="infoButton(5)"><i class="material-icons">people</i></button>
+            <button class="button-of-inputs" (click)="infoButton(6)"><i class="material-icons">people</i></button>
           </div>
           <input class="input-agregar" type="text" placeholder="Cliente" name="cliente" [(ngModel)]="clienteCert" (keyup)="areEmpty()">
         </div>
         <label class="padding-label">Observaciones:</label>
         <div class="flexbox-inputs">
           <div>
-            <button class="button-of-inputs button-description" (click)="infoButton(10)"><i class="material-icons">message</i></button>
+            <button class="button-of-inputs" (click)="infoButton(7)"><i class="material-icons">message</i></button>
           </div>
-          <textarea class="input-agregar input-description" name="desc" cols="40" rows="5" placeholder="Observaciones"
-            [(ngModel)]="obserCert" (keyup)="areEmpty()"></textarea>
+          <input class="input-agregar" type="text" placeholder="Observaciones" name="desc" [(ngModel)]="obserCert" (keyup)="areEmpty()">
         </div>
         <label class="padding-label">Contraseña:</label>
         <div class="flexbox-inputs">
           <div>
-            <button class="button-of-inputs" (click)="infoButton(4)"><i class="material-icons">credit_card</i></button>
+            <button class="button-of-inputs" (click)="infoButton(8)"><i class="material-icons">credit_card</i></button>
           </div>
           <input class="input-agregar" type="password" placeholder="Contraseña" name="password" [(ngModel)]="passCert" (keyup)="areEmpty()">
         </div>
@@ -71,3 +72,4 @@
     </div>
   </div>
 </section>
+<simple-notifications></simple-notifications>

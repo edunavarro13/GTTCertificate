@@ -184,7 +184,7 @@ export class PageViewComponent implements OnInit {
     }
   }
 
-  dowloadFile(certificate: Certificate) {
+  downloadFile(certificate: Certificate) {
     let certificateType = certificate.nombreArchivo.split('.')[1];
     var contentType = "file/"+certificateType;
     var byteCharacters = atob(certificate.fichero64);

@@ -66,20 +66,11 @@ i {
   background-color: Transparent;
   background-repeat: no-repeat;
   border: none;
-  cursor: pointer;
+  cursor: help;
   overflow: hidden;
   outline: none;
   color: rgb(0, 155, 0);
 }
-
-// .section-user {
-//   min-height: 87vh;
-//   width: auto;
-//   background: linear-gradient(to bottom, #d3eb8b, #adc565);
-//   box-sizing: border-box;
-//   font-family: 'PT Sans', sans-serif;
-//   font-weight: bold;
-// }
 
 .grid-jira-edit {
   display: grid;

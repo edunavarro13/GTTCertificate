@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using GTTASPCore.Models;
+using GTTASPCore.Services;
 
 namespace GTTASPCore
 {
@@ -29,6 +30,7 @@ namespace GTTASPCore
         {
             services.AddDbContext<GTTContext>(optionsActions => optionsActions.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddHostedService<ServicioCron>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
