@@ -41,9 +41,9 @@ namespace GTTASPCore.Controllers
               Jira newJira = new Jira();
               newJira.username = "edunavarro13";
               newJira.password = "edunavarro13";
-              newJira.component = "component";
+              newJira.component = "Arquitectura...";
               newJira.url = "url";
-              newJira.proyect = "proyect";
+              newJira.proyect = "SIT";
               newJira.idUser = 1;
               this._context.Jiras.Add(newJira);
               this._context.SaveChanges();

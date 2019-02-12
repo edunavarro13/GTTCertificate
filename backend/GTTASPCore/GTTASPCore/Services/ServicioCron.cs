@@ -48,7 +48,12 @@ namespace GTTASPCore.Services
           context.Certificates.Load();
           foreach (var cert in context.Certificates.Local)
           {
-            _logger.LogInformation(cert.alias);
+          //DateTime maxdate = DateTime.Today.AddMonths(1);
+          DateTime maxdateAux = new DateTime(2018, 01, 29);
+          if (cert.caducidad < maxdateAux)
+          {
+            _logger.LogInformation(cert.caducidad.ToString());
+          }
           }
         }
       //foreach(Certificate cer in this._context.Certificates)

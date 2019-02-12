@@ -49,6 +49,7 @@
         </div>
         Datos Jira: <button *ngIf="verified>0" class="button-verified" (click)="infoButton(6)"><i class="material-icons">verified_user</i></button>
       </div>
+      <!-- Ver Jira -->
       <div *ngIf="!editJira">
         <div class="grid-user">
           <label class="padding-label padding-label-user">Usuario de Jira :</label>
@@ -72,42 +73,50 @@
           </button>
         </div>
       </div>
+      <!-- Fin Ver Jira -->
+      <!-- EDITAR Jira -->
       <div *ngIf="editJira" class="grid-jira-edit">
         <div>
           <br>
           <label class="padding-label">Usuario de Jira:</label>
-          <div *ngIf="editJira" class="flexbox-inputs">
+          <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">account_circle</i></button>
             </div>
             <input class="input-agregar" type="text" placeholder="Nombre de usuario" name="username" [(ngModel)]="usernameJira">
           </div>
           <label class="padding-label">Contraseña de Jira:</label>
-          <div *ngIf="editJira" class="flexbox-inputs">
+          <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(2)"><i class="material-icons">credit_card</i></button>
             </div>
             <input class="input-agregar" type="password" placeholder="Contraseña" name="password" [(ngModel)]="passwordJira">
           </div>
           <label class="padding-label">Componente de Jira:</label>
-          <div *ngIf="editJira" class="flexbox-inputs">
+          <div class="flexbox-inputs">
             <div>
-              <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">settings</i></button>
+              <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">settings</i>
+              </button>
             </div>
-            <input class="input-agregar" type="text" placeholder="Componente" name="component" [(ngModel)]="componentJira">
+            <select class="input-agregar select-add" name="component" [(ngModel)]="componentJira">
+              <option class="option-select" value="{{componentJira}}">{{ componentJira }}</option>
+            </select>
           </div>
           <label class="padding-label">Proyecto de Jira:</label>
-          <div *ngIf="editJira" class="flexbox-inputs">
+          <div class="flexbox-inputs">
             <div>
-              <button class="button-of-inputs" (click)="infoButton(4)"><i class="material-icons">note</i></button>
+              <button class="button-of-inputs" (click)="infoButton(4)"><i class="material-icons">note</i>
+              </button>
             </div>
-            <input class="input-agregar" type="text" placeholder="Contraseña" name="proyect" [(ngModel)]="proyectJira">
+            <select class="input-agregar select-add" name="proyect" [(ngModel)]="proyectJira">
+              <option class="option-select" value="{{proyectJira}}">{{ proyectJira }}</option>
+            </select>
           </div>
         </div>
         <div>
           <br>
           <label class="padding-label">URL de Jira:</label>
-          <div *ngIf="editJira" class="flexbox-inputs">
+          <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(5)"><i class="material-icons">language</i></button>
             </div>
@@ -124,7 +133,7 @@
             </select>
           </div>
           <label class="padding-label">Descripción de la tarea:</label>
-          <div *ngIf="editJira" class="flexbox-inputs">
+          <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs button-description" (click)="infoButton(10)"><i class="material-icons">message</i></button>
             </div>

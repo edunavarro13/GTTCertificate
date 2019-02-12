@@ -58,7 +58,8 @@ export class NewCertificateComponent implements OnInit {
       serie: "",
       eliminado: false,
       fichero64: "",
-      nombreArchivo: event.target.value.split("\\")[2]
+      nombreArchivo: event.target.value.split("\\")[2],
+      estado: 0
     }
     var reader = new FileReader();
     var arrayBuffer;

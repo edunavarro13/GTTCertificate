@@ -32,4 +32,5 @@ export interface Certificate {
   eliminado: boolean;
   fichero64: string;
   nombreArchivo: string;
+  estado: number;
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace GTTASPCore.Models
 {
+  public enum Estado { correcto, alertado, caducado, subido }
   public class Certificate
   {
     public long id { get; set; }
@@ -23,5 +24,6 @@ namespace GTTASPCore.Models
     public bool eliminado { get; set; }
     public string fichero64 { get; set; }
     public string nombreArchivo { get; set; }
+    public Estado estado { get; set; }
   }
 }
