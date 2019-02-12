@@ -1,1 +1,58 @@
 @import '../user-view/user-view.component.scss';
+
+.section-certificate {
+    width: 80vw;
+    min-height: 80vh;
+    background-color: white;
+    box-shadow: 7px 7px rgba(0, 0, 0, 0.445);
+    box-sizing: border-box;
+    border: 5px #737373 outset;
+    margin-bottom: 5vh;
+}
+
+.grid-description-certificate-first {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-items: center;
+    width: 80vw;
+    height: 15vh;
+    box-sizing: border-box;
+}
+
+.image-llave {
+    margin-top: 2vh;
+    width: 10vw;
+    height: 12vh;
+}
+
+.image-eliminado {
+    margin-top: 2vh;
+    width: 10vw;
+    height: 12vh;
+    font-size: 3em;
+}
+
+.grid-description-certificate-last {
+    display: grid;
+    margin-left: 5vw;
+    max-width: 80vw;
+    min-height: 65vh;
+    box-sizing: border-box;
+    margin-bottom: 3vh;
+}
+
+.separator-of-certificates {
+    height: 1px;
+    width: 67vw;
+    background-color: #687a2fbd;
+    margin-bottom: 5px;
+}
+.label-index {
+    color: #99cc00;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+.label-subindex {
+    margin-bottom: 2vh;
+    max-width: 78vw;
+}

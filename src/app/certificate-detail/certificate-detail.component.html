@@ -1,8 +1,7 @@
 <app-principal-header></app-principal-header>
 <section class="section-logIn">
-  <div>
-    <p class="name-page">Datos Certificado:</p>
-    <div *ngIf="certificateActive" class="grid-user">
+  <div class="section-certificate">
+    <!-- <div *ngIf="certificateActive" class="grid-user">
       <label class="padding-label padding-label-user">Alias :</label>
       <label class="label-result">{{ certificateActive ? certificateActive.alias : "" }}<br><br></label>
       <label class="padding-label padding-label-user">Entidad emisora :</label>
@@ -31,6 +30,53 @@
       <label class="label-result">{{ certificateActive ? certificateActive.eliminado : "" }}<br><br></label>
       <label class="padding-label padding-label-user">Nombre del archivo :</label>
       <label class="label-result">{{ certificateActive ? certificateActive.nombreArchivo : "" }}<br><br></label>
+    </div> -->
+    <div *ngIf="certificateActive" class="grid-description-certificate-first">
+      <img class="image-llave" src="../../assets/llave.png">
+      <p class="name-page">Datos Certificado:</p>
+      <label *ngIf="certificateActive.eliminado" class="image-eliminado">❌</label>
+      <label *ngIf="!certificateActive.eliminado" class="image-eliminado">✔️</label>
+    </div>
+    <div *ngIf="certificateActive" class="grid-description-certificate-last">
+        <label class="label-index"><i class="material-icons">code</i> Alias :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.alias : "" }}</label>
+        <label class="label-index"><i class="material-icons">location_city</i> ID_ORGA :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.id_orga : 0 }}</label>
+        <label class="label-index"><i class="material-icons">people</i> Cliente :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.cliente : "" }}</label>
+        <label class="label-index"><i class="material-icons">format_list_numbered</i> Integraciones institución :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.itegraciones_institucion : "" }}</label>
+        <label class="label-index"><i class="material-icons">person_add</i> Persona contacto :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.persona_contacto : "" }}</label>
+        <label class="label-index"><i class="material-icons">folder</i> Repositorio :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.repositorio : "" }}</label>
+        <label class="label-index"><i class="material-icons">message</i> Observaciones :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.observaciones : "" }}</label>
+        <label class="label-index"><i class="material-icons">credit_card</i> Password :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.password : "" }}</label>
+        <label class="label-index">Entidad emisora :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.entidad_emisora : "" }}</label>
+        <label class="label-index">Serie :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.serie : "" }}</label>
+        <label class="label-index">Subject :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.subject : "" }}</label>
+        <label class="label-index">Caducidad :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.caducidad : "" }}</label>
+        <label class="label-index">Nombre del archivo :</label>
+        <div class="separator-of-certificates"></div>
+        <label class="label-subindex">{{ certificateActive ? certificateActive.nombreArchivo : "" }}</label> 
     </div>
   </div>
 </section>

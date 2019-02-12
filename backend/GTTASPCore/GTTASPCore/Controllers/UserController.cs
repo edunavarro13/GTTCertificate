@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using GTTASPCore.Models;
 using GTTASPCore.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using GTTASPCore.Services;
 
 namespace GTTASPCore.Controllers
 {
@@ -50,7 +51,7 @@ namespace GTTASPCore.Controllers
         }
 
     // GET: api/User
-    [Authorize]
+    //[Authorize]
     [HttpGet]
         public ActionResult<List<User>> GetAll()
         {

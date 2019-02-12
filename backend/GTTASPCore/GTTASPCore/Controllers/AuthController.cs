@@ -50,7 +50,7 @@ namespace GTTASPCore.Controllers
             if (userLog.password == Encrypt.Hash(value.password))
             {
           JwtSecurityToken token = BuildToken(userLog);
-              return Ok(new ErrorApi(200, new JwtSecurityTokenHandler().WriteToken(token), userLog.id));
+              return Ok(new ErrorApi(200, new JwtSecurityTokenHandler().WriteToken(token), userLog.id, userLog.role));
             }
             else
             {

@@ -5,13 +5,15 @@ using GTTASPCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
+using GTTASPCore.Services;
 
 namespace GTTASPCore.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CertificateController : ControllerBase
-    {
+  [Route("api/[controller]")]
+  [ApiController]
+  public class CertificateController : ControllerBase
+  {
     private readonly GTTContext _context;
 
     public CertificateController(GTTContext context)
@@ -22,16 +24,16 @@ namespace GTTASPCore.Controllers
     // GET: api/Certificate
     [Authorize]
     [HttpGet]
-        public IEnumerable<Certificate> Get()
-        {
+    public IEnumerable<Certificate> Get()
+    {
       return this._context.Certificates.ToList();
     }
 
     // GET: api/Certificate/5
     [Authorize]
     [HttpGet("{id}", Name = "GetCertificate")]
-        public ActionResult<Certificate> Get(long id)
-        {
+    public ActionResult<Certificate> Get(long id)
+    {
       Certificate certGet = this._context.Certificates.Find(id);
       if (certGet == null)
       {
@@ -43,8 +45,8 @@ namespace GTTASPCore.Controllers
     // POST: api/Certificate
     [Authorize]
     [HttpPost]
-        public ActionResult<ErrorApi> Post([FromBody] Certificate value)
-        {
+    public ActionResult<ErrorApi> Post([FromBody] Certificate value)
+    {
       try
       {
         // Obtenemos el string en base64 y se convierte a byte []
@@ -66,23 +68,23 @@ namespace GTTASPCore.Controllers
         return NotFound(new ErrorApi(404, "Contraseña incorrecta"));
       }
 
-        }
+    }
 
     // PUT: api/Certificate/5
     [Authorize]
     [HttpPut("{id}")]
-        public ActionResult<ErrorApi> Put(long id, [FromBody] Certificate newCert)
-        {
+    public ActionResult<ErrorApi> Put(long id, [FromBody] Certificate newCert)
+    {
       Certificate certUpdate = this._context.Certificates.Find(id);
       certUpdate.eliminado = newCert.eliminado;
       this._context.SaveChanges();
       return new ErrorApi(200, "Certificado modificado correctamente.");
     }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
+    // DELETE: api/ApiWithActions/5
+    [HttpDelete("{id}")]
+    public void Delete(int id)
+    {
+    } 
+  }
 }
