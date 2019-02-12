@@ -48,18 +48,29 @@ namespace GTTASPCore.Services
           context.Certificates.Load();
           foreach (var cert in context.Certificates.Local)
           {
-          //DateTime maxdate = DateTime.Today.AddMonths(1);
-          DateTime maxdateAux = new DateTime(2018, 01, 29);
-          if (cert.caducidad < maxdateAux)
+          DateTime today = DateTime.Today;
+          DateTime maxdate = DateTime.Today.AddMonths(1);
+          //DateTime maxdateAux = new DateTime(2018, 01, 29);
+          // Primero los que ya han caducado (los eliminados ya no cuentan)
+          // Puede pasar a Caducado un correcto y un alertado
+          if(!cert.eliminado && cert.caducidad < today &&
+            (cert.estado == Estado.correcto || cert.estado == Estado.alertado))
           {
-            _logger.LogInformation(cert.caducidad.ToString());
+            Certificate c2 = context.Certificates.Find(cert.id);
+            c2.estado = Estado.caducado;
+            context.SaveChanges();
+            _logger.LogInformation("El certificado " + c2.alias + " ha pasado a Caducado.");
+          }
+          // Luego los que van a caducar en 1 mes (los eliminados ya no cuentan)
+          else if (!cert.eliminado && cert.caducidad < maxdate && cert.estado == Estado.correcto)
+          {
+            Certificate c2 = context.Certificates.Find(cert.id);
+            c2.estado = Estado.alertado;
+            context.SaveChanges();
+            _logger.LogInformation("El certificado " + c2.alias + " ha pasado a Alertado.");
           }
           }
         }
-      //foreach(Certificate cer in this._context.Certificates)
-      //{
-      //  _logger.LogInformation(cer.alias);
-      //}
     }
 
     public Task StopAsync(CancellationToken cancellationToken)

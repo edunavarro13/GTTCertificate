@@ -15,28 +15,22 @@
     grid-template-columns: 1fr 2fr 1fr;
     justify-items: center;
     width: 80vw;
-    height: 15vh;
+    height: 20vh;
     box-sizing: border-box;
 }
 
 .image-llave {
     margin-top: 2vh;
     width: 10vw;
-    height: 12vh;
-}
-
-.image-eliminado {
-    margin-top: 2vh;
-    width: 10vw;
-    height: 12vh;
-    font-size: 3em;
+    height: 15vh;
+    font-size: 3.5em;
 }
 
 .grid-description-certificate-last {
     display: grid;
     margin-left: 5vw;
     max-width: 80vw;
-    min-height: 65vh;
+    min-height: 60vh;
     box-sizing: border-box;
     margin-bottom: 3vh;
 }

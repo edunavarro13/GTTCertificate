@@ -149,6 +149,23 @@
   align-items: center;
   border: 1px #99cc00 solid;
   box-sizing: border-box;
+  text-align: center;
+}
+
+.estado-correcto-color {
+  border-left: 15px green solid;
+}
+
+.estado-caducado-color {
+  border-left: 15px red solid;
+}
+
+.estado-alertado-color {
+  border-left: 15px yellow solid;
+}
+
+.estado-subido-color {
+  border-left: 15px purple solid;
 }
 
 .row-style-first {
