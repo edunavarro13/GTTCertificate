@@ -2,7 +2,7 @@
 <section class="section-logIn">
   <div>
     <p class="name-page">Datos Certificado:</p>
-    <div class="grid-user">
+    <div *ngIf="certificateActive" class="grid-user">
       <label class="padding-label padding-label-user">Alias :</label>
       <label class="label-result">{{ certificateActive ? certificateActive.alias : "" }}<br><br></label>
       <label class="padding-label padding-label-user">Entidad emisora :</label>
@@ -34,3 +34,4 @@
     </div>
   </div>
 </section>
+<simple-notifications></simple-notifications>

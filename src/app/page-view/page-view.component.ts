@@ -39,8 +39,16 @@ export class PageViewComponent implements OnInit {
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userActive = responseUser;
     }).catch(res => {
-      if(res.status === 401) {
+      if (res.status === 401) {
         this.router.navigate(['/login']);
+      } else if (res.status === 504) {
+        console.error(res);
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
+          timeOut: 3000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true
+        });
       } else {
         console.error(res);
       }
@@ -55,7 +63,7 @@ export class PageViewComponent implements OnInit {
       this.modeOrdenate(0);
     }).catch(res => {
       // Si entra aqui es que no esta autorizado
-      if(res.status === 401) {
+      if (res.status === 401) {
         this.router.navigate(['/login']);
       } else {
         console.error(res);
@@ -89,14 +97,14 @@ export class PageViewComponent implements OnInit {
           }
           this.loadGrid();
         }).catch(res => {
-          if(res.status === 401) {
+          if (res.status === 401) {
             this.router.navigate(['/login']);
           } else {
             console.error(res);
           }
         });
       }).catch(res2 => {
-        if(res2.status === 401) {
+        if (res2.status === 401) {
           this.router.navigate(['/login']);
         } else {
           console.error(res2);
@@ -112,6 +120,7 @@ export class PageViewComponent implements OnInit {
     }
   }
 
+  // Metodo para ordenar por columnas
   modeOrdenate(type: number) {
     this.columnActive = type;
     this.boolCert = !this.boolCert;
@@ -189,10 +198,20 @@ export class PageViewComponent implements OnInit {
   }
 
   toAddCertificate() {
-    if (this.userActive.role === 0) {
-      this.router.navigate(['/certificate']);
-    } else {
-      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para agregar nuevos certificados.", {
+    if (this.userActive) {
+      if (this.userActive.role === 0) {
+        this.router.navigate(['/certificate']);
+      } else {
+        this.notification.error('¡ERROR!', "No tienes la autorización necesaria para agregar nuevos certificados.", {
+          timeOut: 3000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true
+        });
+      }
+    }
+    else {
+      this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
         timeOut: 3000,
         showProgressBar: true,
         pauseOnHover: true,
@@ -203,7 +222,7 @@ export class PageViewComponent implements OnInit {
 
   downloadFile(certificate: Certificate) {
     let certificateType = certificate.nombreArchivo.split('.')[1];
-    var contentType = "file/"+certificateType;
+    var contentType = "file/" + certificateType;
     var byteCharacters = atob(certificate.fichero64);
     var byteNumbers = new Array(byteCharacters.length);
 

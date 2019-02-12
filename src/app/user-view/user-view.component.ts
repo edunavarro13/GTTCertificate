@@ -50,7 +50,17 @@ export class UserViewComponent implements OnInit {
     }).catch(res => {
       if(res.status === 401) {
         this.routeAtr.navigate(['/login']);
-      } else {
+      }
+      else if(res.status === 504) {
+        console.error(res);
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
+          timeOut: 3000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true
+        });
+      } 
+      else {
         console.error(res);
       }
     });
