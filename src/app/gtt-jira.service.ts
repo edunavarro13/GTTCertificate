@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GttJiraService {
 
-  urlJira: string = "rest/auth/1/session";
+  urlJira: string = "/rest/auth/1/session";
   // Se debe añadir este header ya que si no da un error xsrf
   // El valor del agent puede ser cualquiera
   headerJira = { headers: {

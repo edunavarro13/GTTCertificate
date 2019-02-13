@@ -25,6 +25,14 @@ export class PrincipalHeaderComponent implements OnInit {
         console.error(res);
       }
     });
+
+    var el = document.querySelector('.notification');
+    let count = 2;
+    el.setAttribute('data-count', "" + count);
+    el.classList.remove('notify');
+    // el.offsetWidth = el.offsetWidth;
+    el.classList.add('notify');
+    el.classList.add('show-count');
   }
 
   logOut() {

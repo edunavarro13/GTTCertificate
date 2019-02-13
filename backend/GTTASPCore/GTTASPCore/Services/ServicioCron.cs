@@ -40,7 +40,7 @@ namespace GTTASPCore.Services
     public void DoWork(object state)
     {
         var optionsBuild = new DbContextOptionsBuilder<GTTContext>();
-        optionsBuild.UseNpgsql("Host=192.168.99.100;Port=5432;Username=postgres;Password=example;Database=ApiGtt;");
+      optionsBuild.UseNpgsql("Host=192.168.99.100;Port=5432;Username=postgres;Password=example;Database=ApiGtt;");// Host =ec2-54-247-113-90.eu-west-1.compute.amazonaws.com;Port=5432;Username=dxrfnsywqjvdeq;Password=d0dc61b17af9ffe0b1cc18e87089fa07898d66123b92b6514afdea0281c2fe83;Database=dcm55dbn35qm7c;");
 
         using (var context = new GTTContext(optionsBuild.Options))
         {

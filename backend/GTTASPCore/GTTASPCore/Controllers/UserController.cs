@@ -39,10 +39,10 @@ namespace GTTASPCore.Controllers
             {
               Console.WriteLine("No existe ningun usuario Jira");
               Jira newJira = new Jira();
-              newJira.username = "edunavarro13";
+              newJira.username = "edunavarro13@gmail.com";
               newJira.password = "edunavarro13";
               newJira.component = "Arquitectura...";
-              newJira.url = "url";
+              newJira.url = "https://edunavarro13.atlassian.net";
               newJira.proyect = "SIT";
               newJira.idUser = 1;
               this._context.Jiras.Add(newJira);

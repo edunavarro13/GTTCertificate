@@ -28,9 +28,9 @@ export class UserViewComponent implements OnInit {
   userActive: User;
   usernameJira: string = "";
   passwordJira: string = "";
-  componentJira: string = "";
-  proyectJira: string = "";
-  urlJira: string = "";
+  componentJira: string = "Arquitectura...";
+  proyectJira: string = "SIT";
+  urlJira: string = "https://edunavarro13.atlassian.net";
   descJira: string = "";
   roleJira: number = 0;
   verified: number = JSON.parse(localStorage.getItem('verified')) || 0;

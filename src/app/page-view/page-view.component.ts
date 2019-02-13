@@ -143,10 +143,12 @@ export class PageViewComponent implements OnInit {
         }
         return 0;
       } else if (type === 2) {
-        if ((asc && a.subject > b.subject) || (!asc && a.subject < b.subject)) {
+        if ((asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) || 
+        (!asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
           return 1;
         }
-        if ((!asc && a.subject > b.subject) || (asc && a.subject < b.subject)) {
+        if ((!asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) || 
+        (asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
           return -1;
         }
         return 0;
@@ -178,10 +180,12 @@ export class PageViewComponent implements OnInit {
         }
         return 0;
       } else if (type === 2) {
-        if ((asc && a.id_orga > b.id_orga) || (!asc && a.id_orga < b.id_orga)) {
+        if ((asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) || 
+        (!asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
           return 1;
         }
-        if ((!asc && a.id_orga > b.id_orga) || (asc && a.id_orga < b.id_orga)) {
+        if ((!asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) || 
+        (asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
           return -1;
         }
         return 0;
