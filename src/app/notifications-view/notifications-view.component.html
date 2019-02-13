@@ -3,6 +3,16 @@
   <div>
     <div>
       <p class="name-page">Notificaciones:</p>
+      <div *ngFor="let certificate of allCertificates">
+        <div class="card-certificate">
+          <div class="grid-card-certificate">
+            <div>color</div>
+            <div>imagen</div>
+            <div>detalles</div>
+            <div>buton</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

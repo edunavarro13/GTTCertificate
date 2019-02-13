@@ -1,1 +1,16 @@
 @import '../user-view/user-view.component.scss';
+
+.card-certificate {
+    height: 20vh;
+    width: 50vw;
+    background-color: white;
+    box-shadow: 7px 7px rgba(0, 0, 0, 0.445);
+    box-sizing: border-box;
+    border: 5px #737373 outset;
+    margin-bottom: 4vh;
+}
+
+.grid-card-certificate {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

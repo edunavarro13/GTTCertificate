@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { GttApiService } from '../gtt-api.service';
-import { User } from '../models.interface';
+import { User, Jira } from '../models.interface';
 
 @Component({
   selector: 'app-principal-header',
@@ -11,6 +11,7 @@ import { User } from '../models.interface';
 export class PrincipalHeaderComponent implements OnInit {
 
   userHeader: User;
+  jiraHeader: Jira;
   contador: number = 0;
 
   constructor(private routerLog: Router, private gttApi: GttApiService) { }
@@ -27,6 +28,7 @@ export class PrincipalHeaderComponent implements OnInit {
       }
     });
 
+    // ------ Boton de notification bell ---------
     var el = document.querySelector('.notification');
     this.gttApi.getCountCaducadosAlertados().then((response: any) => {
       this.contador = +(response.message);
@@ -36,6 +38,7 @@ export class PrincipalHeaderComponent implements OnInit {
     el.classList.add('notify');
     el.classList.add('show-count');
     });
+    //--------------------------------------------
   }
 
   logOut() {
