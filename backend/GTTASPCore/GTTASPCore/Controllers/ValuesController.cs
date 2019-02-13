@@ -4,26 +4,39 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using GTTASPCore.Models;
 
 namespace GTTASPCore.Controllers
 {
-  [Authorize]
   [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+    private readonly GTTContext _context;
+
+    public ValuesController(GTTContext context)
+    {
+      this._context = context;
+    }
+    // GET api/values
+    [Authorize]
+    [HttpGet]
+        public ActionResult<ErrorApi> Get()
         {
-            return new string[] { "value1", "value2" };
+          int cantidad = 0;
+          foreach (var element in this._context.Certificates)
+          {
+            if (element.estado == Estado.alertado || element.estado == Estado.caducado)
+              cantidad++;
+          }
+          return new ErrorApi(200, "" + cantidad);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<string> Get(long id)
         {
-            return "value";
+      return "value";
         }
 
         // POST api/values

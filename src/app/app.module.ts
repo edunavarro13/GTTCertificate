@@ -18,6 +18,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NewCertificateComponent } from './new-certificate/new-certificate.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
+import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
     UserViewComponent,
     CertificateDetailComponent,
     PrincipalHeaderComponent,
-    NewCertificateComponent
+    NewCertificateComponent,
+    NotificationsViewComponent
   ],
   imports: [
     BrowserModule,

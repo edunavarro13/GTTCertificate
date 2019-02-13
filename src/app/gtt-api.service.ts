@@ -15,6 +15,7 @@ export class GttApiService {
   urlRegis: string = "api/user";
   urlNewJira: string = "api/jira";
   urlCert: string = "api/certificate";
+  urlValues: string = "/api/values";
 
   constructor(private api: HttpClient, private router: Router) {}
 
@@ -100,4 +101,9 @@ export class GttApiService {
     certificate.fichero64 = fichero64;
     return this.api.post(this.urlCert, certificate, this.headers).toPromise();
   }
+
+  getCountCaducadosAlertados() {
+    return this.api.get(this.urlValues, this.headers).toPromise();
+  }
+
 }

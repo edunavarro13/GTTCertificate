@@ -11,6 +11,7 @@ import { User } from '../models.interface';
 export class PrincipalHeaderComponent implements OnInit {
 
   userHeader: User;
+  contador: number = 0;
 
   constructor(private routerLog: Router, private gttApi: GttApiService) { }
 
@@ -27,12 +28,14 @@ export class PrincipalHeaderComponent implements OnInit {
     });
 
     var el = document.querySelector('.notification');
-    let count = 2;
-    el.setAttribute('data-count', "" + count);
+    this.gttApi.getCountCaducadosAlertados().then((response: any) => {
+      this.contador = +(response.message);
+      el.setAttribute('data-count', "" + this.contador);
     el.classList.remove('notify');
     // el.offsetWidth = el.offsetWidth;
     el.classList.add('notify');
     el.classList.add('show-count');
+    });
   }
 
   logOut() {

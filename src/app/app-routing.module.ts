@@ -6,6 +6,7 @@ import { PageViewComponent } from './page-view/page-view.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { CertificateDetailComponent } from './certificate-detail/certificate-detail.component';
 import { NewCertificateComponent } from './new-certificate/new-certificate.component';
+import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
 
 const routes: Routes = [
   { path: 'home', component: PageViewComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginViewComponent },
   { path: 'certificate/:id', component: CertificateDetailComponent },
   { path: 'certificate', component: NewCertificateComponent },
+  { path: 'notifications', component: NotificationsViewComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
