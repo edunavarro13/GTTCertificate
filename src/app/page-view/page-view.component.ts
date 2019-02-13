@@ -75,39 +75,31 @@ export class PageViewComponent implements OnInit {
     this.router.navigate(['/certificate/' + idCert]);
   }
 
-  deleteButton(idCert: number) {
+  deleteButton(cert: Certificate) {
     if (this.userActive.role === 0) {
-      this.gttApi.getCertificateById(idCert).then((result: Certificate) => {
-        result.eliminado = !result.eliminado;
-        this.gttApi.updateCertificate(result).then(result2 => {
-          if (!this.viewDelete) {
-            this.notification.success('¡Éxito!', `El certificado ${result.alias} se ha marcado como eliminado exitosamente.`, {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: true,
-              clickToClose: true
-            });
-          } else {
-            this.notification.success('¡Éxito!', `El certificado ${result.alias} se ha marcado como activo exitosamente.`, {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: true,
-              clickToClose: true
-            });
-          }
-          this.loadGrid();
-        }).catch(res => {
-          if (res.status === 401) {
-            this.router.navigate(['/login']);
-          } else {
-            console.error(res);
-          }
-        });
-      }).catch(res2 => {
-        if (res2.status === 401) {
+      cert.eliminado = !cert.eliminado;
+      this.gttApi.updateCertificate(cert).then(result2 => {
+        if (!this.viewDelete) {
+          this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como eliminado exitosamente.`, {
+            timeOut: 3000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true
+          });
+        } else {
+          this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como activo exitosamente.`, {
+            timeOut: 3000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true
+          });
+        }
+        this.loadGrid();
+      }).catch(res => {
+        if (res.status === 401) {
           this.router.navigate(['/login']);
         } else {
-          console.error(res2);
+          console.error(res);
         }
       });
     } else {
@@ -143,12 +135,12 @@ export class PageViewComponent implements OnInit {
         }
         return 0;
       } else if (type === 2) {
-        if ((asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) || 
-        (!asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
+        if ((asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) ||
+          (!asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
           return 1;
         }
-        if ((!asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) || 
-        (asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
+        if ((!asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) ||
+          (asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
           return -1;
         }
         return 0;
@@ -180,12 +172,12 @@ export class PageViewComponent implements OnInit {
         }
         return 0;
       } else if (type === 2) {
-        if ((asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) || 
-        (!asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
+        if ((asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) ||
+          (!asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
           return 1;
         }
-        if ((!asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) || 
-        (asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
+        if ((!asc && a.subject.split("CN=")[1].split(",")[0] > b.subject.split("CN=")[1].split(",")[0]) ||
+          (asc && a.subject.split("CN=")[1].split(",")[0] < b.subject.split("CN=")[1].split(",")[0])) {
           return -1;
         }
         return 0;
@@ -213,8 +205,7 @@ export class PageViewComponent implements OnInit {
           clickToClose: true
         });
       }
-    }
-    else {
+    } else {
       this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
         timeOut: 3000,
         showProgressBar: true,

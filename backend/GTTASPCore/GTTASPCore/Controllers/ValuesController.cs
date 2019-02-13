@@ -26,7 +26,7 @@ namespace GTTASPCore.Controllers
           int cantidad = 0;
           foreach (var element in this._context.Certificates)
           {
-            if (element.estado == Estado.alertado || element.estado == Estado.caducado)
+            if (!element.eliminado && (element.estado == Estado.alertado || element.estado == Estado.caducado))
               cantidad++;
           }
           return new ErrorApi(200, "" + cantidad);

@@ -12,5 +12,32 @@
 
 .grid-card-certificate {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 0.1fr 0.8fr 2.3fr 0.8fr;
+    height: 18.4vh;
+}
+
+.grid-color-alertado {
+    background-color: yellow;
+}
+.grid-color-caducado {
+    background-color: red;
+}
+.grid-imagen {
+    height: 16.4vh;
+    margin-top: 1vh;
+    margin-left: 1vw;
+}
+.grid-detalles {
+    display: flex;
+    align-items: center;
+}
+.grid-botones {
+    display: flex;
+    align-items: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.margin-right-icon {
+    margin-right: 4px;
 }
