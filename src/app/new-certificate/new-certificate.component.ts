@@ -11,7 +11,10 @@ import {
 import {
   GttApiService
 } from '../gtt-api.service';
-import { ActivatedRoute } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router
+} from '@angular/router';
 
 @Component({
   selector: 'app-new-certificate',
@@ -32,17 +35,50 @@ export class NewCertificateComponent implements OnInit {
   passCert: string = "";
 
   id: number;
+  certificateActive: Certificate;
   watchFile: boolean = false;
 
-  constructor(private route: ActivatedRoute, private gttApi: GttApiService, private notification: NotificationsService) {}
+  constructor(private route: ActivatedRoute, private gttApi: GttApiService,
+    private notification: NotificationsService, private router: Router) {}
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
+    if (this.id > 0) {
+      this.getCertificate();
+    }
   }
 
-  imageUpload(ev: any) {
-    console.log(ev);
+  // imageUpload(ev: any) {
+  //   console.log(ev);
 
+  // }
+
+  getCertificate() {
+    this.gttApi.getCertificateById(this.id).then((response: any) => {
+      this.certificateActive = response;
+      this.aliasCert = this.certificateActive.alias;
+      this.orgaCert = "" + this.certificateActive.id_orga;
+      this.clienteCert = this.certificateActive.cliente;
+      this.repoCert = this.certificateActive.repositorio;
+      this.listCert = this.certificateActive.itegraciones_institucion;
+      this.obserCert = this.certificateActive.observaciones;
+      this.emailCert = this.certificateActive.persona_contacto;
+    }).catch(res => {
+      if (res.status === 401) {
+        this.router.navigate(['/login']);
+      }
+      if (res.status === 504) {
+        console.error(res);
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
+          timeOut: 3000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true
+        });
+      } else {
+        console.error(res);
+      }
+    });
   }
 
   obtainCert(event) {
@@ -117,6 +153,32 @@ export class NewCertificateComponent implements OnInit {
       this.watchFile = true;
     } else {
       this.watchFile = false;
+    }
+  }
+
+  updatePublicCert() {
+    if (this.aliasCert && this.clienteCert && this.emailCert && this.listCert // && this.obserCert Esto es opcional
+      &&
+      this.orgaCert && this.repoCert) {
+
+      this.certificateActive.alias = this.aliasCert;
+      this.certificateActive.id_orga = +this.orgaCert;
+      this.certificateActive.cliente = this.clienteCert;
+      this.certificateActive.repositorio = this.repoCert;
+      this.certificateActive.itegraciones_institucion = this.listCert;
+      this.certificateActive.observaciones = this.obserCert;
+      this.certificateActive.persona_contacto = this.emailCert;
+
+      this.gttApi.updateCertificate(this.certificateActive).then(res => {
+        this.router.navigate(['/certificate/' + this.id]);
+      }).catch(console.error);
+    } else {
+      this.notification.error('¡ERROR!', "Ninguno de los campos pueden estar vacíos.", {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
     }
   }
 

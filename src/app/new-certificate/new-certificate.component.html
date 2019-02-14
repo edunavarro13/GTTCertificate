@@ -1,10 +1,10 @@
 <app-principal-header></app-principal-header>
 <section class="section-logIn">
   <div>
-    <div *ngIf="id===0" class="name-page">
+    <div *ngIf="id === 0" class="name-page">
       Agregar certificado <button class="button-info-certificate" (click)="infoButton(9)"><i class="material-icons">feedback</i></button>
     </div>
-    <div *ngIf="id!==0" class="name-page">
+    <div *ngIf="id !== 0" class="name-page">
       Editar certificado
     </div>
     <br>
@@ -55,14 +55,20 @@
           <input class="input-agregar" type="text" placeholder="Cliente" name="cliente" [(ngModel)]="clienteCert" (keyup)="areEmpty()">
         </div>
         <label class="padding-label">Observaciones:</label>
-        <div class="flexbox-inputs">
+        <div *ngIf="id === 0" class="flexbox-inputs">
           <div>
             <button class="button-of-inputs" (click)="infoButton(7)"><i class="material-icons">message</i></button>
           </div>
           <input class="input-agregar" type="text" placeholder="Observaciones" name="desc" [(ngModel)]="obserCert">
         </div>
+        <div *ngIf="id !==0 " class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs button-description" (click)="infoButton(7)"><i class="material-icons">message</i></button>
+            </div>
+            <textarea class="input-agregar input-description" name="desc" cols="40" rows="5" placeholder="Observaciones"  [(ngModel)]="obserCert"></textarea>
+          </div>
         <label *ngIf="id === 0" class="padding-label">Contraseña*:</label>
-        <div *ngIf="id===0" class="flexbox-inputs">
+        <div *ngIf="id === 0" class="flexbox-inputs">
           <div>
             <button class="button-of-inputs" (click)="infoButton(8)"><i class="material-icons">credit_card</i></button>
           </div>
@@ -74,7 +80,7 @@
         <input class="input-file input-agregar" type="file" id="avatar" name="avatar" accept='.p12,.pfx' [(ngModel)]="avatar" (change)="obtainCert($event)">
     </div>
     <div *ngIf="id !== 0" class="div-button-submit">
-      <button class="button-submit button-flex-style" (click)="addToJira(certificate)"><i class="material-icons">create</i> Editar certificado</button>  
+      <button class="button-submit button-flex-style" (click)="updatePublicCert()"><i class="material-icons">create</i> Editar certificado</button>  
     </div>
   </div>
 </section>
