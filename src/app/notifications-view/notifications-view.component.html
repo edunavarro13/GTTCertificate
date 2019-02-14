@@ -20,7 +20,7 @@
               ¿Deseas marcarlo como eliminado? </label>
 
             <div class="grid-botones">
-              <button *ngIf="certificate.estado === 1" class="button-submit button-flex-style"><i class="material-icons margin-right-icon">cloud_upload</i> Jira</button>
+              <button *ngIf="certificate.estado === 1" class="button-submit button-flex-style" (click)="addToJira(certificate)"><i class="material-icons margin-right-icon">cloud_upload</i> Jira</button>
               <button *ngIf="certificate.estado === 2" class="button-submit button-flex-style" (click)="deleteButton(certificate)"><i class="material-icons">close</i>
                 Eliminar</button>
             </div>

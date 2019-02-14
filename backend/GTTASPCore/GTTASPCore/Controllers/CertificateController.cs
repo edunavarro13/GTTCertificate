@@ -76,7 +76,15 @@ namespace GTTASPCore.Controllers
     public ActionResult<ErrorApi> Put(long id, [FromBody] Certificate newCert)
     {
       Certificate certUpdate = this._context.Certificates.Find(id);
+      certUpdate.alias = newCert.alias;
+      certUpdate.estado = newCert.estado;
+      certUpdate.id_orga = newCert.id_orga;
+      certUpdate.cliente = newCert.cliente;
+      certUpdate.itegraciones_institucion = newCert.itegraciones_institucion;
       certUpdate.eliminado = newCert.eliminado;
+      certUpdate.persona_contacto = newCert.persona_contacto;
+      certUpdate.repositorio = newCert.repositorio;
+      certUpdate.observaciones = newCert.observaciones;
       this._context.SaveChanges();
       return new ErrorApi(200, "Certificado modificado correctamente.");
     }
