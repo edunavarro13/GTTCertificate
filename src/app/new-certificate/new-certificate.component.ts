@@ -11,6 +11,7 @@ import {
 import {
   GttApiService
 } from '../gtt-api.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-certificate',
@@ -30,11 +31,14 @@ export class NewCertificateComponent implements OnInit {
   emailCert: string = "";
   passCert: string = "";
 
+  id: number;
   watchFile: boolean = false;
 
-  constructor(private gttApi: GttApiService, private notification: NotificationsService) {}
+  constructor(private route: ActivatedRoute, private gttApi: GttApiService, private notification: NotificationsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.id = +this.route.snapshot.paramMap.get('id');
+  }
 
   imageUpload(ev: any) {
     console.log(ev);

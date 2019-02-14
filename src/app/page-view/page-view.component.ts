@@ -15,6 +15,7 @@ import {
 import {
   Router
 } from '@angular/router';
+import { AuxiliarsService } from '../auxiliars.service';
 
 @Component({
   selector: 'app-page-view',
@@ -31,7 +32,7 @@ export class PageViewComponent implements OnInit {
   columnActive: number = 0;
   viewDelete = false;
 
-  constructor(private gttApi: GttApiService,
+  constructor(private gttApi: GttApiService, private auxService: AuxiliarsService,
     private notification: NotificationsService, private router: Router) {}
 
   ngOnInit() {
@@ -196,7 +197,7 @@ export class PageViewComponent implements OnInit {
   toAddCertificate() {
     if (this.userActive) {
       if (this.userActive.role === 0) {
-        this.router.navigate(['/certificate']);
+        this.router.navigate(['/certificateview/0']);
       } else {
         this.notification.error('¡ERROR!', "No tienes la autorización necesaria para agregar nuevos certificados.", {
           timeOut: 3000,
@@ -213,25 +214,5 @@ export class PageViewComponent implements OnInit {
         clickToClose: true
       });
     }
-  }
-
-  downloadFile(certificate: Certificate) {
-    let certificateType = certificate.nombreArchivo.split('.')[1];
-    var contentType = "file/" + certificateType;
-    var byteCharacters = atob(certificate.fichero64);
-    var byteNumbers = new Array(byteCharacters.length);
-
-    for (var i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    var byteArray = new Uint8Array(byteNumbers);
-    var blob = new Blob([byteArray], {
-      type: contentType
-    });
-    var aux_document = document.createElement("a");
-    aux_document.href = URL.createObjectURL(blob);
-    aux_document.download = `${certificate.nombreArchivo}`;
-    document.body.appendChild(aux_document);
-    aux_document.click();
   }
 }

@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'user', component: UserViewComponent },
   { path: 'login', component: LoginViewComponent },
   { path: 'certificate/:id', component: CertificateDetailComponent },
-  { path: 'certificate', component: NewCertificateComponent },
+  { path: 'certificateview/:id', component: NewCertificateComponent },
   { path: 'notifications', component: NotificationsViewComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

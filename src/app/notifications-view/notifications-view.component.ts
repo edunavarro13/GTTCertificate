@@ -18,7 +18,6 @@ import {
 } from '@angular/router';
 import { GttJiraService } from '../gtt-jira.service';
 import { Base64 } from 'js-base64';
-declare const Buffer;
 
 @Component({
   selector: 'app-notifications-view',
@@ -27,6 +26,7 @@ declare const Buffer;
 })
 export class NotificationsViewComponent implements OnInit {
 
+  id: number;
   allCertificates: Array < Certificate > = [];
   userActive: User;
 
@@ -34,6 +34,7 @@ export class NotificationsViewComponent implements OnInit {
     private notification: NotificationsService, private router: Router) {}
 
   ngOnInit() {
+    
     this.loadGrid();
     this.gttApi.getUserById().then((responseUser: User) => {
       this.userActive = responseUser;

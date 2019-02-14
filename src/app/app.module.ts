@@ -11,6 +11,7 @@ import { CertificateDetailComponent } from './certificate-detail/certificate-det
 import { PrincipalHeaderComponent } from './principal-header/principal-header.component';
 import { GttApiService } from './gtt-api.service';
 import { GttJiraService } from './gtt-jira.service';
+import { AuxiliarsService } from './auxiliars.service';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,7 +43,7 @@ import { NotificationsViewComponent } from './notifications-view/notifications-v
     NoopAnimationsModule,
     AngularFileUploaderModule
   ],
-  providers: [GttApiService, GttJiraService],
+  providers: [GttApiService, GttJiraService, AuxiliarsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

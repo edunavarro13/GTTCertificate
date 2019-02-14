@@ -52,9 +52,8 @@ namespace GTTASPCore.Services
           DateTime maxdate = DateTime.Today.AddMonths(1);
           //DateTime maxdateAux = new DateTime(2018, 01, 29);
           // Primero los que ya han caducado (los eliminados ya no cuentan)
-          // Puede pasar a Caducado un correcto y un alertado
-          if(!cert.eliminado && cert.caducidad < today &&
-            (cert.estado == Estado.correcto || cert.estado == Estado.alertado))
+          // Puede pasar a Caducado un correcto, un alertado o un jira
+          if(!cert.eliminado && cert.caducidad < today && cert.estado != Estado.caducado)
           {
             Certificate c2 = context.Certificates.Find(cert.id);
             c2.estado = Estado.caducado;
