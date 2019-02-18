@@ -40,12 +40,10 @@
           <div class="row-style">{{certificate.caducidad}}</div>
           <div class="row-style">{{ certificate.subject.split("CN=")[1].split(",")[0] }}</div>
           <div class="row-style">{{certificate.id_orga + " - " + certificate.cliente}}</div>
-          <div class="row-style grid-buttons">
-            <div></div> <!-- Esta vacio para dejar un espacio -->
+          <div class="row-style flex-buttons">
             <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
             <input type="button" class="button-log-out grid-buttons-style" value="📁" (click)="auxService.downloadFile(certificate)">
             <input type="button" class="button-log-out grid-buttons-style" value="❌" (click)="deleteButton(certificate)">
-            <div></div>
           </div>
         </div>
       </div>
@@ -57,7 +55,7 @@
           <div class="row-style">{{certificate.caducidad}}</div>
           <div class="row-style">{{ certificate.subject.split("CN=")[1].split(",")[0] }}</div>
           <div class="row-style">{{certificate.id_orga + " - " + certificate.cliente}}</div>
-          <div class="row-style grid-buttons">
+          <div class="row-style flex-buttons">
             <div></div> <!-- Esta vacio para dejar un espacio -->
             <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
             <input type="button" class="button-log-out grid-buttons-style" value="📁" (click)="auxService.downloadFile(certificate)">

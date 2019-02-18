@@ -8,6 +8,7 @@ import {
 import {
   NotificationsService
 } from 'angular2-notifications';
+import { AuxiliarsService } from '../auxiliars.service';
 
 @Component({
   selector: 'app-login-view',
@@ -18,7 +19,8 @@ export class LoginViewComponent {
 
   usernameLogin: string = '';
   passLogin: string = '';
-  constructor(private apiService: GttApiService, private routerLog: Router, private notification: NotificationsService) {}
+  constructor(private apiService: GttApiService, private auxiliarService: AuxiliarsService,
+    private routerLog: Router, private notification: NotificationsService) {}
 
   login() {
     if (this.usernameLogin.trim() !== '' && this.passLogin.trim() !== '') {
@@ -41,22 +43,7 @@ export class LoginViewComponent {
   }
 
   infoButton(option: number) {
-    if(option === 1) {
-      this.notification.info('Información', `En Usuario debes introducir el nombre de usuario con el que te has registrado.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }
-    else if(option === 2) {
-      this.notification.info('Información', `En Contraseña debes introducir la contraseña que elegiste al registrar tu usuario.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }
+    this.auxiliarService.infoButton(option, this.notification);
   }
 
 }

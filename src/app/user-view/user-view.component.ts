@@ -16,6 +16,7 @@ import {
   GttJiraService
 } from '../gtt-jira.service';
 import { Router } from '@angular/router';
+import { AuxiliarsService } from '../auxiliars.service';
 
 @Component({
   selector: 'app-user-view',
@@ -41,7 +42,7 @@ export class UserViewComponent implements OnInit {
   usernamePass1: string = "";
   usernamePass2: string = "";
 
-  constructor(private gttApi: GttApiService, private jiraApi: GttJiraService,
+  constructor(private gttApi: GttApiService, private jiraApi: GttJiraService, private auxiliarService: AuxiliarsService,
     private notification: NotificationsService, private routeAtr: Router) {}
 
   ngOnInit() {
@@ -176,79 +177,7 @@ export class UserViewComponent implements OnInit {
   }
 
   infoButton(option: number) {
-    if (option === 1) {
-      this.notification.info('Información', `En Usuario de Jira debes introducir el nombre de usuario que usas en Jira.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 2) {
-      this.notification.info('Información', `En Contraseña de Jira debes introducir la contraseña que elegiste en Jira.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 3) {
-      this.notification.info('Información', `En Componente de Jira debes introducir el equipo que va a recibir la tarea de Jira.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 4) {
-      this.notification.info('Información', `En Proyecto de Jira debes introducir el proyecto donde se creará una tarea cuando un certificado caduque.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 5) {
-      this.notification.info('Información', `En Url de Jira debes introducir la url de tu usuario de Jira.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 6) {
-      this.notification.info('Información', `Este icono verifica que el usuario de Jira introducido existe.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 7) {
-      this.notification.info('Información', `En contraseña debes introducir la nueva contraseña que quieras tener.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 8) {
-      this.notification.info('Información', `En confirmación de la contraseña debes introducir el mismo valor que en contraseña.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }
-    else if (option === 9) {
-      this.notification.info('Información', `Tipo de tarea es el tipo que tendrá la tarea de Jira cuando se suba (siempre será Explotación).`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }
-    else if (option === 10) {
-      this.notification.info('Información', `En descripción de Jira debes introducir la información en detalle que tendrá la tarea de Jira cuando se suba.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }
+    this.auxiliarService.infoButton(option, this.notification);
   }
 
   confirmUser() {

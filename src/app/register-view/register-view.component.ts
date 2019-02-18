@@ -10,6 +10,7 @@ import {
 import {
   NotificationsService
 } from 'angular2-notifications';
+import { AuxiliarsService } from '../auxiliars.service';
 
 @Component({
   selector: 'app-register-view',
@@ -22,7 +23,8 @@ export class RegisterViewComponent {
   passRegister: string = '';
   confRegister: string = '';
   roleRegister: number = 1;
-  constructor(private apiService: GttApiService, private routeAtr: Router, private notification: NotificationsService) {}
+  constructor(private apiService: GttApiService, private auxiliarService: AuxiliarsService,
+    private routeAtr: Router, private notification: NotificationsService) {}
 
   register() {
     if (this.usernameRegister.trim() !== '' && this.passRegister.trim() !== '' && this.confRegister.trim()) {
@@ -70,36 +72,7 @@ export class RegisterViewComponent {
   }
 
   infoButton(option: number) {
-    if (option === 1) {
-      this.notification.info('Información', `En Usuario debes introducir el nombre de usuario con el que te has registrado.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 2) {
-      this.notification.info('Información', `En Contraseña debes introducir la contraseña que elegiste al registrar tu usuario.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    } else if (option === 3) {
-      this.notification.info('Información', `En Confirmación contraseña debes introducir la misma contraseña que pusiste en Contraseña.`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }
-    else if (option === 4) {
-      this.notification.info('Información', `En Rol de usuario debes elegir si quieres que el usuario tenga permisos de edición de certificados (Admin) o solo de lectura (User).`, {
-        timeOut: 5000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }
+    this.auxiliarService.infoButton(option, this.notification);
   }
 
 }

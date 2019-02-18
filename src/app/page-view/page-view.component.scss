@@ -176,9 +176,10 @@
   cursor: pointer;
 }
 
-.grid-buttons {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+.flex-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .grid-buttons-style {
