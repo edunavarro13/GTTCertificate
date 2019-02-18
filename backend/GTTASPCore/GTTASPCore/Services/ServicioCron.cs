@@ -44,7 +44,6 @@ namespace GTTASPCore.Services
 
         using (var context = new GTTContext(optionsBuild.Options))
         {
-          long Id = 1;
           context.Certificates.Load();
           foreach (var cert in context.Certificates.Local)
           {

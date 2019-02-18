@@ -78,21 +78,21 @@
       <div *ngIf="editJira" class="grid-jira-edit">
         <div>
           <br>
-          <label class="padding-label">Usuario de Jira:</label>
+          <label class="padding-label">Usuario de Jira*:</label>
           <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">account_circle</i></button>
             </div>
             <input class="input-agregar" type="text" placeholder="Nombre de usuario" name="username" [(ngModel)]="usernameJira">
           </div>
-          <label class="padding-label">Contraseña de Jira:</label>
+          <label class="padding-label">Contraseña de Jira*:</label>
           <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(2)"><i class="material-icons">credit_card</i></button>
             </div>
             <input class="input-agregar" type="password" placeholder="Contraseña" name="password" [(ngModel)]="passwordJira">
           </div>
-          <label class="padding-label">Componente de Jira:</label>
+          <label class="padding-label">Componente de Jira*:</label>
           <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">settings</i>
@@ -102,7 +102,7 @@
               <option class="option-select" value="{{componentJira}}">{{ componentJira }}</option>
             </select>
           </div>
-          <label class="padding-label">Proyecto de Jira:</label>
+          <label class="padding-label">Proyecto de Jira*:</label>
           <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(4)"><i class="material-icons">note</i>
@@ -115,7 +115,7 @@
         </div>
         <div>
           <br>
-          <label class="padding-label">URL de Jira:</label>
+          <label class="padding-label">URL de Jira*:</label>
           <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(5)"><i class="material-icons">language</i>
@@ -125,7 +125,7 @@
               <option class="option-select" value="{{urlJira}}">{{ urlJira }}</option>
             </select>
           </div>
-          <label class="padding-label">Tipo de tarea:</label>
+          <label class="padding-label">Tipo de tarea*:</label>
           <div class="flexbox-inputs">
             <div>
               <button class="button-of-inputs" (click)="infoButton(9)"><i class="material-icons">ballot</i>

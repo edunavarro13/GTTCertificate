@@ -108,7 +108,7 @@ export class NotificationsViewComponent implements OnInit {
           // Subimos la tarea a Jira
           this.jiraApi.postJiraTask(objJsonB64, responseJira.proyect, `${cert.alias} caducará pronto (fecha: ${cert.caducidad})`, 
           "descripcion", "Explotacion").then( res3 => {
-            // Modificamos su esta a subido
+            // Modificamos su estado a subido
             cert.estado = 3;
             this.gttApi.updateCertificate(cert).then(resFinal => {
               this.notification.success('¡Éxito!', `La tarea del certificado ${cert.alias} ha sido subido a Jira con éxito.`, {

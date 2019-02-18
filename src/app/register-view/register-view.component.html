@@ -8,21 +8,21 @@
       <div>
         <button class="button-of-inputs" (click)="infoButton(1)"><i class="material-icons">account_circle</i></button>
       </div>
-      <input class="input-agregar" type="text" placeholder="Username" name="username" [(ngModel)]="usernameRegister">
+      <input class="input-agregar" type="text" placeholder="Usuario" name="username" [(ngModel)]="usernameRegister">
     </div>
     <label class="padding-label">Contraseña:</label>
     <div class="flexbox-inputs">
       <div>
         <button class="button-of-inputs" (click)="infoButton(2)"><i class="material-icons">credit_card</i> </button>
       </div>
-      <input class="input-agregar" type="password" placeholder="Password" name="pass" [(ngModel)]="passRegister">
+      <input class="input-agregar" type="password" placeholder="Contraseña" name="pass" [(ngModel)]="passRegister">
     </div>
     <label class="padding-label">Confirmación contraseña:</label>
     <div class="flexbox-inputs">
       <div>
         <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">credit_card</i> </button>
       </div>
-      <input class="input-agregar" type="password" placeholder="Password" name="confirmation" [(ngModel)]="confRegister">
+      <input class="input-agregar" type="password" placeholder="Contraseña" name="confirmation" [(ngModel)]="confRegister">
     </div>
     <label class="padding-label">Rol de usuario:</label>
     <div class="flexbox-inputs">
@@ -34,7 +34,7 @@
         <option class="option-select" value="1">User</option>
       </select> 
     </div>
-    <div class="div-button-submit"><input class="button-submit" type="button" value="Register" (click)="register()"></div>
+    <div class="div-button-submit"><input class="button-submit" type="button" value="Registro" (click)="register()"></div>
   </div>
 </section>
 <simple-notifications></simple-notifications>
