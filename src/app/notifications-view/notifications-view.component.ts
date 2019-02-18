@@ -31,6 +31,9 @@ export class NotificationsViewComponent implements OnInit {
   allCertificates: Array < Certificate > = [];
   userActive: User;
 
+  // Input de la campana del header
+  contadorPadre: number = 0;
+
   constructor(private gttApi: GttApiService, private jiraApi: GttJiraService, private auxiliarService: AuxiliarsService,
     private notification: NotificationsService, private router: Router) {}
 
@@ -70,6 +73,7 @@ export class NotificationsViewComponent implements OnInit {
       cert.eliminado = true;
       this.gttApi.updateCertificate(cert).then(result2 => {
         this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como eliminado exitosamente.`, this.auxiliarService.getNotificationError());
+        this.contadorPadre += 1;
         this.loadGrid();
       }).catch(res => {
         if (res.status === 401) {
@@ -98,6 +102,7 @@ export class NotificationsViewComponent implements OnInit {
             cert.estado = 3;
             this.gttApi.updateCertificate(cert).then(resFinal => {
               this.notification.success('¡Éxito!', `La tarea del certificado ${cert.alias} ha sido subido a Jira con éxito.`, this.auxiliarService.getNotificationError());
+              this.contadorPadre += 1;
               this.loadGrid();
             }).catch(console.error);
           }).catch(console.error);

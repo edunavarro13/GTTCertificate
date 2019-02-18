@@ -31,6 +31,8 @@ export class PageViewComponent implements OnInit {
   boolCert: boolean = false;
   columnActive: number = 0;
   viewDelete = false;
+  // Input de la campana del header
+  contadorPadre: number = 0;
 
   constructor(private gttApi: GttApiService, private auxiliarService: AuxiliarsService,
     private notification: NotificationsService, private router: Router) {}
@@ -77,8 +79,11 @@ export class PageViewComponent implements OnInit {
       this.gttApi.updateCertificate(cert).then(result2 => {
         if (!this.viewDelete) {
           this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como eliminado exitosamente.`, this.auxiliarService.getNotificationError());
+          // Cambio este valor para que se llame a ngOnChange
+          this.contadorPadre += 1;
         } else {
           this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como activo exitosamente.`, this.auxiliarService.getNotificationError());
+          this.contadorPadre += 1;
         }
         this.loadGrid();
       }).catch(res => {
