@@ -70,12 +70,7 @@ export class NewCertificateComponent implements OnInit {
       }
       if (res.status === 504) {
         console.error(res);
-        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
       } else {
         console.error(res);
       }
@@ -104,34 +99,21 @@ export class NewCertificateComponent implements OnInit {
     }
     var reader = new FileReader();
     var arrayBuffer;
+    // Se necesitan los auxiliares ya que dentro de reader.onloadend no se puede acceder a this
     let gtt_aux = this.gttApi;
     let notification_aux = this.notification;
+    let auxiliarService_aux = this.auxiliarService;
     reader.onloadend = function () {
       arrayBuffer = reader.result;
       let arrayBuffer2 = arrayBuffer.split(','); // Para quitar data:application/x-pkcs12;base64,
       gtt_aux.addCertificate(arrayBuffer2[1], certificateGo).then((response: any) => {
-        notification_aux.success('¡Éxito!', `El certificado ${certificateGo.alias} ha sido registrado satisfactoriamente.`, {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        notification_aux.success('¡Éxito!', `El certificado ${certificateGo.alias} ha sido registrado satisfactoriamente.`, auxiliarService_aux.getNotificationError());
       }).catch((res: any) => {
         if (res.status === 504) {
           console.error(res);
-          notification_aux.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
+          notification_aux.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', auxiliarService_aux.getNotificationError());
         } else {
-          notification_aux.error('¡Error!', 'La contraseña no es correcta.', {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
+          notification_aux.error('¡Error!', 'La contraseña no es correcta.', auxiliarService_aux.getNotificationError());
         }
       });
     };
@@ -174,12 +156,7 @@ export class NewCertificateComponent implements OnInit {
         this.router.navigate(['/certificate/' + this.id]);
       }).catch(console.error);
     } else {
-      this.notification.error('¡ERROR!', "Ninguno de los campos pueden estar vacíos.", {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', "Ninguno de los campos pueden estar vacíos.", this.auxiliarService.getNotificationError());
     }
   }
 

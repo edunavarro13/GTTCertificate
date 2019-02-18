@@ -32,7 +32,7 @@ export class PageViewComponent implements OnInit {
   columnActive: number = 0;
   viewDelete = false;
 
-  constructor(private gttApi: GttApiService, private auxService: AuxiliarsService,
+  constructor(private gttApi: GttApiService, private auxiliarService: AuxiliarsService,
     private notification: NotificationsService, private router: Router) {}
 
   ngOnInit() {
@@ -44,12 +44,7 @@ export class PageViewComponent implements OnInit {
         this.router.navigate(['/login']);
       } else if (res.status === 504) {
         console.error(res);
-        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
       } else {
         console.error(res);
       }
@@ -81,19 +76,9 @@ export class PageViewComponent implements OnInit {
       cert.eliminado = !cert.eliminado;
       this.gttApi.updateCertificate(cert).then(result2 => {
         if (!this.viewDelete) {
-          this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como eliminado exitosamente.`, {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
+          this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como eliminado exitosamente.`, this.auxiliarService.getNotificationError());
         } else {
-          this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como activo exitosamente.`, {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
+          this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como activo exitosamente.`, this.auxiliarService.getNotificationError());
         }
         this.loadGrid();
       }).catch(res => {
@@ -104,12 +89,7 @@ export class PageViewComponent implements OnInit {
         }
       });
     } else {
-      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para marcar como eliminados los certificados.", {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para marcar como eliminados los certificados.", this.auxiliarService.getNotificationError());
     }
   }
 
@@ -199,20 +179,10 @@ export class PageViewComponent implements OnInit {
       if (this.userActive.role === 0) {
         this.router.navigate(['/certificateview/0']);
       } else {
-        this.notification.error('¡ERROR!', "No tienes la autorización necesaria para agregar nuevos certificados.", {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', "No tienes la autorización necesaria para agregar nuevos certificados.", this.auxiliarService.getNotificationError());
       }
     } else {
-      this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
     }
   }
 }

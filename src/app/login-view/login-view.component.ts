@@ -26,19 +26,9 @@ export class LoginViewComponent {
     if (this.usernameLogin.trim() !== '' && this.passLogin.trim() !== '') {
       this.apiService.login(this.usernameLogin.trim(), this.passLogin.trim()).then(response => {
         this.routerLog.navigate(['/home']);
-      }).catch(errmes => this.notification.error('¡ERROR!', errmes, {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      }));
+      }).catch(errmes => this.notification.error('¡ERROR!', errmes, this.auxiliarService.getNotificationError()));
     } else {
-      this.notification.error('¡ERROR!', `Usuario y contraseña no pueden estar vacíos.`, {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', `Usuario y contraseña no pueden estar vacíos.`, this.auxiliarService.getNotificationError());
     }
   }
 

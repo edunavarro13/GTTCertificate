@@ -54,12 +54,7 @@ export class UserViewComponent implements OnInit {
       }
       else if(res.status === 504) {
         console.error(res);
-        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
       } 
       else {
         console.error(res);
@@ -99,12 +94,7 @@ export class UserViewComponent implements OnInit {
   addNewJira() {
     // Ningun campo puede estar vacio, si no salta un error
     if (!this.usernameJira || !this.passwordJira || !this.urlJira || !this.proyectJira || !this.componentJira) {
-      this.notification.error('¡ERROR!', "Ninguno de los campos pueden estar vacíos", {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', "Ninguno de los campos marcados con * pueden estar vacíos", this.auxiliarService.getNotificationError());
     } else {
       let jiraActiveAux: Jira = undefined;
       jiraActiveAux = {
@@ -123,20 +113,10 @@ export class UserViewComponent implements OnInit {
           if (res.status === 200) {
             this.jiraActive = jiraActiveAux;
             this.editJira = false;
-            this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido enlazado con tu usuario.`, {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: true,
-              clickToClose: true
-            });
+            this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido enlazado con tu usuario.`, this.auxiliarService.getNotificationError());
             this.verified = 0;
           } else {
-            this.notification.error('¡ERROR!', res.message, {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: true,
-              clickToClose: true
-            });
+            this.notification.error('¡ERROR!', res.message, this.auxiliarService.getNotificationError());
           }
         }).catch(res => {
           if(res.status === 401) {
@@ -150,20 +130,10 @@ export class UserViewComponent implements OnInit {
           if (res.status === 200) {
             this.jiraActive = jiraActiveAux;
             this.editJira = false;
-            this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido modificado con éxito.`, {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: true,
-              clickToClose: true
-            });
+            this.notification.success('¡Éxito!', `El usuario de Jira ${this.usernameJira} ha sido modificado con éxito.`, this.auxiliarService.getNotificationError());
             this.verified = 0;
           } else {
-            this.notification.error('¡ERROR!', res.message, {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: true,
-              clickToClose: true
-            });
+            this.notification.error('¡ERROR!', res.message, this.auxiliarService.getNotificationError());
           }
         }).catch(res2 => {
           if(res2.status === 401) {
@@ -184,18 +154,8 @@ export class UserViewComponent implements OnInit {
     this.jiraApi.verifiedUser(this.jiraActive.username, this.jiraActive.password).then(response => {
       this.verified = 1;
       localStorage.setItem('verified', JSON.stringify(1));
-      this.notification.success('¡Confirmado!', `El usuario de Jira ${this.jiraActive.username} se puede conectar con éxito.`, {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
-    }).catch(errmes => this.notification.error('¡ERROR!', `El usuario de Jira ${this.jiraActive.username} no se ha podido conectar.`, {
-      timeOut: 3000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    }));
+      this.notification.success('¡Confirmado!', `El usuario de Jira ${this.jiraActive.username} se puede conectar con éxito.`, this.auxiliarService.getNotificationError());
+    }).catch(errmes => this.notification.error('¡ERROR!', `El usuario de Jira ${this.jiraActive.username} no se ha podido conectar.`, this.auxiliarService.getNotificationError()));
   }
 
   editUser() {
@@ -204,12 +164,7 @@ export class UserViewComponent implements OnInit {
       if (this.usernamePass1.trim() === this.usernamePass2.trim()) {
         this.userActive.password = this.usernamePass1;
         this.gttApi.updateUser(this.userActive).then(response => {
-          this.notification.success('¡Éxito!', `El usuario ${this.userActive.username} se ha modificado correctamente.`, {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
+          this.notification.success('¡Éxito!', `El usuario ${this.userActive.username} se ha modificado correctamente.`, this.auxiliarService.getNotificationError());
         }).catch(res => {
           if(res.status === 401) {
             this.routeAtr.navigate(['/login']);
@@ -220,20 +175,10 @@ export class UserViewComponent implements OnInit {
         this.editPass = false;
       }
       else {
-        this.notification.error('¡ERROR!', "La contraseña y la confirmación de la contraseña no coinciden.", {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', "La contraseña y la confirmación de la contraseña no coinciden.", this.auxiliarService.getNotificationError());
       }
     } else {
-      this.notification.error('¡ERROR!', "Ninguno de los campos pueden estar vacíos.", {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', "Ninguno de los campos pueden estar vacíos.", this.auxiliarService.getNotificationError());
     }
   }
 }

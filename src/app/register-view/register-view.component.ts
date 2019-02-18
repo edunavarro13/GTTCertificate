@@ -32,19 +32,9 @@ export class RegisterViewComponent {
         this.apiService.register(this.usernameRegister.trim(), this.passRegister.trim(), this.roleRegister)
           .then((response: any) => {
             if (response.status === 200) {
-              this.notification.success('¡Éxito!', `Tu usuario ${this.usernameRegister} ha sido registrado satisfactoriamente.`, {
-                timeOut: 3000,
-                showProgressBar: true,
-                pauseOnHover: true,
-                clickToClose: true
-              });
+              this.notification.success('¡Éxito!', `Tu usuario ${this.usernameRegister} ha sido registrado satisfactoriamente.`, this.auxiliarService.getNotificationError());
             } else {
-              this.notification.error('¡ERROR!', response.message, {
-                timeOut: 3000,
-                showProgressBar: true,
-                pauseOnHover: true,
-                clickToClose: true
-              })
+              this.notification.error('¡ERROR!', response.message, this.auxiliarService.getNotificationError())
             }
           }).catch(res => {
             if(res.status === 401) {
@@ -54,20 +44,10 @@ export class RegisterViewComponent {
             }
           });
       } else {
-        this.notification.error('¡ERROR!', `Contraseña y confirmación de la contraseña no son iguales.`, {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', `Contraseña y confirmación de la contraseña no son iguales.`, this.auxiliarService.getNotificationError());
       }
     } else {
-      this.notification.error('¡ERROR!', `Usuario, contraseña y confirmación de la contraseña no pueden estar vacíos.`, {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', `Usuario, contraseña y confirmación de la contraseña no pueden estar vacíos.`, this.auxiliarService.getNotificationError());
     }
   }
 

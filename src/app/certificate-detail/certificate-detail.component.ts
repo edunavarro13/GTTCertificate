@@ -17,7 +17,7 @@ export class CertificateDetailComponent implements OnInit {
   userActive: User;
 
   constructor(private route: ActivatedRoute, private apiService: GttApiService, private routeAtr: Router,
-    private notification: NotificationsService, private auxService: AuxiliarsService) { }
+    private notification: NotificationsService, private auxiliarService: AuxiliarsService) { }
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -29,12 +29,7 @@ export class CertificateDetailComponent implements OnInit {
         this.routeAtr.navigate(['/login']);
       } else if (res.status === 504) {
         console.error(res);
-        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
       } else {
         console.error(res);
       }
@@ -49,12 +44,7 @@ export class CertificateDetailComponent implements OnInit {
         this.routeAtr.navigate(['/login']);
       } if (res.status === 504) {
         console.error(res);
-        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
       } else {
         console.error(res);
       }
@@ -67,20 +57,10 @@ export class CertificateDetailComponent implements OnInit {
         let chain = '/certificateview/'+ this.id;
         this.routeAtr.navigate([chain]);
       } else {
-        this.notification.error('¡ERROR!', "No tienes la autorización necesaria para agregar nuevos certificados.", {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', "No tienes la autorización necesaria para agregar nuevos certificados.", this.auxiliarService.getNotificationError());
       }
     } else {
-      this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
     }
   }
 

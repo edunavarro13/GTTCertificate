@@ -18,6 +18,7 @@ import {
 } from '@angular/router';
 import { GttJiraService } from '../gtt-jira.service';
 import { Base64 } from 'js-base64';
+import { AuxiliarsService } from '../auxiliars.service';
 
 @Component({
   selector: 'app-notifications-view',
@@ -30,7 +31,7 @@ export class NotificationsViewComponent implements OnInit {
   allCertificates: Array < Certificate > = [];
   userActive: User;
 
-  constructor(private gttApi: GttApiService, private jiraApi: GttJiraService,
+  constructor(private gttApi: GttApiService, private jiraApi: GttJiraService, private auxiliarService: AuxiliarsService,
     private notification: NotificationsService, private router: Router) {}
 
   ngOnInit() {
@@ -43,12 +44,7 @@ export class NotificationsViewComponent implements OnInit {
         this.router.navigate(['/login']);
       } else if (res.status === 504) {
         console.error(res);
-        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
       } else {
         console.error(res);
       }
@@ -73,12 +69,7 @@ export class NotificationsViewComponent implements OnInit {
     if (this.userActive.role === 0) {
       cert.eliminado = true;
       this.gttApi.updateCertificate(cert).then(result2 => {
-        this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como eliminado exitosamente.`, {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        });
+        this.notification.success('¡Éxito!', `El certificado ${cert.alias} se ha marcado como eliminado exitosamente.`, this.auxiliarService.getNotificationError());
         this.loadGrid();
       }).catch(res => {
         if (res.status === 401) {
@@ -88,12 +79,7 @@ export class NotificationsViewComponent implements OnInit {
         }
       });
     } else {
-      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para marcar como eliminados los certificados.", {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para marcar como eliminados los certificados.", this.auxiliarService.getNotificationError());
     }
   }
 
@@ -111,40 +97,20 @@ export class NotificationsViewComponent implements OnInit {
             // Modificamos su estado a subido
             cert.estado = 3;
             this.gttApi.updateCertificate(cert).then(resFinal => {
-              this.notification.success('¡Éxito!', `La tarea del certificado ${cert.alias} ha sido subido a Jira con éxito.`, {
-                timeOut: 3000,
-                showProgressBar: true,
-                pauseOnHover: true,
-                clickToClose: true
-              });
+              this.notification.success('¡Éxito!', `La tarea del certificado ${cert.alias} ha sido subido a Jira con éxito.`, this.auxiliarService.getNotificationError());
               this.loadGrid();
             }).catch(console.error);
           }).catch(console.error);
-        }).catch(errmes => this.notification.error('¡ERROR!', `El usuario de Jira ${responseJira.username} no se ha podido conectar.`, {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true
-        }));
+        }).catch(errmes => this.notification.error('¡ERROR!', `El usuario de Jira ${responseJira.username} no se ha podido conectar.`, this.auxiliarService.getNotificationError()));
       }).catch((res2: any) => {
         if(res2.status === 401) {
           this.router.navigate(['/login']);
         } else {
-          this.notification.error('¡ERROR!', "No tienes un usuario Jira enlazado con el que subirlo. Ve a Datos usuario y agrégalo para hacerlo.", {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true
-          });
+          this.notification.error('¡ERROR!', "No tienes un usuario Jira enlazado con el que subirlo. Ve a Datos usuario y agrégalo para hacerlo.", this.auxiliarService.getNotificationError());
         }
       });
     } else {
-      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para marcar como eliminados los certificados.", {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para marcar como eliminados los certificados.", this.auxiliarService.getNotificationError());
     }
   }
 
