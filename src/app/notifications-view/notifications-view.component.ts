@@ -88,7 +88,6 @@ export class NotificationsViewComponent implements OnInit {
   }
 
   addToJira(cert: Certificate) {
-    if (this.userActive.role === 0) {
       // Primero comprobamos que haya un usuario Jira enlazado con el usuario
       this.gttApi.getJiraByUserId().then((responseJira: Jira) => {
         // Comprobamos que el usuario y la contraseña de Jira existan
@@ -114,9 +113,6 @@ export class NotificationsViewComponent implements OnInit {
           this.notification.error('¡ERROR!', "No tienes un usuario Jira enlazado con el que subirlo. Ve a Datos usuario y agrégalo para hacerlo.", this.auxiliarService.getNotificationError());
         }
       });
-    } else {
-      this.notification.error('¡ERROR!', "No tienes la autorización necesaria para marcar como eliminados los certificados.", this.auxiliarService.getNotificationError());
-    }
   }
 
 }
