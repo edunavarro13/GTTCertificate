@@ -32,7 +32,7 @@ namespace GTTASPCore.Services
     public Task StartAsync(CancellationToken cancellationToken)
     {
       _logger.LogInformation("Iniciando el servicio");
-      _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(10)); // TimeSpan.FromHours(12)
+      _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(5)); // TimeSpan.FromHours(12)
 
       return Task.CompletedTask;
     }
