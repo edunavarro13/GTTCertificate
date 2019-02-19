@@ -3,7 +3,7 @@ import {
   OnInit
 } from '@angular/core';
 import {
-  Certificate
+  Certificate, User
 } from '../models.interface';
 import {
   NotificationsService
@@ -37,6 +37,7 @@ export class NewCertificateComponent implements OnInit {
 
   id: number;
   certificateActive: Certificate;
+  userActive: User;
   watchFile: boolean = false;
 
   constructor(private route: ActivatedRoute, private gttApi: GttApiService, private auxiliarService: AuxiliarsService,
@@ -44,9 +45,25 @@ export class NewCertificateComponent implements OnInit {
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
-    if (this.id > 0) {
-      this.getCertificate();
-    }
+    
+    this.gttApi.getUserById().then((responseUser: User) => {
+      this.userActive = responseUser;
+      if(this.userActive.role === 1) {
+        this.router.navigate(['/home']);
+      }
+      else if (this.id > 0) {
+        this.getCertificate();
+      }
+    }).catch(res => {
+      if (res.status === 401) {
+        this.router.navigate(['/login']);
+      } else if (res.status === 504) {
+        console.error(res);
+        this.notification.error('¡ERROR!', 'No se ha podido conectar al servidor. Vuelve a intentarlo más tarde.', this.auxiliarService.getNotificationError());
+      } else {
+        console.error(res);
+      }
+    });
   }
 
   // imageUpload(ev: any) {
