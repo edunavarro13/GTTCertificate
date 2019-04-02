@@ -1,0 +1,92 @@
+@import '../page-view/page-view.component.scss';
+
+.button-submit-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  margin-bottom: 5vh;
+}
+
+.button-submit-userJira {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  margin-right: 5px;
+}
+
+.padding-to-bottom {
+  padding-bottom: 5vh;
+}
+
+.button-edit {
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.controls {
+  opacity: 0;
+  transition: opacity 800ms;
+  display: none;
+}
+
+.name-page:hover .controls {
+  opacity: 1;
+  display: inline;
+}
+
+i {
+  cursor: pointer;
+}
+
+.label-result {
+    color: #4e4e4e;
+    padding-left: 2vw;
+}
+
+.grid-user {
+  margin-top: 3vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-user-update {
+  margin-top: 3vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 3vw;
+}
+
+.padding-label-user {
+  text-align: end;
+}
+
+.button-verified {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: help;
+  overflow: hidden;
+  outline: none;
+  color: rgb(0, 155, 0);
+}
+
+.grid-jira-edit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  grid-column-gap: 3vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+.input-description {
+  height: 17vh;
+  resize: none;
+}
+
+.button-description {
+  height: 18vh;
+}
+

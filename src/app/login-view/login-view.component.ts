@@ -8,6 +8,7 @@ import {
 import {
   NotificationsService
 } from 'angular2-notifications';
+import { AuxiliarsService } from '../auxiliars.service';
 
 @Component({
   selector: 'app-login-view',
@@ -18,26 +19,21 @@ export class LoginViewComponent {
 
   usernameLogin: string = '';
   passLogin: string = '';
-  constructor(private apiService: GttApiService, private routerLog: Router, private notification: NotificationsService) {}
+  constructor(private apiService: GttApiService, private auxiliarService: AuxiliarsService,
+    private routerLog: Router, private notification: NotificationsService) {}
 
   login() {
     if (this.usernameLogin.trim() !== '' && this.passLogin.trim() !== '') {
       this.apiService.login(this.usernameLogin.trim(), this.passLogin.trim()).then(response => {
-        this.routerLog.navigate(['/trello']);
-      }).catch(errmes => this.notification.error('ERROR!', errmes, {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      }));
+        this.routerLog.navigate(['/home']);
+      }).catch(errmes => this.notification.error('¡ERROR!', errmes, this.auxiliarService.getNotificationError()));
     } else {
-      this.notification.error('ERROR!', `Username and password can not be empty.`, {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      this.notification.error('¡ERROR!', `Usuario y contraseña no pueden estar vacíos.`, this.auxiliarService.getNotificationError());
     }
+  }
+
+  infoButton(option: number) {
+    this.auxiliarService.infoButton(option, this.notification);
   }
 
 }

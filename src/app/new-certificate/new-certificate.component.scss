@@ -1,0 +1,16 @@
+@import '../user-view/user-view.component.scss';
+
+.input-file {
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+}
+
+.button-info-certificate {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: help;
+    overflow: hidden;
+    outline: none;
+    color: #03a9f4;
+  }

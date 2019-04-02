@@ -13,7 +13,7 @@ header {
   border-bottom: 2px #99cc00 solid;
 }
 
-section {
+.section-logIn {
   min-height: 87vh;
   width: auto;
   background: linear-gradient(to bottom, #d3eb8b, #adc565);
@@ -21,7 +21,7 @@ section {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 10vh;
+  padding-top: 5vh;
   font-family: 'PT Sans', sans-serif;
   font-weight: bold;
 }
@@ -56,11 +56,17 @@ section {
 }
 
 .input-agregar {
-  border-radius: 5px;
-  height: 5vh;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-top: 0.2vh;
+  height: 4.8vh;
   width: 30vw;
   background: linear-gradient(to bottom, rgb(180, 180, 180), rgb(236, 236, 236));
   margin-bottom: 3vh;
+  border-top-color: rgb(255, 255, 255);
+  border-left-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(124, 124, 124);
+  border-right-color: rgb(124, 124, 124);
 }
 
 .div-button-submit {
@@ -86,4 +92,35 @@ section {
 label {
   color: #737373;
   font-size: 3vh;
+}
+
+.button-of-inputs {
+  color: white;
+  background-color: #99cc00;
+  border-top-color: #c0ff02;
+  border-left-color: #c0ff02;
+  border-bottom-color: #84af02;
+  border-right-color: #84af02;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  box-sizing: border-box;
+  height: 6vh;
+  cursor: help;
+}
+
+.flexbox-inputs {
+  display: flex;
+}
+
+.padding-label {
+  padding-left: 3vw;
+}
+
+.select-add {
+  height: 5.8vh;
+  width: 30.5vw;
+}
+
+.option-select {
+  color: #4e4e4e;
 }

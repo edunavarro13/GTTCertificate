@@ -1,0 +1,33 @@
+<app-principal-header [contador]="contadorPadre"></app-principal-header>
+<section class="section-logIn padding-to-bottom">
+  <div>
+    <div>
+      <p class="name-page">Notificaciones:</p>
+      <div *ngFor="let certificate of allCertificates">
+        <div class="card-certificate">
+          <div class="grid-card-certificate">
+            <div *ngIf="certificate.estado === 1" class="grid-color-alertado"></div>
+            <div *ngIf="certificate.estado === 2" class="grid-color-caducado"></div>
+
+            <img *ngIf="certificate.estado === 1" class="grid-imagen" src="../../assets/llave.png">
+            <img *ngIf="certificate.estado === 2" class="grid-imagen" src="../../assets/llaveexpired.png">
+
+            <label *ngIf="certificate.estado === 1" class="label-index grid-detalles">El certificado {{
+              certificate.alias }} está a punto de caducar (fecha de caducidad: {{ certificate.caducidad }}).
+              ¿Deseas crear una tarea de Jira avisando de ello? </label>
+            <label *ngIf="certificate.estado === 2" class="label-index grid-detalles">El certificado {{
+              certificate.alias }} caducó hace algún tiempo (fecha de caducidad: {{ certificate.caducidad }}).
+              ¿Deseas marcarlo como eliminado? </label>
+
+            <div class="grid-botones">
+              <button *ngIf="certificate.estado === 1" class="button-submit button-flex-style" (click)="addToJira(certificate)"><i class="material-icons margin-right-icon">cloud_upload</i> Jira</button>
+              <button *ngIf="certificate.estado === 2" class="button-submit button-flex-style" (click)="deleteButton(certificate)"><i class="material-icons">close</i>
+                Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<simple-notifications></simple-notifications>

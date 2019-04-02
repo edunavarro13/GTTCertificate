@@ -1,3 +1,70 @@
-<p>
-  page-view works!
-</p>
+<app-principal-header [contador]="contadorPadre"></app-principal-header>
+<section class="section-logIn">
+  <div>
+    <div class="section-header">
+      <button *ngIf="!viewDelete" class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">close</i>
+        A eliminados</button>
+      <button *ngIf="viewDelete" class="button-submit button-flex-style" (click)="viewDelete = !viewDelete"><i class="material-icons">done</i>
+        A verificados</button>
+      <div *ngIf="!viewDelete" class="name-page">Certificados activos:</div>
+      <div *ngIf="viewDelete" class="name-page">Certificados eliminados:</div>
+      <button class="button-submit button-flex-style" (click)="toAddCertificate()"><i class="material-icons">note_add</i>
+        Agregar certificado</button>
+    </div>
+    <div class="grid-principal-first">
+      <button class="row-style row-style-first" (click)="modeOrdenate(0)">Alias
+        <i *ngIf="columnActive===0 && boolCert" class="material-icons">arrow_drop_down</i>
+        <i *ngIf="columnActive===0 && !boolCert" class="material-icons">arrow_drop_up</i>
+      </button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(1)">Caducidad
+        <i *ngIf="columnActive===1 && boolCert" class="material-icons">arrow_drop_down</i>
+        <i *ngIf="columnActive===1 && !boolCert" class="material-icons">arrow_drop_up</i>
+      </button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(2)">Subject
+        <i *ngIf="columnActive===2 && boolCert" class="material-icons">arrow_drop_down</i>
+        <i *ngIf="columnActive===2 && !boolCert" class="material-icons">arrow_drop_up</i>
+      </button>
+      <button class="row-style row-style-first" (click)="modeOrdenate(3)">Cliente
+        <i *ngIf="columnActive===3 && boolCert" class="material-icons">arrow_drop_down</i>
+        <i *ngIf="columnActive===3 && !boolCert" class="material-icons">arrow_drop_up</i>
+      </button>
+      <button class="row-style row-style-first" disabled>Opciones</button>
+    </div>
+    <div class="grid-principal" *ngIf="!viewDelete">
+      <div *ngFor="let certificate of allCertificates">
+        <div class="grid-principal-body">
+          <div *ngIf="certificate.estado===0" class="row-style estado-correcto-color">{{certificate.alias}}</div>
+          <div *ngIf="certificate.estado===1" class="row-style estado-alertado-color">{{certificate.alias}}</div>
+          <div *ngIf="certificate.estado===2" class="row-style estado-caducado-color">{{certificate.alias}}</div>
+          <div *ngIf="certificate.estado===3" class="row-style estado-subido-color">{{certificate.alias}}</div>
+          <div class="row-style">{{certificate.caducidad}}</div>
+          <div class="row-style">{{ certificate.subject.split("CN=")[1].split(",")[0] }}</div>
+          <div class="row-style">{{certificate.id_orga + " - " + certificate.cliente}}</div>
+          <div class="row-style flex-buttons">
+            <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
+            <input type="button" class="button-log-out grid-buttons-style" value="📁" (click)="auxiliarService.downloadFile(certificate)">
+            <input type="button" class="button-log-out grid-buttons-style" value="❌" (click)="deleteButton(certificate)">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-principal" *ngIf="viewDelete">
+      <div *ngFor="let certificate of allCertificatesDelete">
+        <div class="grid-principal-body">
+          <div class="row-style">{{certificate.alias}}</div>
+          <div class="row-style">{{certificate.caducidad}}</div>
+          <div class="row-style">{{ certificate.subject.split("CN=")[1].split(",")[0] }}</div>
+          <div class="row-style">{{certificate.id_orga + " - " + certificate.cliente}}</div>
+          <div class="row-style flex-buttons">
+            <div></div> <!-- Esta vacio para dejar un espacio -->
+            <input type="button" class="button-log-out grid-buttons-style" value="📋" (click)="detailButton(certificate.id)">
+            <input type="button" class="button-log-out grid-buttons-style" value="📁" (click)="auxiliarService.downloadFile(certificate)">
+            <input type="button" class="button-log-out grid-buttons-style" value="✔️" (click)="deleteButton(certificate)">
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<simple-notifications></simple-notifications>

@@ -1,0 +1,87 @@
+<app-principal-header></app-principal-header>
+<section class="section-logIn">
+  <div>
+    <div *ngIf="id === 0" class="name-page">
+      Agregar certificado <button class="button-info-certificate" (click)="infoButton(11)"><i class="material-icons">feedback</i></button>
+    </div>
+    <div *ngIf="id !== 0" class="name-page">
+      Editar certificado
+    </div>
+    <br>
+    <div class="grid-jira-edit">
+      <div>
+        <label class="padding-label">Alias*:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(3)"><i class="material-icons">code</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Alias" name="alias" [(ngModel)]="aliasCert" (keyup)="areEmpty()">
+        </div>
+        <label class="padding-label">ID_ORGA*:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(4)"><i class="material-icons">location_city</i></button>
+          </div>
+          <input class="input-agregar" type="number" placeholder="ID_ORGA" name="orga" [(ngModel)]="orgaCert" (keyup)="areEmpty()">
+        </div>
+        <label class="padding-label">Lista de integraciones*:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(5)"><i class="material-icons">format_list_numbered</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Lista de tareas" name="lista" [(ngModel)]="listCert" (keyup)="areEmpty()">
+        </div>
+        <label class="padding-label">Persona para renovaciones*:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(6)"><i class="material-icons">contact_mail</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Persona para renovaciones" name="email" [(ngModel)]="emailCert" (keyup)="areEmpty()">
+        </div>
+      </div>
+      <div>
+        <label class="padding-label">Repositorio*:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(7)"><i class="material-icons">folder</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Repositorio" name="repositorio" [(ngModel)]="repoCert" (keyup)="areEmpty()">
+        </div>
+        <label class="padding-label">Cliente*:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(8)"><i class="material-icons">people</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Cliente" name="cliente" [(ngModel)]="clienteCert" (keyup)="areEmpty()">
+        </div>
+        <label class="padding-label">Observaciones:</label>
+        <div *ngIf="id === 0" class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(9)"><i class="material-icons">message</i></button>
+          </div>
+          <input class="input-agregar" type="text" placeholder="Observaciones" name="desc" [(ngModel)]="obserCert">
+        </div>
+        <div *ngIf="id !==0 " class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs button-description" (click)="infoButton(9)"><i class="material-icons">message</i></button>
+            </div>
+            <textarea class="input-agregar input-description" name="desc" cols="40" rows="5" placeholder="Observaciones"  [(ngModel)]="obserCert"></textarea>
+          </div>
+        <label *ngIf="id === 0" class="padding-label">Contraseña*:</label>
+        <div *ngIf="id === 0" class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(10)"><i class="material-icons">credit_card</i></button>
+          </div>
+          <input class="input-agregar" type="password" placeholder="Contraseña" name="password" [(ngModel)]="passCert" (keyup)="areEmpty()">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="watchFile && id === 0" class="div-button-submit">
+        <input class="input-file input-agregar" type="file" id="avatar" name="avatar" accept='.p12,.pfx' [(ngModel)]="avatar" (change)="obtainCert($event)">
+    </div>
+    <div *ngIf="id !== 0" class="div-button-submit">
+      <button class="button-submit button-flex-style" (click)="updatePublicCert()"><i class="material-icons">create</i> Editar certificado</button>  
+    </div>
+  </div>
+</section>
+<simple-notifications></simple-notifications>

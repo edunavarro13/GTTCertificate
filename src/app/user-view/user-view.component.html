@@ -1,0 +1,154 @@
+<app-principal-header></app-principal-header>
+<section class="section-logIn padding-to-bottom">
+  <div *ngIf="userActive">
+    <div>
+      <p class="name-page">Datos usuario:</p>
+      <div class="grid-user">
+        <label class="padding-label padding-label-user">Nombre de usuario :</label>
+        <label class="label-result">{{ userActive ? userActive.username : "" }}<br><br></label>
+        <label class="padding-label padding-label-user">Rol :</label>
+        <label class="label-result">{{ userActive.role === 1 ? 'User' : 'Admin' }}<br><br></label>
+      </div>
+      <div *ngIf="!editPass" class="div-button-submit">
+        <button class="button-submit button-submit-user" (click)="editPass = !editPass"><i class="material-icons">credit_card</i>
+          Cambiar contraseña</button>
+      </div>
+      <!-- Seccion modificar contraseña  -->
+      <div *ngIf="editPass" class="div-button-submit">
+        <label class="padding-label">Contraseña nueva:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(22)"><i class="material-icons">credit_card</i></button>
+          </div>
+          <input class="input-agregar" type="password" placeholder="Contraseña nueva" name="passNew1" [(ngModel)]="usernamePass1">
+        </div>
+        <label class="padding-label">Confirmación contraseña nueva:</label>
+        <div class="flexbox-inputs">
+          <div>
+            <button class="button-of-inputs" (click)="infoButton(23)"><i class="material-icons">credit_card</i></button>
+          </div>
+          <input class="input-agregar" type="password" placeholder="Confirmación contraseña nueva" name="passNew2"
+            [(ngModel)]="usernamePass2">
+        </div>
+        <div class="grid-user-update">
+          <button class="button-submit button-submit-user" (click)="editUser()"><i class="material-icons">create</i>
+            Cambiar contraseña</button>
+          <button class="button-submit button-submit-user" (click)="editPass = !editPass"><i class="material-icons">credit_card</i>Salir
+            edición</button>
+        </div>
+      </div>
+      <!-- Fin seccion modificar contraseña -->
+    </div>
+    <div>
+      <div class="name-page">
+        <div class="controls">
+          <button class="button-submit button-submit-userJira" (click)="editJira = !editJira"><i class="material-icons">create</i>
+            <div *ngIf="!editJira">Editar</div>
+            <div *ngIf="editJira">Salir edición</div>
+          </button>
+        </div>
+        Datos Jira: <button *ngIf="verified>0" class="button-verified" (click)="infoButton(21)"><i class="material-icons">verified_user</i></button>
+      </div>
+      <!-- Ver Jira -->
+      <div *ngIf="!editJira">
+        <div class="grid-user">
+          <label class="padding-label padding-label-user">Usuario de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.username : "" }}<br><br></label>
+          <label class="padding-label padding-label-user">Contraseña de Jira :</label>
+          <label class="label-result">{{ convertPass() }}<br><br></label>
+          <label class="padding-label padding-label-user">Componente de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.component : "" }}<br><br></label>
+          <label class="padding-label padding-label-user">Proyecto de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.proyect : "" }}<br><br></label>
+          <label class="padding-label padding-label-user">URL de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.url : "" }}<br><br></label>
+          <label class="padding-label padding-label-user">Tipo de tarea :</label>
+          <label class="label-result">{{ jiraActive ? "Explotación" : "" }}<br><br></label>
+          <label class="padding-label padding-label-user">Descripción de Jira :</label>
+          <label class="label-result">{{ jiraActive ? jiraActive.descripcion : "" }}<br><br></label>
+        </div>
+        <div *ngIf="jiraActive" class="div-button-submit">
+          <button class="button-submit button-submit-userJira" (click)="confirmUser()"><i class="material-icons">cloud_done</i>
+            Comprobar conexión
+          </button>
+        </div>
+      </div>
+      <!-- Fin Ver Jira -->
+      <!-- EDITAR Jira -->
+      <div *ngIf="editJira" class="grid-jira-edit">
+        <div>
+          <br>
+          <label class="padding-label">Usuario de Jira*:</label>
+          <div class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs" (click)="infoButton(16)"><i class="material-icons">account_circle</i></button>
+            </div>
+            <input class="input-agregar" type="text" placeholder="Nombre de usuario" name="username" [(ngModel)]="usernameJira">
+          </div>
+          <label class="padding-label">Contraseña de Jira*:</label>
+          <div class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs" (click)="infoButton(17)"><i class="material-icons">credit_card</i></button>
+            </div>
+            <input class="input-agregar" type="password" placeholder="Contraseña" name="password" [(ngModel)]="passwordJira">
+          </div>
+          <label class="padding-label">Componente de Jira*:</label>
+          <div class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs" (click)="infoButton(18)"><i class="material-icons">settings</i>
+              </button>
+            </div>
+            <select class="input-agregar select-add" name="component" [(ngModel)]="componentJira">
+              <option class="option-select" value="{{componentJira}}">{{ componentJira }}</option>
+            </select>
+          </div>
+          <label class="padding-label">Proyecto de Jira*:</label>
+          <div class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs" (click)="infoButton(19)"><i class="material-icons">note</i>
+              </button>
+            </div>
+            <select class="input-agregar select-add" name="proyect" [(ngModel)]="proyectJira">
+              <option class="option-select" value="{{proyectJira}}">{{ proyectJira }}</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <br>
+          <label class="padding-label">URL de Jira*:</label>
+          <div class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs" (click)="infoButton(20)"><i class="material-icons">language</i>
+              </button>
+            </div>
+            <select class="input-agregar select-add" name="url" [(ngModel)]="urlJira">
+              <option class="option-select" value="{{urlJira}}">{{ urlJira }}</option>
+            </select>
+          </div>
+          <label class="padding-label">Tipo de tarea*:</label>
+          <div class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs" (click)="infoButton(24)"><i class="material-icons">ballot</i>
+              </button>
+            </div>
+            <select class="input-agregar select-add" name="role" [(ngModel)]="roleJira">
+              <option class="option-select" value="0">Explotación</option>
+            </select>
+          </div>
+          <label class="padding-label">Descripción de la tarea:</label>
+          <div class="flexbox-inputs">
+            <div>
+              <button class="button-of-inputs button-description" (click)="infoButton(25)"><i class="material-icons">message</i></button>
+            </div>
+            <textarea class="input-agregar input-description" name="desc" cols="40" rows="5" placeholder="Descripcion"  [(ngModel)]="descJira"></textarea>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="editJira" class="div-button-submit">
+        <button class="button-submit button-submit-userJira" (click)="addNewJira()"><i class="material-icons">create</i>Editar
+          Jira</button>
+      </div>
+    </div>
+  </div>
+</section>
+<simple-notifications></simple-notifications>
